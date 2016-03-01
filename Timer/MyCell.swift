@@ -8,10 +8,11 @@
 
 import UIKit
 
+let kMyCell = "MyCell"
+
 class MyCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
     @IBOutlet weak var imageLeft: UIImageView!
     @IBOutlet weak var valueLabel: UILabel!
     

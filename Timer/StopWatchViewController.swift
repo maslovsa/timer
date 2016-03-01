@@ -8,11 +8,24 @@
 
 import UIKit
 
-class StopWatchViewController: UIViewController {
+enum TimerStyle {
+    case StopWatch
+    case AMRAP
+    case Tabata
+}
 
+class StopWatchViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    var type = TimerStyle.StopWatch
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        type = .StopWatch
+        
+        let nib = UINib(nibName: kMyCell, bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: kMyCell)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +34,24 @@ class StopWatchViewController: UIViewController {
     }
 
 
+}
+
+extension StopWatchViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cellRaw = tableView.dequeueReusableCellWithIdentifier(kMyCell, forIndexPath: indexPath)
+        if let cell = cellRaw as? MyCell {
+            cell.descriptionLabel.text = "1"
+            
+            return cell
+        }
+
+        
+        return cellRaw
+    }
 }
 
