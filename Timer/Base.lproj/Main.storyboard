@@ -5,6 +5,70 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
+        <!--Picker View Controller-->
+        <scene sceneID="d5j-2d-B90">
+            <objects>
+                <viewController storyboardIdentifier="PickerViewController" id="hub-4N-inq" customClass="PickerViewController" customModule="Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="anx-Qp-7Xb"/>
+                        <viewControllerLayoutGuide type="bottom" id="c9Q-bQ-ZHT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GTn-j3-Tch">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDL-jH-e2M">
+                                <rect key="frame" x="0.0" y="10" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="pxr-WZ-zQs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVg-7Q-3jP">
+                                <rect key="frame" x="0.0" y="548" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2Ww-rr-YQY"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="applyClicked:" destination="hub-4N-inq" eventType="touchUpInside" id="PQ7-SZ-n8X"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="5U1-fz-dgo">
+                                <rect key="frame" x="20" y="64" width="560" height="474"/>
+                                <date key="date" timeIntervalSinceReferenceDate="478557588.41985101">
+                                    <!--2016-03-01 20:39:48 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePickerChanged:" destination="hub-4N-inq" eventType="valueChanged" id="CFf-zi-QiB"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5U1-fz-dgo" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" constant="20" id="6hK-uI-4e2"/>
+                            <constraint firstItem="OVg-7Q-3jP" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" id="6w8-dB-1IH"/>
+                            <constraint firstItem="c9Q-bQ-ZHT" firstAttribute="top" secondItem="OVg-7Q-3jP" secondAttribute="bottom" constant="8" id="8zY-N1-H9t"/>
+                            <constraint firstAttribute="trailing" secondItem="xDL-jH-e2M" secondAttribute="trailing" id="Er0-Vm-b0q"/>
+                            <constraint firstAttribute="trailing" secondItem="OVg-7Q-3jP" secondAttribute="trailing" id="MDv-7r-6AV"/>
+                            <constraint firstAttribute="trailing" secondItem="5U1-fz-dgo" secondAttribute="trailing" constant="20" id="Sr2-nC-hJz"/>
+                            <constraint firstItem="xDL-jH-e2M" firstAttribute="top" secondItem="GTn-j3-Tch" secondAttribute="top" constant="10" id="jLK-jP-j7z"/>
+                            <constraint firstItem="5U1-fz-dgo" firstAttribute="top" secondItem="xDL-jH-e2M" secondAttribute="bottom" constant="10" id="n1g-F2-Nh2"/>
+                            <constraint firstItem="OVg-7Q-3jP" firstAttribute="top" secondItem="5U1-fz-dgo" secondAttribute="bottom" constant="10" id="pcn-Sw-BoU"/>
+                            <constraint firstItem="xDL-jH-e2M" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" id="wNX-Q4-ZB1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dateTimePicker" destination="5U1-fz-dgo" id="F8U-Ai-y3W"/>
+                        <outlet property="titleLabel" destination="xDL-jH-e2M" id="blE-6L-lsO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xqd-77-fBS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1560" y="-1696"/>
+        </scene>
         <!--StopWatch-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -21,13 +85,6 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <datePicker key="tableFooterView" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="200" minuteInterval="1" useCurrentDate="NO" id="wQb-sa-D4G">
-                                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <date key="date" timeIntervalSinceReferenceDate="478556790.27795398">
-                                        <!--2016-03-01 20:26:30 +0000-->
-                                    </date>
-                                </datePicker>
                                 <connections>
                                     <outlet property="dataSource" destination="9pv-A4-QxB" id="xxL-6t-QA6"/>
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="gB5-Lb-tFZ"/>
