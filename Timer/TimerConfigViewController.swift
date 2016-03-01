@@ -88,3 +88,18 @@ extension TimerConfigViewController: UITableViewDataSource {
     }
 }
 
+extension TimerConfigViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //
+        
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.bounds = self.view.frame
+        datePickerView.datePickerMode = UIDatePickerMode.Time
+        datePickerView.locale = NSLocale(localeIdentifier: "da_DK")
+        
+        //sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: Selector("datePickerValueChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+        
+    }
+}
+
