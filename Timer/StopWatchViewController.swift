@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class StopWatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
