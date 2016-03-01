@@ -16,6 +16,8 @@
 		8FB953C81C861EC400EF95C1 /* TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953C71C861EC400EF95C1 /* TimerTests.swift */; };
 		8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D21C8620D600EF95C1 /* TabataViewController.swift */; };
 		8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */; };
+		8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D81C86248E00EF95C1 /* MyCell.swift */; };
+		8FB953DB1C86248E00EF95C1 /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FB953D91C86248E00EF95C1 /* MyCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		8FB953C91C861EC400EF95C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB953D21C8620D600EF95C1 /* TabataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabataViewController.swift; sourceTree = "<group>"; };
 		8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8FB953D81C86248E00EF95C1 /* MyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
+		8FB953D91C86248E00EF95C1 /* MyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 				8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */,
 				8FB953D21C8620D600EF95C1 /* TabataViewController.swift */,
 				8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */,
+				8FB953D81C86248E00EF95C1 /* MyCell.swift */,
+				8FB953D91C86248E00EF95C1 /* MyCell.xib */,
 				8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */,
 				8FB953B61C861EC400EF95C1 /* Main.storyboard */,
 				8FB953B91C861EC400EF95C1 /* Assets.xcassets */,
@@ -189,6 +195,7 @@
 				8FB953BD1C861EC400EF95C1 /* LaunchScreen.storyboard in Resources */,
 				8FB953BA1C861EC400EF95C1 /* Assets.xcassets in Resources */,
 				8FB953B81C861EC400EF95C1 /* Main.storyboard in Resources */,
+				8FB953DB1C86248E00EF95C1 /* MyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +216,7 @@
 				8FB953B51C861EC400EF95C1 /* AMRAPViewContoller.swift in Sources */,
 				8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */,
 				8FB953B11C861EC400EF95C1 /* AppDelegate.swift in Sources */,
+				8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */,
 				8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */,
 				8FB953B31C861EC400EF95C1 /* StopWatchViewController.swift in Sources */,
 			);
