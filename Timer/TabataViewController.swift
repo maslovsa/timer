@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TabataViewController: UIViewController {
+class TabataViewController: TimerConfigViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.timerStyle = .Tabata
     }
     
     override func didReceiveMemoryWarning() {

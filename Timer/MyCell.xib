@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,43 +16,63 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNL-wz-Te6" userLabel="Description">
-                        <rect key="frame" x="14" y="0.0" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNL-wz-Te6" userLabel="Description">
+                        <rect key="frame" x="14" y="0.0" width="169" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="169" id="hGX-oo-OoP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIE-Lo-ObB" userLabel="Value">
+                        <rect key="frame" x="191" y="11" width="75" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="tJq-qi-fXG"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIE-Lo-ObB" userLabel="Value">
-                        <rect key="frame" x="219" y="11" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h4L-qk-Qn4">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="950" translatesAutoresizingMaskIntoConstraints="NO" id="h4L-qk-Qn4">
                         <rect key="frame" x="277" y="0.0" width="43" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="h4L-qk-Qn4" secondAttribute="height" multiplier="1:1" id="Gn3-8p-CDT"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLJ-JR-NL5" userLabel="Title">
-                        <rect key="frame" x="14" y="22" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLJ-JR-NL5" userLabel="Title">
+                        <rect key="frame" x="14" y="22" width="169" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="169" id="drG-XC-Ves"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="h4L-qk-Qn4" firstAttribute="leading" secondItem="cIE-Lo-ObB" secondAttribute="trailing" constant="11" id="BTY-2b-2lU"/>
+                    <constraint firstItem="QLJ-JR-NL5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="EUH-qS-dv6"/>
                     <constraint firstAttribute="trailing" secondItem="h4L-qk-Qn4" secondAttribute="trailing" id="Gng-Kb-vB3"/>
+                    <constraint firstItem="uNL-wz-Te6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="U9W-HG-0DA"/>
+                    <constraint firstAttribute="bottom" secondItem="QLJ-JR-NL5" secondAttribute="bottom" id="VGz-Nh-Chj"/>
+                    <constraint firstItem="cIE-Lo-ObB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="WIf-13-aMz"/>
                     <constraint firstItem="h4L-qk-Qn4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZG4-Of-58u"/>
+                    <constraint firstItem="QLJ-JR-NL5" firstAttribute="top" secondItem="uNL-wz-Te6" secondAttribute="bottom" constant="1" id="gCb-XX-4j5"/>
+                    <constraint firstItem="uNL-wz-Te6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jMW-r9-Roa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="cIE-Lo-ObB" secondAttribute="bottom" constant="3" id="tbp-5t-tPL"/>
                     <constraint firstAttribute="bottom" secondItem="h4L-qk-Qn4" secondAttribute="bottom" id="zC4-do-AtI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="descriptionLabel" destination="uNL-wz-Te6" id="NDD-ay-7OC"/>
+                <outlet property="descriptionLabel" destination="QLJ-JR-NL5" id="obP-2K-6cj"/>
                 <outlet property="imageLeft" destination="h4L-qk-Qn4" id="P0p-4M-JzU"/>
-                <outlet property="titleLabel" destination="QLJ-JR-NL5" id="ZiY-D8-vv6"/>
+                <outlet property="titleLabel" destination="uNL-wz-Te6" id="Euy-u6-mq8"/>
                 <outlet property="valueLabel" destination="cIE-Lo-ObB" id="6Hu-IY-QMS"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="950" width="512" height="512"/>
+    </resources>
 </document>

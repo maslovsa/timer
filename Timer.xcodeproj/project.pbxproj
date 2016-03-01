@@ -18,6 +18,8 @@
 		8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */; };
 		8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D81C86248E00EF95C1 /* MyCell.swift */; };
 		8FB953DB1C86248E00EF95C1 /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FB953D91C86248E00EF95C1 /* MyCell.xib */; };
+		8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */; };
+		8FB953E01C862BD000EF95C1 /* Utilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953DF1C862BD000EF95C1 /* Utilites.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8FB953D81C86248E00EF95C1 /* MyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		8FB953D91C86248E00EF95C1 /* MyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
+		8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerConfigViewController.swift; sourceTree = "<group>"; };
+		8FB953DF1C862BD000EF95C1 /* Utilites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilites.swift; path = Utilites/Utilites.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,12 +92,10 @@
 			isa = PBXGroup;
 			children = (
 				8FB953B01C861EC400EF95C1 /* AppDelegate.swift */,
-				8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */,
-				8FB953D21C8620D600EF95C1 /* TabataViewController.swift */,
-				8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */,
+				8FB953DE1C862AB100EF95C1 /* Controllers */,
 				8FB953D81C86248E00EF95C1 /* MyCell.swift */,
 				8FB953D91C86248E00EF95C1 /* MyCell.xib */,
-				8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */,
+				8FB953DF1C862BD000EF95C1 /* Utilites.swift */,
 				8FB953B61C861EC400EF95C1 /* Main.storyboard */,
 				8FB953B91C861EC400EF95C1 /* Assets.xcassets */,
 				8FB953BB1C861EC400EF95C1 /* LaunchScreen.storyboard */,
@@ -109,6 +111,18 @@
 				8FB953C91C861EC400EF95C1 /* Info.plist */,
 			);
 			path = TimerTests;
+			sourceTree = "<group>";
+		};
+		8FB953DE1C862AB100EF95C1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */,
+				8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */,
+				8FB953D21C8620D600EF95C1 /* TabataViewController.swift */,
+				8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */,
+				8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +231,9 @@
 				8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */,
 				8FB953B11C861EC400EF95C1 /* AppDelegate.swift in Sources */,
 				8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */,
+				8FB953E01C862BD000EF95C1 /* Utilites.swift in Sources */,
 				8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */,
+				8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */,
 				8FB953B31C861EC400EF95C1 /* StopWatchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AMRAPViewContoller: UIViewController {
+class AMRAPViewContoller: TimerConfigViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.timerStyle = .AMRAP
     }
 
     override func didReceiveMemoryWarning() {
