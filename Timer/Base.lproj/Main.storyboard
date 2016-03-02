@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDL-jH-e2M">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDL-jH-e2M">
                                 <rect key="frame" x="0.0" y="10" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="pxr-WZ-zQs"/>
@@ -31,37 +31,31 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="2Ww-rr-YQY"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Ok"/>
                                 <connections>
                                     <action selector="applyClicked:" destination="hub-4N-inq" eventType="touchUpInside" id="PQ7-SZ-n8X"/>
                                 </connections>
                             </button>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="5U1-fz-dgo">
-                                <rect key="frame" x="20" y="64" width="560" height="474"/>
-                                <date key="date" timeIntervalSinceReferenceDate="478557588.41985101">
-                                    <!--2016-03-01 20:39:48 +0000-->
-                                </date>
-                                <connections>
-                                    <action selector="datePickerChanged:" destination="hub-4N-inq" eventType="valueChanged" id="CFf-zi-QiB"/>
-                                </connections>
-                            </datePicker>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smb-Pm-ouI" customClass="TimePickerView" customModule="Timer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="54" width="600" height="494"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5U1-fz-dgo" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" constant="20" id="6hK-uI-4e2"/>
+                            <constraint firstAttribute="trailing" secondItem="smb-Pm-ouI" secondAttribute="trailing" id="5oc-pf-5tR"/>
                             <constraint firstItem="OVg-7Q-3jP" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" id="6w8-dB-1IH"/>
                             <constraint firstItem="c9Q-bQ-ZHT" firstAttribute="top" secondItem="OVg-7Q-3jP" secondAttribute="bottom" constant="8" id="8zY-N1-H9t"/>
                             <constraint firstAttribute="trailing" secondItem="xDL-jH-e2M" secondAttribute="trailing" id="Er0-Vm-b0q"/>
                             <constraint firstAttribute="trailing" secondItem="OVg-7Q-3jP" secondAttribute="trailing" id="MDv-7r-6AV"/>
-                            <constraint firstAttribute="trailing" secondItem="5U1-fz-dgo" secondAttribute="trailing" constant="20" id="Sr2-nC-hJz"/>
+                            <constraint firstItem="smb-Pm-ouI" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" id="ZvF-ZR-9dN"/>
+                            <constraint firstItem="OVg-7Q-3jP" firstAttribute="top" secondItem="smb-Pm-ouI" secondAttribute="bottom" id="asO-wj-7dd"/>
                             <constraint firstItem="xDL-jH-e2M" firstAttribute="top" secondItem="GTn-j3-Tch" secondAttribute="top" constant="10" id="jLK-jP-j7z"/>
-                            <constraint firstItem="5U1-fz-dgo" firstAttribute="top" secondItem="xDL-jH-e2M" secondAttribute="bottom" constant="10" id="n1g-F2-Nh2"/>
-                            <constraint firstItem="OVg-7Q-3jP" firstAttribute="top" secondItem="5U1-fz-dgo" secondAttribute="bottom" constant="10" id="pcn-Sw-BoU"/>
                             <constraint firstItem="xDL-jH-e2M" firstAttribute="leading" secondItem="GTn-j3-Tch" secondAttribute="leading" id="wNX-Q4-ZB1"/>
+                            <constraint firstItem="smb-Pm-ouI" firstAttribute="top" secondItem="xDL-jH-e2M" secondAttribute="bottom" id="yg9-B4-gt2"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dateTimePicker" destination="5U1-fz-dgo" id="F8U-Ai-y3W"/>
+                        <outlet property="dateTimePicker" destination="smb-Pm-ouI" id="2cI-Ni-nRm"/>
                         <outlet property="titleLabel" destination="xDL-jH-e2M" id="blE-6L-lsO"/>
                     </connections>
                 </viewController>

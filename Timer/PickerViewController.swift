@@ -15,7 +15,7 @@ protocol PickerProtocol {
 class PickerViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var applyButton: UIButton!
-    @IBOutlet weak var dateTimePicker: UIDatePicker!
+    @IBOutlet weak var dateTimePicker: TimePickerView!
 
     var delegate : PickerProtocol?
     
@@ -35,8 +35,10 @@ class PickerViewController: UIViewController {
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
         
-        let strDate = dateFormatter.stringFromDate(dateTimePicker.date)
+        let strDate = dateFormatter.stringFromDate(dateTimePicker.getDate())
+
         delegate?.valueApplied(strDate)
+        self.dismissViewControllerAnimated(true, completion: nil)
    }
     
 }
