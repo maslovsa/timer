@@ -8,15 +8,10 @@
 
 import UIKit
 
-enum TimerStyle {
-    case StopWatch
-    case AMRAP
-    case Tabata
-}
 
 class TimerConfigViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var timerStyle = TimerStyle.StopWatch
+    var timer = Timer.createStopWatch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +22,7 @@ class TimerConfigViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        var title = String()
-        switch timerStyle {
-        case .StopWatch :
-            title = "StopWatch"
-        case .AMRAP:
-            title = "AMRAP"
-        case .Tabata:
-            title = "Tabata"
-        }
-        navigationController?.navigationBar.topItem!.title = title
-        
+        navigationController?.navigationBar.topItem!.title = timer.title
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,36 +35,43 @@ class TimerConfigViewController: UIViewController {
 
 extension TimerConfigViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch timerStyle {
-        case .StopWatch, .AMRAP:
-            return 2
-        case .Tabata:
-            return 5
-        }
+        return timer.prefCount
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellRaw = tableView.dequeueReusableCellWithIdentifier(kMyCell, forIndexPath: indexPath)
         if let cell = cellRaw as? MyCell {
-            switch indexPath.row {
-            case 0:
-                cell.titleLabel.text = "Prepare"
-                cell.descriptionLabel.text = "Countdown before you start"
-                cell.valueLabel.text = ":00"
-
-            case 1:
-                cell.titleLabel.text = "Time Cap"
-                cell.descriptionLabel.text = "Clock will stop at this time"
-                cell.valueLabel.text = ":00"
-                
-            default:
-                cell.titleLabel.text = "TITLE"
-                cell.descriptionLabel.text = "DESCRIPTION"
-                cell.valueLabel.text = "00:00"
-
+            if indexPath.row < timer.prefCount {
                 
             }
+            
+            let preset = timer.presets[indexPath.row]
+            
+            cell.titleLabel.text = preset.title
+            cell.descriptionLabel.text = preset.description
+            let value = preset.value ?? preset.defaultValue
+            cell.valueLabel.text = ":\(value)"
+            
+            
+//            switch indexPath.row {
+//            case 0:
+//                cell.titleLabel.text = "Prepare"
+//                cell.descriptionLabel.text = "Countdown before you start"
+//                cell.valueLabel.text = ":00"
+//
+//            case 1:
+//                cell.titleLabel.text = "Time Cap"
+//                cell.descriptionLabel.text = "Clock will stop at this time"
+//                cell.valueLabel.text = ":00"
+//                
+//            default:
+//                cell.titleLabel.text = "TITLE"
+//                cell.descriptionLabel.text = "DESCRIPTION"
+//                cell.valueLabel.text = "00:00"
+//
+//                
+//            }
             return cell
         }
         

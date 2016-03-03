@@ -1,9 +1,4 @@
 
-Mobile Apps.
-
-1) Transporting data from Server to Server
-2) Quick blocks
-
 Stopwatch
 -Prepare  [0..59 sec] default = .10
 (Countdown before you start)
@@ -19,7 +14,7 @@ AMRAP
 Tabata
 -Prepare  [0..59 sec] default = .10
 (Countdown before you start)
--Work [0..60 min 0..59sec] default = 30.00
+-Work [0..60 min 0..59 sec] default = 30.00
 (Do exercise for this long)
 -Rest [0..60 min 0..59sec] default = 30.00
 (Rest for this long)

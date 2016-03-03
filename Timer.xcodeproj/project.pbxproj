@@ -22,6 +22,8 @@
 		8FB953E21C86364C00EF95C1 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953E11C86364C00EF95C1 /* PickerViewController.swift */; };
 		8FB954471C87858700EF95C1 /* Utilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB954461C87858700EF95C1 /* Utilites.swift */; };
 		8FB954491C8785A200EF95C1 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB954481C8785A200EF95C1 /* TimePickerView.swift */; };
+		8FB9544B1C886CE900EF95C1 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9544A1C886CE800EF95C1 /* Preset.swift */; };
+		8FB9544D1C8871A400EF95C1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9544C1C8871A400EF95C1 /* Timer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		8FB953E11C86364C00EF95C1 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		8FB954461C87858700EF95C1 /* Utilites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilites.swift; sourceTree = "<group>"; };
 		8FB954481C8785A200EF95C1 /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		8FB9544A1C886CE800EF95C1 /* Preset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
+		8FB9544C1C8871A400EF95C1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				8FB953D81C86248E00EF95C1 /* MyCell.swift */,
 				8FB953D91C86248E00EF95C1 /* MyCell.xib */,
 				8FB953B61C861EC400EF95C1 /* Main.storyboard */,
+				8FB9544A1C886CE800EF95C1 /* Preset.swift */,
+				8FB9544C1C8871A400EF95C1 /* Timer.swift */,
 				8FB954451C87858700EF95C1 /* Utilites */,
 				8FB953B91C861EC400EF95C1 /* Assets.xcassets */,
 				8FB953BB1C861EC400EF95C1 /* LaunchScreen.storyboard */,
@@ -244,11 +250,13 @@
 				8FB953B51C861EC400EF95C1 /* AMRAPViewContoller.swift in Sources */,
 				8FB954471C87858700EF95C1 /* Utilites.swift in Sources */,
 				8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */,
+				8FB9544D1C8871A400EF95C1 /* Timer.swift in Sources */,
 				8FB954491C8785A200EF95C1 /* TimePickerView.swift in Sources */,
 				8FB953B11C861EC400EF95C1 /* AppDelegate.swift in Sources */,
 				8FB953E21C86364C00EF95C1 /* PickerViewController.swift in Sources */,
 				8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */,
 				8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */,
+				8FB9544B1C886CE900EF95C1 /* Preset.swift in Sources */,
 				8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */,
 				8FB953B31C861EC400EF95C1 /* StopWatchViewController.swift in Sources */,
 			);

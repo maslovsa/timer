@@ -12,7 +12,7 @@ class AMRAPViewContoller: TimerConfigViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.timerStyle = .AMRAP
+        self.timer = Timer.createAMRAP()
     }
 
     override func didReceiveMemoryWarning() {
