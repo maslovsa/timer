@@ -18,11 +18,22 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var dateTimePicker: TimePickerView!
 
     var delegate : PickerProtocol?
+    var preset: Preset?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let preset = preset {
+            let value = preset.value ?? preset.defaultValue
+            let showIDasInt = NSNumberFormatter().numberFromString(value) ?? 0
+            dateTimePicker.minute = showIDasInt.integerValue
+            dateTimePicker.updatePicker()
+        }
     }
     
     @IBAction func datePickerChanged(sender: AnyObject) {

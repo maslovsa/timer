@@ -126,11 +126,8 @@
 		8FB953DE1C862AB100EF95C1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */,
+				8FB9544E1C887FE800EF95C1 /* Timer */,
 				8FB953E11C86364C00EF95C1 /* PickerViewController.swift */,
-				8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */,
-				8FB953D21C8620D600EF95C1 /* TabataViewController.swift */,
-				8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */,
 				8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */,
 			);
 			name = Controllers;
@@ -143,6 +140,17 @@
 				8FB954481C8785A200EF95C1 /* TimePickerView.swift */,
 			);
 			path = Utilites;
+			sourceTree = "<group>";
+		};
+		8FB9544E1C887FE800EF95C1 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */,
+				8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */,
+				8FB953D21C8620D600EF95C1 /* TabataViewController.swift */,
+				8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */,
+			);
+			name = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

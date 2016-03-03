@@ -34,7 +34,7 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         self.delegate = self
         self.dataSource = self
         
-        /*let height = CGFloat(20)
+        let height = CGFloat(20)
         let offsetX = self.frame.size.width / 3
         let offsetY = self.frame.size.height/2 - height/2
         let marginX = CGFloat(42)
@@ -46,7 +46,15 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         
         let minsLabel = UILabel(frame: CGRectMake(marginX + offsetX, offsetY, width, height))
         minsLabel.text = "min"
-        self.addSubview(minsLabel)*/
+        self.addSubview(minsLabel)
+    }
+    
+    func updatePicker() {
+        
+        if minute != 0 {
+            self.selectRow(minute, inComponent: 0, animated: true)
+        }
+
     }
     
     func getDate() -> NSDate{

@@ -12,12 +12,14 @@ struct Preset {
     
     var title: String = ""
     var description: String = ""
+    
     var value: String? = nil
     
     var lowLimit: String = "0"
     var highLimit: String = "10"
     var defaultValue: String = "00"
-
+    
+    
     static func preparePreset() -> Preset {
         var preset = Preset()
         preset.title = "Prepare"

@@ -39,43 +39,15 @@ extension TimerConfigViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cellRaw = tableView.dequeueReusableCellWithIdentifier(kMyCell, forIndexPath: indexPath)
         if let cell = cellRaw as? MyCell {
-            if indexPath.row < timer.prefCount {
-                
-            }
-            
             let preset = timer.presets[indexPath.row]
-            
             cell.titleLabel.text = preset.title
             cell.descriptionLabel.text = preset.description
             let value = preset.value ?? preset.defaultValue
             cell.valueLabel.text = ":\(value)"
-            
-            
-//            switch indexPath.row {
-//            case 0:
-//                cell.titleLabel.text = "Prepare"
-//                cell.descriptionLabel.text = "Countdown before you start"
-//                cell.valueLabel.text = ":00"
-//
-//            case 1:
-//                cell.titleLabel.text = "Time Cap"
-//                cell.descriptionLabel.text = "Clock will stop at this time"
-//                cell.valueLabel.text = ":00"
-//                
-//            default:
-//                cell.titleLabel.text = "TITLE"
-//                cell.descriptionLabel.text = "DESCRIPTION"
-//                cell.valueLabel.text = "00:00"
-//
-//                
-//            }
             return cell
         }
-        
-        
         return cellRaw
     }
 }
@@ -84,6 +56,7 @@ extension TimerConfigViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PickerViewController") as! PickerViewController
+        vc.preset = timer.presets[indexPath.row]
         self.presentViewController(vc, animated: true, completion: nil)
     }
 }
