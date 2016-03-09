@@ -9,18 +9,15 @@
 import UIKit
 
 struct Constants {
-    //MARK: - normal constants
-    struct Fonts {
-        struct Notifications {
-            static let TextCellFontSize = UIFont.systemFontOfSize(16, weight: UIFontWeightRegular)
-            static let NameCellFontSize = UIFont.systemFontOfSize(16, weight: UIFontWeightRegular)
-        }
-    }
+
     
     struct Picker {
         static let FontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightBold)
         static let FontColor = UIColor.blackColor()
-        //static let NotificationsTitlesColor = UIColor(red:204.0/255.0, green:0.0/255.0, blue:0.0/255.0, alpha:0.2)
+        
+        static let DescriptionFontSize = UIFont.systemFontOfSize(18, weight: UIFontWeightRegular)
+        static let DescriptionFontColor = UIColor.blackColor()
+
     }
     
     struct CustomCell {
