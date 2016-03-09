@@ -59,15 +59,8 @@ extension TimerConfigViewController: UITableViewDelegate {
         vc.completion = { [weak self](value) -> Void in
             self?.timer.presets[indexPath.row].value = value
             self?.tableView.reloadData()
-            
         }
         self.presentViewController(vc, animated: true, completion: nil)
     }
 }
-
-//extension TimerConfigViewController: PickerProtocol {
-//    func valueApplied(value: String) {
-//        
-//    }
-//}
 
