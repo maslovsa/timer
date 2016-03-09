@@ -54,16 +54,20 @@ extension TimerConfigViewController: UITableViewDataSource {
 
 extension TimerConfigViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PickerViewController") as! PickerViewController
+        let vc = PickerViewController()
         vc.preset = timer.presets[indexPath.row]
+        vc.completion = { [weak self](value) -> Void in
+            self?.timer.presets[indexPath.row].value = value
+            self?.tableView.reloadData()
+            
+        }
         self.presentViewController(vc, animated: true, completion: nil)
     }
 }
 
-extension TimerConfigViewController: PickerProtocol {
-    func valueApplied(value: String) {
-        
-    }
-}
+//extension TimerConfigViewController: PickerProtocol {
+//    func valueApplied(value: String) {
+//        
+//    }
+//}
 

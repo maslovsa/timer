@@ -18,6 +18,7 @@ Tabata
 (Do exercise for this long)
 -Rest [0..60 min 0..59sec] default = 30.00
 (Rest for this long)
+
 -Rounds [1..90]
 One round is Work + Rest
 -Cycles [1..90]

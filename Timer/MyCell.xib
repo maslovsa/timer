@@ -17,11 +17,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNL-wz-Te6" userLabel="Description">
-                        <rect key="frame" x="8" y="0.0" width="199" height="21"/>
+                        <rect key="frame" x="8" y="0.0" width="209" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="169" id="hGX-oo-OoP"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -30,28 +30,28 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIE-Lo-ObB" userLabel="Value">
-                        <rect key="frame" x="207" y="11" width="70" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIE-Lo-ObB" userLabel="Value">
+                        <rect key="frame" x="217" y="11" width="60" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="tJq-qi-fXG"/>
+                            <constraint firstAttribute="width" constant="60" id="tJq-qi-fXG"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="950" translatesAutoresizingMaskIntoConstraints="NO" id="h4L-qk-Qn4">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="950" translatesAutoresizingMaskIntoConstraints="NO" id="h4L-qk-Qn4">
                         <rect key="frame" x="277" y="0.0" width="43" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="h4L-qk-Qn4" secondAttribute="height" multiplier="1:1" id="Gn3-8p-CDT"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="QLJ-JR-NL5" userLabel="Title">
-                        <rect key="frame" x="8" y="22" width="199" height="21"/>
+                        <rect key="frame" x="8" y="22" width="209" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="169" id="drG-XC-Ves"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">

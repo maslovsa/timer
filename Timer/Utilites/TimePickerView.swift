@@ -83,12 +83,11 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         if component == 0 {
             return 24
         }
-        
         return 60
     }
     
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 30
+        return 30 
     }
 
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
