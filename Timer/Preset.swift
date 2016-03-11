@@ -8,8 +8,30 @@
 
 import Foundation
 
-struct Preset {
+struct IntPreset {
+    var value: Int = 0
+    var low: Int = 0
+    var high: Int = 0
+    init() {
+        self.value = 0
+        self.low = 0
+        self.high = 0
+    }
     
+    init(value: Int, low: Int, high: Int) {
+        self.value = value
+        self.low = low
+        self.high = high
+    }
+}
+
+enum PresetType {
+    case IntType(unit: IntPreset)
+    case TimeType(min: IntPreset, sec: IntPreset)
+}
+
+struct Preset {
+    var type: PresetType = PresetType.IntType(unit: IntPreset(value: 0, low: 0, high: 0))
     var title: String = ""
     var description: String = ""
     
