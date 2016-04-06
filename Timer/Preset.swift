@@ -43,7 +43,7 @@ enum PresetType {
 }
 
 struct Preset {
-    var type: PresetType? // = PresetType.IntType(unit: IntPreset(value: 0, low: 0, high: 0))
+    var type = PresetType.IntType(unit: IntPreset(value: 0, low: 0, high: 0))
     var title: String = ""
     var description: String = ""
     

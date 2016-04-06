@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-typealias completionHandler =  (String) -> Void
+typealias completionHandler =  (Preset) -> Void
 
 class PickerViewController: UIViewController {
     var titleLabel = UILabel()
@@ -83,24 +83,59 @@ class PickerViewController: UIViewController {
         if let preset = preset {
             titleLabel.text = preset.title
             descriptionLabel.text = preset.description
-            if let value = preset.value {
-                if let i = Int(value) {
-                    picker.selectRow(i, inComponent: 0, animated: true)
-                }
+            
+            switch preset.type {
+            case .IntType(let unit):
+               picker.selectRow(unit.value, inComponent: 0, animated: true)
+            case .TimeType(let min, let sec ):
+                picker.selectRow(min.value, inComponent: 0, animated: true)
+                picker.selectRow(sec.value, inComponent: 1, animated: true)
             }
+            
+//            if let value = preset.value {
+//                if let i = Int(value) {
+//                    picker.selectRow(i, inComponent: 0, animated: true)
+//                }
+//            }
         }
     }
     
     func applyClicked(sender: AnyObject) {
-        let index = picker.selectedRowInComponent(0)
-        completion?(String(index))
+        guard var preset = preset else {
+            return
+        }
+        
+        let indexFirst = picker.selectedRowInComponent(0)
+
+        switch preset.type {
+        case .IntType(let unit):
+            preset.type = PresetType.IntType(unit: IntPreset(value: indexFirst, low: unit.low, high: unit.high))
+            
+        case .TimeType(let min, let sec ):
+            let indexSecond = picker.selectedRowInComponent(1)
+
+            let minPreset = IntPreset(value: indexFirst, low: min.low, high: min.high)
+            let secPreset = IntPreset(value: indexSecond, low: sec.low, high: sec.high)
+            
+            preset.type = PresetType.TimeType(min: minPreset, sec: secPreset)
+        }
+        
+        completion?(preset)
         self.dismissViewControllerAnimated(true, completion: nil)
    }
 }
 
 extension PickerViewController: UIPickerViewDataSource {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
+        guard let type = preset?.type else {
+            return 1
+        }
+        switch type {
+        case .IntType(_):
+            return 1
+        case .TimeType(_, _):
+            return 2
+        }
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -150,7 +185,7 @@ extension PickerViewController: UIPickerViewDelegate {
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "sdfsdfdsf"
+        return "!!!!"
     }
 
     

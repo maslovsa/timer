@@ -44,8 +44,14 @@ extension TimerConfigViewController: UITableViewDataSource {
             let preset = timer.presets[indexPath.row]
             cell.titleLabel.text = preset.title
             cell.descriptionLabel.text = preset.description
-            let value = preset.value ?? preset.defaultValue
-            cell.valueLabel.text = ":\(value)"
+            
+            switch preset.type {
+            case .IntType(let unit):
+                cell.valueLabel.text = NSString(format: ":%.2d", unit.value) as String
+                
+            case .TimeType(let min, let sec):
+                cell.valueLabel.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
+            }
             return cell
         }
         return cellRaw
@@ -56,8 +62,8 @@ extension TimerConfigViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let vc = PickerViewController()
         vc.preset = timer.presets[indexPath.row]
-        vc.completion = { [weak self](value) -> Void in
-            self?.timer.presets[indexPath.row].value = value
+        vc.completion = { [weak self](newValue) -> Void in
+            self?.timer.presets[indexPath.row] = newValue
             self?.tableView.reloadData()
         }
         self.presentViewController(vc, animated: true, completion: nil)
