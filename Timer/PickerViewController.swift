@@ -46,7 +46,7 @@ class PickerViewController: UIViewController {
         applyButton.backgroundColor = Constants.HeaderCell.BlueFontColor
         applyButton.titleLabel?.textColor = UIColor.whiteColor()
         applyButton.setTitle("OK", forState: .Normal)
-        applyButton.addTarget(self, action: "applyClicked:", forControlEvents: .TouchDown)
+        applyButton.addTarget(self, action: #selector(PickerViewController.applyClicked(_:)), forControlEvents: .TouchDown)
         self.view.addSubview(applyButton)
         applyButton.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(self.view).offset(20)
