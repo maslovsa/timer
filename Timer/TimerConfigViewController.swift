@@ -30,8 +30,7 @@ class TimerConfigViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addTapped(){
-        
+    func addTapped() {
         let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CoundownViewController") as! CoundownViewController
         controller.modalTransitionStyle = .CrossDissolve
         controller.timer = timer

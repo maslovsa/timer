@@ -5,5 +5,6 @@ use_frameworks!
 target 'Timer' do
 
 pod 'SnapKit', '~> 0.15.0'
+pod "DDHTimerControl"
 
 end

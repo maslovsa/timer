@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '27E3A7696772F96A540BD9B1'
-               BlueprintName = 'Pods-Timer'
+               BlueprintIdentifier = '8BD004FB935657AEB622CA66'
+               BlueprintName = 'DDHTimerControl'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_Timer.framework'>
+               BuildableName = 'DDHTimerControl.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
