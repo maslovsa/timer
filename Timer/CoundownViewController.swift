@@ -24,8 +24,7 @@ class CoundownViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        timerCoundownValue = (timer?.presets[0].prepareSeconds)!
-        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
+        restartTimer()
         
         timeView1.color = UIColor.greenColor()
         timeView1.titleLabel.text = "sec"
@@ -39,8 +38,6 @@ class CoundownViewController: UIViewController {
             make.width.equalTo(100)
             make.height.equalTo(100)
         }
-        
-        
     }
     
     deinit {
@@ -57,20 +54,39 @@ class CoundownViewController: UIViewController {
     }
     
     func updateTime() {
-        timerCoundownValue -= 1
-        printTimerValue()
-        
-        timeView1.minutesOrSeconds = timerCoundownValue
-        
-        if timerCoundownValue == 0 {
-            tickTimer?.invalidate()
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.printTimerValue()
+            
+            self.timeView1.minutesOrSeconds = self.timerCoundownValue
+            
+            if self.timerCoundownValue == 0 {
+                self.tickTimer?.invalidate()
+            }
+            
+            self.timerCoundownValue -= 1
         }
     }
     
     @IBAction func clickMenu(sender: UIButton) {
+        self.tickTimer?.invalidate()
         self.dismissViewControllerAnimated(true) { 
-            //
+            
         }
+    }
+    
+    @IBAction func clickReset(sender: AnyObject) {
+        restartTimer()
+    }
+    
+    @IBAction func clickPlayPause(sender: AnyObject) {
+        tickTimer?.invalidate()
+    }
+    
+    private func restartTimer() {
+        tickTimer?.invalidate()
+        timerCoundownValue = (timer?.presets[0].seconds)!
+        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
+        updateTime()
     }
     
     private func printTimerValue() {

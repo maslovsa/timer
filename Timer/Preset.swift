@@ -51,12 +51,12 @@ struct Preset {
     var title: String = ""
     var description: String = ""
     var units: String = ""
-    var prepareSeconds: Int {
+    var seconds: Int {
         switch type {
         case .IntType(let unit):
             return unit.value
-        case .TimeType(let _, let _):
-            return 0
+        case .TimeType(let min, let sec):
+            return min.value * 60 + sec.value
         }
     }
     
