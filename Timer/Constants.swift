@@ -12,7 +12,7 @@ struct Constants {
 
     
     struct Picker {
-        static let FontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightBold)
+        static let FontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightRegular)
         static let FontColor = UIColor.blackColor()
         
         static let DescriptionFontSize = UIFont.systemFontOfSize(18, weight: UIFontWeightRegular)
@@ -26,14 +26,8 @@ struct Constants {
     
     struct HeaderCell {
 
-        static let NewNotificationFontSize = UIFont.systemFontOfSize(17, weight: UIFontWeightBold)
         static let RedFontColor = UIColor(red:213.0/255.0, green:34.0/255.0, blue:42.0/255.0, alpha:1.0)
         static let BlueFontColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
-
-        // 127, 199, 226 - blue
-        static let NewNotificationCounterFontSize = UIFont.systemFontOfSize(17, weight: UIFontWeightBold)
-//        static let NewNotificationCounterFontColor = UIColor(red:85.0/255.0, green:85.0/255.0, blue:85.0/255.0, alpha:1.0)
-        static let NewNotificationCounterFontColor = UIColor(red:230.0/255.0, green:0.0/255.0, blue:28.0/255.0, alpha:1.0)
         
         static let Height: CGFloat = 48.0
         static let TitleOffset: CGFloat = 10.0

@@ -89,13 +89,29 @@ class PickerViewController: UIViewController {
             
             switch preset.type {
             case .IntType(let unit):
-               picker.selectRow(unit.value, inComponent: 0, animated: true)
+                picker.selectRow(unit.value, inComponent: 0, animated: true)
+                
+                
+                self.view.addSubview(firstLabel)
+                
+                firstLabel.backgroundColor = UIColor.clearColor()
+                firstLabel.text = preset.units
+                firstLabel.font = Constants.Picker.FontSize
+                firstLabel.textAlignment = .Left
+                firstLabel.textColor = Constants.HeaderCell.BlueFontColor
+                firstLabel.snp_makeConstraints { (make) -> Void in
+                    make.centerX.equalTo(self.view).offset(50)
+                    make.centerY.equalTo(self.view).offset(-1)
+                    make.height.equalTo(30)
+                    make.width.equalTo(60)
+                }
+                
             case .TimeType(let min, let sec ):
                 picker.selectRow(min.value, inComponent: 0, animated: true)
                 picker.selectRow(sec.value, inComponent: 1, animated: true)
             }
             
-            
+
             
         }
     }
