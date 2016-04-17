@@ -1,13 +1,10 @@
 PODS:
-  - DDHTimerControl (1.0.0)
   - SnapKit (0.15.0)
 
 DEPENDENCIES:
-  - DDHTimerControl
   - SnapKit (~> 0.15.0)
 
 SPEC CHECKSUMS:
-  DDHTimerControl: 5dfe11a9d3cfe70ebe054437ad4ef7e89a99fe2a
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
 
 COCOAPODS: 0.39.0

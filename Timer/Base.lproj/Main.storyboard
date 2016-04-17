@@ -124,6 +124,7 @@
                                     <constraint firstAttribute="height" constant="44" id="lc3-6w-Ulg"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" image="Menu"/>
                                 <connections>
                                     <action selector="clickMenu:" destination="CDQ-Ch-nt9" eventType="touchUpInside" id="prM-6Z-ypi"/>
