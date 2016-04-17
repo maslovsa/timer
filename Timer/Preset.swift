@@ -24,6 +24,10 @@ struct IntPreset {
         self.high = high
     }
     
+    var length: Int {
+        return high - low + 1
+    }
+    
     static func MinutePreset() -> IntPreset {
         return IntPreset(value: 30, low: 0, high: 90)
     }

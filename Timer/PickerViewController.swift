@@ -12,11 +12,15 @@ import SnapKit
 typealias completionHandler =  (Preset) -> Void
 
 class PickerViewController: UIViewController {
-    var titleLabel = UILabel()
-    var descriptionLabel = UILabel()
+    lazy var titleLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
     
-    var applyButton = UIButton()
-    var picker = UIPickerView()
+    lazy var firstLabel = UILabel()
+    lazy var secondLabel = UILabel()
+    
+    
+    lazy var applyButton = UIButton()
+    lazy var picker = UIPickerView()
 
     var preset: Preset?
     var completion: completionHandler? = nil
@@ -37,7 +41,6 @@ class PickerViewController: UIViewController {
             make.height.equalTo(self.view).dividedBy(1.2)
             make.width.equalTo(self.view)
         }
-
         
         applyButton.layer.cornerRadius = 10
         applyButton.layer.masksToBounds = true
@@ -92,11 +95,8 @@ class PickerViewController: UIViewController {
                 picker.selectRow(sec.value, inComponent: 1, animated: true)
             }
             
-//            if let value = preset.value {
-//                if let i = Int(value) {
-//                    picker.selectRow(i, inComponent: 0, animated: true)
-//                }
-//            }
+            
+            
         }
     }
     
@@ -139,15 +139,35 @@ extension PickerViewController: UIPickerViewDataSource {
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
-        if let highLimit = preset?.highLimit, let lowLimit = preset?.lowLimit {
-            if let high = Int(highLimit), let low = Int(lowLimit){
-                return high - low + 1
-            }
+        guard let type = preset?.type else {
+            return 1
         }
-        return 0
+        switch type {
+        case .IntType(let unit):
+            return unit.length
+        case .TimeType(let min, let sec):
+            if component == 0 {
+                return min.length
+            }
+            return sec.length
+        }
     }
     
+    private func calculateValue(row: Int, component: Int) -> String {
+        guard let type = preset?.type else {
+            return "no value"
+        }
+        
+        switch type {
+        case .IntType(let unit):
+            return "\(row + unit.low)"
+        case .TimeType(let min, let sec):
+            if component == 0 {
+                return NSString(format: "%02d", row + min.low) as String
+            }
+            return NSString(format: "%02d", row + sec.low) as String
+        }
+    }
 }
 
 extension PickerViewController: UIPickerViewDelegate {
@@ -156,13 +176,7 @@ extension PickerViewController: UIPickerViewDelegate {
     }
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        var value = ""
-        if let highLimit = preset?.highLimit, let lowLimit = preset?.lowLimit {
-            if let high = Int(highLimit), let low = Int(lowLimit){
-                let lowFixed = low ?? 0
-                value = "\(row + lowFixed)"
-            }
-        }
+        let value = calculateValue(row, component: component)
         pickerView.subviews[1].hidden = false
         pickerView.subviews[2].hidden = false
         pickerView.subviews[1].backgroundColor = Constants.HeaderCell.BlueFontColor
@@ -191,6 +205,4 @@ extension PickerViewController: UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     }
-    
-
 }

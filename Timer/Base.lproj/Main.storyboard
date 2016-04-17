@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibw-go-WBp" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="902"/>
+            <point key="canvasLocation" x="0.0" y="766"/>
         </scene>
         <!--StopWatch-->
         <scene sceneID="yAm-h1-lEa">
