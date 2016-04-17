@@ -12,6 +12,10 @@ import SnapKit
 typealias completionHandler =  (Preset) -> Void
 
 class PickerViewController: UIViewController {
+    let verticalCorrection = -1
+    let unitsHeight = 30
+    let unitsWidth = 60
+    
     lazy var titleLabel = UILabel()
     lazy var descriptionLabel = UILabel()
     
@@ -91,7 +95,6 @@ class PickerViewController: UIViewController {
             case .IntType(let unit):
                 picker.selectRow(unit.value, inComponent: 0, animated: true)
                 
-                
                 self.view.addSubview(firstLabel)
                 
                 firstLabel.backgroundColor = UIColor.clearColor()
@@ -101,14 +104,40 @@ class PickerViewController: UIViewController {
                 firstLabel.textColor = Constants.HeaderCell.BlueFontColor
                 firstLabel.snp_makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(50)
-                    make.centerY.equalTo(self.view).offset(-1)
-                    make.height.equalTo(30)
-                    make.width.equalTo(60)
+                    make.centerY.equalTo(self.view).offset(verticalCorrection)
+                    make.height.equalTo(unitsHeight)
+                    make.width.equalTo(unitsWidth)
                 }
                 
             case .TimeType(let min, let sec ):
                 picker.selectRow(min.value, inComponent: 0, animated: true)
                 picker.selectRow(sec.value, inComponent: 1, animated: true)
+                
+                self.view.addSubview(firstLabel)
+                firstLabel.backgroundColor = UIColor.clearColor()
+                firstLabel.text = "min"
+                firstLabel.font = Constants.Picker.FontSize
+                firstLabel.textAlignment = .Left
+                firstLabel.textColor = Constants.HeaderCell.BlueFontColor
+                firstLabel.snp_makeConstraints { (make) -> Void in
+                    make.centerX.equalTo(self.view).offset(-30)
+                    make.centerY.equalTo(self.view).offset(verticalCorrection)
+                    make.height.equalTo(unitsHeight)
+                    make.width.equalTo(unitsWidth)
+                }
+                
+                self.view.addSubview(secondLabel)
+                secondLabel.backgroundColor = UIColor.clearColor()
+                secondLabel.text = "sec"
+                secondLabel.font = Constants.Picker.FontSize
+                secondLabel.textAlignment = .Left
+                secondLabel.textColor = Constants.HeaderCell.BlueFontColor
+                secondLabel.snp_makeConstraints { (make) -> Void in
+                    make.right.equalTo(self.view).offset(0)
+                    make.centerY.equalTo(self.view).offset(verticalCorrection)
+                    make.height.equalTo(unitsHeight)
+                    make.width.equalTo(unitsWidth)
+                }
             }
             
 

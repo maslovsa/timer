@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2348F581E95DEDA7D7F75D04 /* Pods_Timer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E847F59F1D95A4D13DDD32 /* Pods_Timer.framework */; };
+		8F41E0DC1CC3D2C6005BD00A /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F41E0DB1CC3D2C6005BD00A /* TimerCell.swift */; };
 		8FB953B11C861EC400EF95C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953B01C861EC400EF95C1 /* AppDelegate.swift */; };
 		8FB953B31C861EC400EF95C1 /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */; };
 		8FB953B51C861EC400EF95C1 /* AMRAPViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */; };
@@ -17,8 +18,6 @@
 		8FB953C81C861EC400EF95C1 /* TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953C71C861EC400EF95C1 /* TimerTests.swift */; };
 		8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D21C8620D600EF95C1 /* TabataViewController.swift */; };
 		8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */; };
-		8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D81C86248E00EF95C1 /* MyCell.swift */; };
-		8FB953DB1C86248E00EF95C1 /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FB953D91C86248E00EF95C1 /* MyCell.xib */; };
 		8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */; };
 		8FB953E21C86364C00EF95C1 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953E11C86364C00EF95C1 /* PickerViewController.swift */; };
 		8FB954471C87858700EF95C1 /* Utilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB954461C87858700EF95C1 /* Utilites.swift */; };
@@ -39,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F41E0DB1CC3D2C6005BD00A /* TimerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
 		8FB953AD1C861EC400EF95C1 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB953B01C861EC400EF95C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
@@ -52,8 +52,6 @@
 		8FB953C91C861EC400EF95C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB953D21C8620D600EF95C1 /* TabataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabataViewController.swift; sourceTree = "<group>"; };
 		8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		8FB953D81C86248E00EF95C1 /* MyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
-		8FB953D91C86248E00EF95C1 /* MyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
 		8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerConfigViewController.swift; sourceTree = "<group>"; };
 		8FB953E11C86364C00EF95C1 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		8FB954461C87858700EF95C1 /* Utilites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilites.swift; sourceTree = "<group>"; };
@@ -102,6 +100,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8F41E0DD1CC3D2ED005BD00A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8F41E0DB1CC3D2C6005BD00A /* TimerCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		8FB953A41C861EC400EF95C1 = {
 			isa = PBXGroup;
 			children = (
@@ -127,8 +133,7 @@
 			children = (
 				8FB953B01C861EC400EF95C1 /* AppDelegate.swift */,
 				8FB953DE1C862AB100EF95C1 /* Controllers */,
-				8FB953D81C86248E00EF95C1 /* MyCell.swift */,
-				8FB953D91C86248E00EF95C1 /* MyCell.xib */,
+				8F41E0DD1CC3D2ED005BD00A /* Cells */,
 				8FB953B61C861EC400EF95C1 /* Main.storyboard */,
 				8FCF2EF91C906CEE001BCB0C /* Data */,
 				8FB954451C87858700EF95C1 /* Utilites */,
@@ -275,7 +280,6 @@
 				8FB953BD1C861EC400EF95C1 /* LaunchScreen.storyboard in Resources */,
 				8FB953BA1C861EC400EF95C1 /* Assets.xcassets in Resources */,
 				8FB953B81C861EC400EF95C1 /* Main.storyboard in Resources */,
-				8FB953DB1C86248E00EF95C1 /* MyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,8 +352,8 @@
 				8FB954491C8785A200EF95C1 /* TimePickerView.swift in Sources */,
 				8FB953B11C861EC400EF95C1 /* AppDelegate.swift in Sources */,
 				8FB953E21C86364C00EF95C1 /* PickerViewController.swift in Sources */,
+				8F41E0DC1CC3D2C6005BD00A /* TimerCell.swift in Sources */,
 				8FCF2EF81C906CDA001BCB0C /* Constants.swift in Sources */,
-				8FB953DA1C86248E00EF95C1 /* MyCell.swift in Sources */,
 				8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */,
 				8FB9544B1C886CE900EF95C1 /* Preset.swift in Sources */,
 				8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */,

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--StopWatch-->
@@ -18,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-Rj-YGR">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -29,11 +30,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="oy6-Rj-YGR" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" id="6f4-MF-blc"/>
                             <constraint firstItem="oy6-Rj-YGR" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="7Hh-uw-std"/>
-                            <constraint firstItem="oy6-Rj-YGR" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="9a8-Of-Aae"/>
+                            <constraint firstItem="oy6-Rj-YGR" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="-64" id="9a8-Of-Aae"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="oy6-Rj-YGR" secondAttribute="bottom" id="Ig3-WK-zDn"/>
                             <constraint firstAttribute="trailing" secondItem="oy6-Rj-YGR" secondAttribute="trailing" id="pwu-6w-Gn7"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9a8-Of-Aae"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Vs9-3U-4BH"/>
                     <navigationItem key="navigationItem" title="StopWatch" id="4jH-gr-Yib"/>
@@ -130,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GhR-i3-9BG">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -142,10 +149,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="GhR-i3-9BG" secondAttribute="trailing" id="0HM-N5-dHr"/>
+                            <constraint firstItem="GhR-i3-9BG" firstAttribute="top" secondItem="iNI-YC-Kvi" secondAttribute="topMargin" id="M9j-Pd-eng"/>
                             <constraint firstItem="caG-fa-Dtr" firstAttribute="top" secondItem="GhR-i3-9BG" secondAttribute="bottom" id="ae0-S2-Li2"/>
                             <constraint firstItem="GhR-i3-9BG" firstAttribute="top" secondItem="VRm-s7-hcN" secondAttribute="bottom" id="cmw-vC-48R"/>
                             <constraint firstItem="GhR-i3-9BG" firstAttribute="leading" secondItem="iNI-YC-Kvi" secondAttribute="leading" id="uhU-og-ULg"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cmw-vC-48R"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="StopWatch" id="7Lw-SE-3GI"/>
                     <connections>
@@ -169,7 +182,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BB4-lg-aU9">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -184,7 +197,13 @@
                             <constraint firstItem="BB4-lg-aU9" firstAttribute="top" secondItem="scU-9Z-vB6" secondAttribute="bottom" id="Sdp-lU-cZH"/>
                             <constraint firstItem="BB4-lg-aU9" firstAttribute="leading" secondItem="Me0-Kh-Xbd" secondAttribute="leading" id="SuZ-Pi-Eri"/>
                             <constraint firstAttribute="trailing" secondItem="BB4-lg-aU9" secondAttribute="trailing" id="amr-eA-cvf"/>
+                            <constraint firstItem="BB4-lg-aU9" firstAttribute="top" secondItem="Me0-Kh-Xbd" secondAttribute="topMargin" id="ezD-KO-UKn"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Sdp-lU-cZH"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="StopWatch" id="2pC-Kt-Lp7"/>
                     <connections>

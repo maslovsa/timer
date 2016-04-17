@@ -9,7 +9,17 @@
 import UIKit
 
 struct Constants {
-
+    struct Fonts {
+        static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
+        
+        static let TimerCellTitleFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold)
+        static let TimerCellDescriptionFontSize = UIFont.systemFontOfSize(12, weight: UIFontWeightRegular)
+    }
+    
+    struct Colors {
+        static let TimerCellTitleFontColor = UIColor.blackColor()
+        static let TimerCellDescriptionFontColor = UIColor.darkGrayColor()
+    }
     
     struct Picker {
         static let FontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightRegular)

@@ -15,10 +15,9 @@ class TimerConfigViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let nib = UINib(nibName: kMyCell, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: kMyCell)
+
+        tableView.separatorStyle = .None
+        tableView.registerClass(TimerCell.self, forCellReuseIdentifier: TimerCellIdentifier)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,22 +38,14 @@ extension TimerConfigViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellRaw = tableView.dequeueReusableCellWithIdentifier(kMyCell, forIndexPath: indexPath)
-        if let cell = cellRaw as? MyCell {
-            let preset = timer.presets[indexPath.row]
-            cell.titleLabel.text = preset.title
-            cell.descriptionLabel.text = preset.description
-            
-            switch preset.type {
-            case .IntType(let unit):
-                cell.valueLabel.text = NSString(format: ":%.2d", unit.value) as String
-                
-            case .TimeType(let min, let sec):
-                cell.valueLabel.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
-            }
-            return cell
-        }
-        return cellRaw
+        let cell = tableView.dequeueReusableCellWithIdentifier(TimerCellIdentifier, forIndexPath: indexPath) as! TimerCell
+        let preset = timer.presets[indexPath.row]
+        cell.configure(preset)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 54.0
     }
 }
 
