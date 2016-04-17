@@ -92,8 +92,8 @@ class TimerCell: UITableViewCell {
             make.height.equalTo(20)
         }
         
-        labelValue.textColor = Constants.Colors.TimerCellTitleFontColor
-        labelValue.font = Constants.Fonts.TimerCellTitleFontSize
+        labelValue.textColor = Constants.Colors.TimerCellValueFontColor
+        labelValue.font = Constants.Fonts.TimerCellValueFontSize
         labelValue.textAlignment = .Right
         self.addSubview(labelValue)
         labelValue.snp_makeConstraints {

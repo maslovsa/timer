@@ -105,6 +105,44 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="766"/>
         </scene>
+        <!--Coundown View Controller-->
+        <scene sceneID="WdU-re-7op">
+            <objects>
+                <viewController storyboardIdentifier="CoundownViewController" id="CDQ-Ch-nt9" customClass="CoundownViewController" customModule="Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lWv-XL-TwJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="nhF-Ck-X7P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wM4-eU-6Us">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfC-xt-L5c">
+                                <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="L9d-ay-Lee"/>
+                                    <constraint firstAttribute="height" constant="44" id="lc3-6w-Ulg"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="Menu"/>
+                                <connections>
+                                    <action selector="clickMenu:" destination="CDQ-Ch-nt9" eventType="touchUpInside" id="prM-6Z-ypi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BfC-xt-L5c" firstAttribute="leading" secondItem="wM4-eU-6Us" secondAttribute="leading" constant="8" id="Nyv-98-SvC"/>
+                            <constraint firstItem="BfC-xt-L5c" firstAttribute="top" secondItem="wM4-eU-6Us" secondAttribute="top" constant="8" id="bt2-hI-212"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqC-9k-F1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2" y="-693"/>
+        </scene>
         <!--StopWatch-->
         <scene sceneID="yAm-h1-lEa">
             <objects>
@@ -254,6 +292,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Menu" width="512" height="512"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>

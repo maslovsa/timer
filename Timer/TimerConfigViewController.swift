@@ -22,6 +22,7 @@ class TimerConfigViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.navigationBar.topItem!.title = timer.title
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Start", style: .Plain, target: self, action: #selector(TimerConfigViewController.addTapped))
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,7 +30,13 @@ class TimerConfigViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func addTapped(){
+        
+        let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CoundownViewController") as! CoundownViewController
+        controller.modalTransitionStyle = .CrossDissolve
+        controller.timer = timer
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
 }
 
 extension TimerConfigViewController: UITableViewDataSource {

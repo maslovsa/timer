@@ -11,13 +11,14 @@ import UIKit
 struct Constants {
     struct Fonts {
         static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
-        
         static let TimerCellTitleFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold)
+        static let TimerCellValueFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightBold)
         static let TimerCellDescriptionFontSize = UIFont.systemFontOfSize(12, weight: UIFontWeightRegular)
     }
     
     struct Colors {
         static let TimerCellTitleFontColor = UIColor.blackColor()
+        static let TimerCellValueFontColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
         static let TimerCellDescriptionFontColor = UIColor.darkGrayColor()
     }
     
