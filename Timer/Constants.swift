@@ -45,6 +45,10 @@ struct Constants {
 
         static let BackgroundColor = UIColor(red:238.0/255.0, green:238.0/255.0, blue:238.0/255.0, alpha:0.2)
         static let PixelColor = UIColor(red:204.0/255.0, green:204.0/255.0, blue:204.0/255.0, alpha:1.0)
-
     }
+    
+    struct UserDefaultsKeys {
+        static let UseActionIcons = "UserDefaultsKeyUseActionIcons"
+    }
+    
 }

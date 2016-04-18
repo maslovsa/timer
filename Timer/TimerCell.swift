@@ -19,6 +19,8 @@ protocol TimerCellProtocol: class {
 class TimerCell: UITableViewCell {
     let leftOffset = 10
     let topOffset = 8
+    let imageIconSize = 30
+    
     
     var isLast: Bool = false {
         didSet {
@@ -28,11 +30,14 @@ class TimerCell: UITableViewCell {
     lazy var labelTitle = UILabel()
     lazy var labelDescription = UILabel()
     lazy var labelValue = UILabel()
+    lazy var imageViewIcon = UIImageView()
     
     lazy var onePixelLineBottom = UIView()
     
     var preset: Preset?
     weak var delegate: TimerCellProtocol?
+    
+    let useIcons = NSUserDefaults.standardUserDefaults().boolForKey(Constants.UserDefaultsKeys.UseActionIcons)
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -55,6 +60,7 @@ class TimerCell: UITableViewCell {
     
     func localInit() {
         
+        
         self.backgroundColor = UIColor.whiteColor()
         
         onePixelLineBottom.backgroundColor = UIColor.lightGrayColor()
@@ -74,7 +80,7 @@ class TimerCell: UITableViewCell {
         self.addSubview(labelTitle)
         labelTitle.snp_makeConstraints {
             (make) -> Void in
-            make.left.equalTo(self).offset(leftOffset)
+            make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize: leftOffset)
             make.top.equalTo(self).offset(topOffset)
             make.width.equalTo(200)
             make.height.equalTo(20)
@@ -86,7 +92,7 @@ class TimerCell: UITableViewCell {
         self.addSubview(labelDescription)
         labelDescription.snp_makeConstraints {
             (make) -> Void in
-            make.left.equalTo(self).offset(leftOffset)
+            make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize : leftOffset)
             make.bottom.equalTo(self).offset(-topOffset)
             make.width.equalTo(200)
             make.height.equalTo(20)
@@ -103,6 +109,18 @@ class TimerCell: UITableViewCell {
             make.width.equalTo(60)
             make.height.equalTo(20)
         }
+        
+        imageViewIcon.tintColor = Constants.Colors.TimerCellValueFontColor
+        imageViewIcon.contentMode = .ScaleAspectFit
+        self.addSubview(imageViewIcon)
+        imageViewIcon.snp_makeConstraints {
+            (make) -> Void in
+            make.left.equalTo(self).offset(leftOffset)
+            make.centerY.equalTo(self)
+            make.width.equalTo(imageIconSize)
+            make.height.equalTo(imageIconSize)
+        }
+        
     }
     
     func configure(preset: Preset) {
@@ -117,6 +135,12 @@ class TimerCell: UITableViewCell {
 
         case .TimeType(let min, let sec):
         labelValue.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
+        }
+        
+        if useIcons {
+            if let imageName = preset.image, let image = UIImage(named: imageName) {
+                imageViewIcon.image = image
+            }
         }
     }
 }

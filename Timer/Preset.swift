@@ -51,6 +51,7 @@ struct Preset {
     var title: String = ""
     var description: String = ""
     var units: String = ""
+    var image: String? = nil
     var seconds: Int {
         switch type {
         case .IntType(let unit):
@@ -58,6 +59,7 @@ struct Preset {
         case .TimeType(let min, let sec):
             return min.value * 60 + sec.value
         }
+        
     }
     
     static func preparePreset() -> Preset {
@@ -66,6 +68,7 @@ struct Preset {
         preset.title = "Prepare"
         preset.description = "Countdown before you start"
         preset.units = "sec"
+        preset.image = "Meditation"
         return preset
     }
     
@@ -74,6 +77,7 @@ struct Preset {
         preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
         preset.title = "Time Cap"
         preset.description = "Clock will stop at this time"
+        preset.image = "Run"
         return preset
     }
     
@@ -82,6 +86,7 @@ struct Preset {
         preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
         preset.title = "Start time"
         preset.description = "Total duration of workout"
+        preset.image = "Weightlift"
         return preset
     }
     
@@ -90,6 +95,7 @@ struct Preset {
         preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
         preset.title = "Work"
         preset.description = "Do exercise for this long"
+        preset.image = "Paddling"
         return preset
     }
     
@@ -98,6 +104,7 @@ struct Preset {
         preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
         preset.title = "Rest"
         preset.description = "Rest for this long"
+        preset.image = "Walking"
         return preset
     }
     
@@ -106,6 +113,7 @@ struct Preset {
         preset.type = PresetType.IntType(unit: IntPreset(value: 1, low: 1, high: 90))
         preset.title = "Rounds"
         preset.description = "One round is Work + Rest"
+        preset.image = "Rounds"
         return preset
     }
     
@@ -114,6 +122,7 @@ struct Preset {
         preset.type = PresetType.IntType(unit: IntPreset(value: 1, low: 1, high: 90))
         preset.title = "Cycles"
         preset.description = "One cycle in %d round"
+        preset.image = "Rounds"
         return preset
     }
     
@@ -122,6 +131,7 @@ struct Preset {
         preset.type = PresetType.TimeType(min: IntPreset.Minute60Preset(), sec: IntPreset.SecondPreset())
         preset.title = "Rest between Cycles"
         preset.description = "Recovery Interval"
+        preset.image = "Drink"
         return preset
     }
 }

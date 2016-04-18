@@ -11,7 +11,7 @@ import UIKit
 
 class TimerConfigViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var timer = Timer.createStopWatch()
+    lazy var timer = Timer.createStopWatch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
