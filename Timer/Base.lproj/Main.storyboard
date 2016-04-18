@@ -158,11 +158,11 @@
             </objects>
             <point key="canvasLocation" x="-2" y="-693"/>
         </scene>
-        <!--StopWatch-->
+        <!--Navigation Controller-->
         <scene sceneID="yAm-h1-lEa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VpV-Vv-D0N" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="StopWatch" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" image="Gym" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vjc-MB-trT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -307,6 +307,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Gym" width="128" height="128"/>
         <image name="Menu" width="512" height="512"/>
         <image name="second" width="30" height="30"/>
     </resources>
