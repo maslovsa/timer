@@ -324,11 +324,11 @@
             </objects>
             <point key="canvasLocation" x="838" y="-52"/>
         </scene>
-        <!--tabata-->
+        <!--Tabata-->
         <scene sceneID="a8a-e2-bkA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SgU-Gm-RAK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="tabata" image="tabTabata" id="xx9-BM-kCN"/>
+                    <tabBarItem key="tabBarItem" title="Tabata" image="tabTabata" id="xx9-BM-kCN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rNm-cS-VXx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -139,7 +139,7 @@ class TimerCell: UITableViewCell {
         
         if useIcons {
             if let imageName = preset.image, let image = UIImage(named: imageName) {
-                imageViewIcon.image = image
+                imageViewIcon.image = image.imageWithRenderingMode(.AlwaysTemplate)
             }
         }
     }
