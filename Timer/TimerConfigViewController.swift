@@ -28,7 +28,7 @@ class TimerConfigViewController: UIViewController {
         button.tintColor = Constants.Colors.BlueThemeColor
         button.setImage(UIImage(named: "Exercise"), forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(TimerConfigViewController.clickGo), forControlEvents: .TouchUpInside)
-        button.frame = CGRectMake(0, 0, 44, 44)
+        button.frame = CGRectMake(0, 0, 30, 30)
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton

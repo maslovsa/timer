@@ -14,25 +14,34 @@ class CoundownViewController: UIViewController {
     var timerCoundownValue = 0
     var timerMaxValue = 0
     
+    let colorPause = UIColor.yellowColor()
+    let colorPlay = UIColor.greenColor()
+    let buttonPlaySize = 44
+    let verticaButtonlOffset = 55
     
     var progressView: KDCircularProgress!
-    lazy var buttonPlay = UIButton()
-    lazy var buttonReset = UIButton()
-    
+    lazy var buttonPlay = UIButton(type: .System)
+    lazy var buttonReset = UIButton(type: .System)
+    lazy var buttonMenu = UIButton(type: .System)
+    lazy var labelTime = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        restartTimer()
+        labelTime.textColor = colorPause
+        labelTime.font = Constants.Fonts.TimeLabelFontSize
+        labelTime.textAlignment = .Center
+        self.view.addSubview(labelTime)
+        labelTime.snp_makeConstraints {
+            (make) -> Void in
+            make.centerX.centerY.equalTo(self.view)
+            make.width.equalTo(200)
+            make.height.equalTo(55)
+        }
         
         progressView = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         progressView.startAngle = -90
-        progressView.progressThickness = 0.3
+        progressView.progressThickness = 0.2
         progressView.trackThickness = 0.1
         progressView.clockwise = false
         progressView.gradientRotateSpeed = 2
@@ -50,6 +59,49 @@ class CoundownViewController: UIViewController {
             make.width.equalTo(300)
             make.height.equalTo(300)
         }
+        
+        buttonPlay.tintColor = colorPause
+        buttonPlay.setImage(UIImage(named: "Play"), forState: .Normal)
+        buttonPlay.addTarget(self, action: #selector(CoundownViewController.clickPlayPause), forControlEvents: .TouchDown)
+        self.view.addSubview(buttonPlay)
+        buttonPlay.snp_makeConstraints { (make) -> Void in
+            make.centerX.equalTo(self.view).offset(-30)
+            make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
+            make.width.equalTo(buttonPlaySize)
+            make.height.equalTo(buttonPlaySize)
+        }
+        
+        buttonReset.tintColor = colorPause
+        buttonReset.setImage(UIImage(named: "Rounds"), forState: .Normal)
+        buttonReset.addTarget(self, action: #selector(CoundownViewController.clickReset), forControlEvents: .TouchDown)
+        self.view.addSubview(buttonReset)
+        buttonReset.snp_makeConstraints { (make) -> Void in
+            make.centerX.equalTo(self.view).offset(30)
+            make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
+            make.width.equalTo(buttonPlaySize)
+            make.height.equalTo(buttonPlaySize)
+        }
+        
+        buttonMenu.tintColor = UIColor.whiteColor()
+        buttonMenu.layer.cornerRadius = 10
+        buttonMenu.layer.masksToBounds = true
+        buttonMenu.contentMode = .ScaleAspectFit
+        buttonMenu.setImage(UIImage(named: "Menu"), forState: .Normal)
+        buttonMenu.addTarget(self, action: #selector(CoundownViewController.clickMenu), forControlEvents: .TouchDown)
+        self.view.addSubview(buttonMenu)
+        buttonMenu.snp_makeConstraints { (make) -> Void in
+            make.left.top.equalTo(self.view).offset(20)
+            make.width.height.equalTo(30)
+        }
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //restartTimer()
+        
+
     }
     
     deinit {
@@ -65,9 +117,25 @@ class CoundownViewController: UIViewController {
         return true
     }
     
+    func clickPlayPause() {
+
+    }
+    
+    func clickReset() {
+        restartTimer()
+    }
+    
+    func clickMenu() {
+        self.tickTimer?.invalidate()
+        self.dismissViewControllerAnimated(true) {
+            
+        }
+    }
+    
     func updateTime() {
         dispatch_async(dispatch_get_main_queue()) { 
-            self.printTimerValue()
+            
+            self.labelTime.text = self.printTimerValue()
             self.progressView.angle = 360 * ( Double(self.timerCoundownValue) / Double(self.timerMaxValue) )
             print(self.progressView.angle)
             if self.timerCoundownValue == 0 {
@@ -76,22 +144,7 @@ class CoundownViewController: UIViewController {
             self.timerCoundownValue -= 1
         }
     }
-    
-    @IBAction func clickMenu(sender: UIButton) {
-        self.tickTimer?.invalidate()
-        self.dismissViewControllerAnimated(true) { 
-            
-        }
-    }
-    
-    @IBAction func clickReset(sender: AnyObject) {
-        restartTimer()
-    }
-    
-    @IBAction func clickPlayPause(sender: AnyObject) {
-        tickTimer?.invalidate()
-    }
-    
+
     private func restartTimer() {
         tickTimer?.invalidate()
         timerCoundownValue = 60 //(timer?.presets[0].seconds)!
@@ -100,13 +153,11 @@ class CoundownViewController: UIViewController {
         updateTime()
     }
     
-    private func printTimerValue() {
+    private func printTimerValue() -> String {
         let minutes = timerCoundownValue/60
         let seconds = timerCoundownValue - minutes * 60
         
-        let str = NSString(format: "%02d:%02d", minutes,seconds) as String
-        
-        print(str)
+        return NSString(format: "%02d:%02d", minutes,seconds) as String
 
     }
 }
