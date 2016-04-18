@@ -113,7 +113,7 @@ struct Preset {
         preset.type = PresetType.IntType(unit: IntPreset(value: 1, low: 1, high: 90))
         preset.title = "Rounds"
         preset.description = "One round is Work + Rest"
-        preset.image = "Rounds"
+        preset.image = "WorkRest"
         return preset
     }
     
@@ -122,7 +122,7 @@ struct Preset {
         preset.type = PresetType.IntType(unit: IntPreset(value: 1, low: 1, high: 90))
         preset.title = "Cycles"
         preset.description = "One cycle in %d round"
-        preset.image = "Rounds"
+        preset.image = "Cicles"
         return preset
     }
     

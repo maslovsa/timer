@@ -131,10 +131,10 @@ class TimerCell: UITableViewCell {
         
         switch preset.type {
         case .IntType(let unit):
-        labelValue.text = NSString(format: ":%.2d", unit.value) as String
-
+            labelValue.text = NSString(format: ":%.2d", unit.value) as String
+            
         case .TimeType(let min, let sec):
-        labelValue.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
+            labelValue.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
         }
         
         if useIcons {
