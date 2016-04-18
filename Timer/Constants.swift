@@ -20,7 +20,7 @@ struct Constants {
         static let TimerCellTitleFontColor = UIColor.blackColor()
         static let TimerCellValueFontColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
         static let BlueThemeColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
-
+        //static let BlueThemeColor = UIColor(red:135.0/255.0, green:153.0/255.0, blue:189.0/255.0, alpha:1.0)
         static let TimerCellDescriptionFontColor = UIColor.darkGrayColor()
     }
     

@@ -139,9 +139,6 @@ class PickerViewController: UIViewController {
                     make.width.equalTo(unitsWidth)
                 }
             }
-            
-
-            
         }
     }
     

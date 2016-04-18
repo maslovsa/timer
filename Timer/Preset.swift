@@ -64,7 +64,7 @@ struct Preset {
     
     static func preparePreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.IntType(unit: IntPreset(value: 5, low: 0, high: 59))
+        preset.type = PresetType.IntType(unit: IntPreset(value: 5, low: 3, high: 59))
         preset.title = "Prepare"
         preset.description = "Countdown before you start"
         preset.units = "sec"
@@ -121,7 +121,7 @@ struct Preset {
         var preset = Preset()
         preset.type = PresetType.IntType(unit: IntPreset(value: 1, low: 1, high: 90))
         preset.title = "Cycles"
-        preset.description = "One cycle in %d round"
+        preset.description = "One cycle in several rounds"
         preset.image = "Cicles"
         return preset
     }
