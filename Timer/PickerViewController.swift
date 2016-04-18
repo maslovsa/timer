@@ -12,6 +12,10 @@ import SnapKit
 typealias completionHandler =  (Preset) -> Void
 
 class PickerViewController: UIViewController {
+    let titleLabelVerticalOffset = 22
+    let titleHeight = 22
+    let defaultOffset = 22
+    
     let verticalCorrection = -1
     let unitsHeight = 30
     let unitsWidth = 60
@@ -50,27 +54,27 @@ class PickerViewController: UIViewController {
         applyButton.layer.masksToBounds = true
         applyButton.clipsToBounds = true
         applyButton.titleLabel!.font = Constants.Picker.FontSize
-        applyButton.backgroundColor = Constants.HeaderCell.BlueFontColor
+        applyButton.backgroundColor = Constants.Colors.BlueThemeColor
         applyButton.titleLabel?.textColor = UIColor.whiteColor()
         applyButton.setTitle("OK", forState: .Normal)
         applyButton.addTarget(self, action: #selector(PickerViewController.applyClicked(_:)), forControlEvents: .TouchDown)
         self.view.addSubview(applyButton)
         applyButton.snp_makeConstraints { (make) -> Void in
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.bottom.equalTo(self.view).offset(-20)
+            make.left.equalTo(self.view).offset(defaultOffset)
+            make.right.equalTo(self.view).offset(-defaultOffset)
+            make.bottom.equalTo(self.view).offset(-defaultOffset)
             make.height.equalTo(44)
         }
 
         titleLabel.font = Constants.Picker.FontSize
         titleLabel.textAlignment = .Center
-        titleLabel.textColor = Constants.HeaderCell.RedFontColor
+        titleLabel.textColor = Constants.Picker.FontColor
         self.view.addSubview(titleLabel)
         titleLabel.snp_makeConstraints { (make) -> Void in
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(self.view).offset(44)
-            make.height.equalTo(44)
+            make.left.equalTo(self.view).offset(defaultOffset)
+            make.right.equalTo(self.view).offset(-defaultOffset)
+            make.top.equalTo(self.view).offset(titleLabelVerticalOffset)
+            make.height.equalTo(titleHeight)
         }
         
         descriptionLabel.font = Constants.Picker.DescriptionFontSize
@@ -78,10 +82,10 @@ class PickerViewController: UIViewController {
         descriptionLabel.textColor = Constants.Picker.DescriptionFontColor
         self.view.addSubview(descriptionLabel)
         descriptionLabel.snp_makeConstraints { (make) -> Void in
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(self.view).offset(44+44)
-            make.height.equalTo(44)
+            make.left.equalTo(self.view).offset(defaultOffset)
+            make.right.equalTo(self.view).offset(-defaultOffset)
+            make.top.equalTo(self.view).offset(titleLabelVerticalOffset + titleHeight)
+            make.height.equalTo(titleHeight)
         }
         
     }
@@ -101,7 +105,7 @@ class PickerViewController: UIViewController {
                 firstLabel.text = preset.units
                 firstLabel.font = Constants.Picker.FontSize
                 firstLabel.textAlignment = .Left
-                firstLabel.textColor = Constants.HeaderCell.BlueFontColor
+                firstLabel.textColor = Constants.Colors.BlueThemeColor
                 firstLabel.snp_makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(50)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
@@ -118,9 +122,9 @@ class PickerViewController: UIViewController {
                 firstLabel.text = "min"
                 firstLabel.font = Constants.Picker.FontSize
                 firstLabel.textAlignment = .Left
-                firstLabel.textColor = Constants.HeaderCell.BlueFontColor
+                firstLabel.textColor = Constants.Colors.BlueThemeColor
                 firstLabel.snp_makeConstraints { (make) -> Void in
-                    make.centerX.equalTo(self.view).offset(-30)
+                    make.centerX.equalTo(self.view).offset(0)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
                     make.height.equalTo(unitsHeight)
                     make.width.equalTo(unitsWidth)
@@ -131,9 +135,9 @@ class PickerViewController: UIViewController {
                 secondLabel.text = "sec"
                 secondLabel.font = Constants.Picker.FontSize
                 secondLabel.textAlignment = .Left
-                secondLabel.textColor = Constants.HeaderCell.BlueFontColor
+                secondLabel.textColor = Constants.Colors.BlueThemeColor
                 secondLabel.snp_makeConstraints { (make) -> Void in
-                    make.right.equalTo(self.view).offset(0)
+                    make.centerX.equalTo(self.view).offset(110)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
                     make.height.equalTo(unitsHeight)
                     make.width.equalTo(unitsWidth)
@@ -214,15 +218,17 @@ extension PickerViewController: UIPickerViewDataSource {
 
 extension PickerViewController: UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 33.0
+        return 50.0
     }
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         let value = calculateValue(row, component: component)
         pickerView.subviews[1].hidden = false
         pickerView.subviews[2].hidden = false
-        pickerView.subviews[1].backgroundColor = Constants.HeaderCell.BlueFontColor
-        pickerView.subviews[2].backgroundColor = Constants.HeaderCell.BlueFontColor
+        pickerView.subviews[1].backgroundColor = Constants.Colors.BlueThemeColor
+        pickerView.subviews[2].backgroundColor = Constants.Colors.BlueThemeColor
+        
+        pickerView.subviews[1].bounds = CGRect(x: 0, y:  0, width: pickerView.subviews[2].bounds.width, height: 1)
         pickerView.subviews[2].bounds = CGRect(x: 0, y:  0, width: pickerView.subviews[2].bounds.width, height: 1)
         
         
@@ -231,7 +237,7 @@ extension PickerViewController: UIPickerViewDelegate {
             return view
         }
         
-        let columnView = UILabel(frame: CGRectMake(350, 0, 150, 44))
+        let columnView = UILabel(frame: CGRectMake(150, 0, 150, 50))
         columnView.font = Constants.Picker.FontSize
         columnView.textColor = Constants.Picker.FontColor
         columnView.text = value
@@ -243,7 +249,9 @@ extension PickerViewController: UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "!!!!"
     }
-
+    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 100.0
+    }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     }

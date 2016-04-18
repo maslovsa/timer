@@ -22,31 +22,19 @@ struct Constants {
         static let BlueThemeColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
         //static let BlueThemeColor = UIColor(red:135.0/255.0, green:153.0/255.0, blue:189.0/255.0, alpha:1.0)
         static let TimerCellDescriptionFontColor = UIColor.darkGrayColor()
+        static let RedFontColor = UIColor(red:213.0/255.0, green:34.0/255.0, blue:42.0/255.0, alpha:1.0)
     }
     
     struct Picker {
         static let FontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightRegular)
         static let FontColor = UIColor.blackColor()
         
-        static let DescriptionFontSize = UIFont.systemFontOfSize(18, weight: UIFontWeightRegular)
-        static let DescriptionFontColor = UIColor.blackColor()
-
+        static let DescriptionFontSize = UIFont.systemFontOfSize(16, weight: UIFontWeightRegular)
+        static let DescriptionFontColor = UIColor.grayColor()
     }
     
     struct CustomCell {
         static let Height: CGFloat = 40.0
-    }
-    
-    struct HeaderCell {
-
-        static let RedFontColor = UIColor(red:213.0/255.0, green:34.0/255.0, blue:42.0/255.0, alpha:1.0)
-        static let BlueFontColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
-        
-        static let Height: CGFloat = 48.0
-        static let TitleOffset: CGFloat = 10.0
-
-        static let BackgroundColor = UIColor(red:238.0/255.0, green:238.0/255.0, blue:238.0/255.0, alpha:0.2)
-        static let PixelColor = UIColor(red:204.0/255.0, green:204.0/255.0, blue:204.0/255.0, alpha:1.0)
     }
     
     struct UserDefaultsKeys {
