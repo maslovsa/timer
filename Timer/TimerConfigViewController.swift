@@ -22,7 +22,16 @@ class TimerConfigViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.navigationBar.topItem!.title = timer.title
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Start", style: .Plain, target: self, action: #selector(TimerConfigViewController.addTapped))
+        
+        let button: UIButton = UIButton(type: UIButtonType.System)
+        button.contentMode = .ScaleAspectFit
+        button.tintColor = Constants.Colors.BlueThemeColor
+        button.setImage(UIImage(named: "Exercise"), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(TimerConfigViewController.clickGo), forControlEvents: .TouchUpInside)
+        button.frame = CGRectMake(0, 0, 44, 44)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,7 +39,7 @@ class TimerConfigViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addTapped() {
+    func clickGo() {
         let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CoundownViewController") as! CoundownViewController
         controller.modalTransitionStyle = .CrossDissolve
         controller.timer = timer

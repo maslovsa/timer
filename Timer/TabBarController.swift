@@ -12,6 +12,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBar.tintColor = Constants.Colors.TimerCellValueFontColor
+        self.tabBar.tintColor = Constants.Colors.BlueThemeColor
     }
 }
