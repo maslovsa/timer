@@ -97,7 +97,7 @@ class PickerViewController: UIViewController {
             
             switch preset.type {
             case .IntType(let unit):
-                picker.selectRow(unit.value, inComponent: 0, animated: true)
+                picker.selectRow(unit.valueForRow, inComponent: 0, animated: true)
                 
                 self.view.addSubview(firstLabel)
                 
@@ -114,8 +114,8 @@ class PickerViewController: UIViewController {
                 }
                 
             case .TimeType(let min, let sec ):
-                picker.selectRow(min.value, inComponent: 0, animated: true)
-                picker.selectRow(sec.value, inComponent: 1, animated: true)
+                picker.selectRow(min.valueForRow, inComponent: 0, animated: true)
+                picker.selectRow(sec.valueForRow, inComponent: 1, animated: true)
                 
                 self.view.addSubview(firstLabel)
                 firstLabel.backgroundColor = UIColor.clearColor()
@@ -155,13 +155,13 @@ class PickerViewController: UIViewController {
 
         switch preset.type {
         case .IntType(let unit):
-            preset.type = PresetType.IntType(unit: IntPreset(value: indexFirst, low: unit.low, high: unit.high))
+            preset.type = PresetType.IntType(unit: IntPreset(value: indexFirst + unit.low, low: unit.low, high: unit.high))
             
         case .TimeType(let min, let sec ):
             let indexSecond = picker.selectedRowInComponent(1)
 
-            let minPreset = IntPreset(value: indexFirst, low: min.low, high: min.high)
-            let secPreset = IntPreset(value: indexSecond, low: sec.low, high: sec.high)
+            let minPreset = IntPreset(value: indexFirst + min.low, low: min.low, high: min.high)
+            let secPreset = IntPreset(value: indexSecond + sec.low, low: sec.low, high: sec.high)
             
             preset.type = PresetType.TimeType(min: minPreset, sec: secPreset)
         }
