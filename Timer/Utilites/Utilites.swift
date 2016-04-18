@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class Utilites {
+    class func scaleImage(image: UIImage, toSize newSize: CGSize) -> (UIImage) {
+        let newRect = CGRectIntegral(CGRectMake(0,0, newSize.width, newSize.height))
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextSetInterpolationQuality(context, .High)
+        let flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, newSize.height)
+        CGContextConcatCTM(context, flipVertical)
+        CGContextDrawImage(context, newRect, image.CGImage)
+        let newImage = UIImage(CGImage: CGBitmapContextCreateImage(context)!)
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+}

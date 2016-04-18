@@ -27,6 +27,7 @@
 		8FB9544D1C8871A400EF95C1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9544C1C8871A400EF95C1 /* Timer.swift */; };
 		8FCF2EF81C906CDA001BCB0C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCF2EF71C906CDA001BCB0C /* Constants.swift */; };
 		8FF021CA1CC41DC900E5DDE0 /* DDHTimerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF021C91CC41DC900E5DDE0 /* DDHTimerControl.m */; };
+		8FF021CF1CC5169000E5DDE0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF021CE1CC5169000E5DDE0 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		8FCF2EF71C906CDA001BCB0C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8FF021C81CC41DC900E5DDE0 /* DDHTimerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHTimerControl.h; sourceTree = "<group>"; };
 		8FF021C91CC41DC900E5DDE0 /* DDHTimerControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHTimerControl.m; sourceTree = "<group>"; };
+		8FF021CE1CC5169000E5DDE0 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B351FE283B529C6A579E5DD3 /* Pods-Timer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Timer/Pods-Timer.debug.xcconfig"; sourceTree = "<group>"; };
 		E3E847F59F1D95A4D13DDD32 /* Pods_Timer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Timer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD7DEF1964F432D3B3A5A07 /* Pods-Timer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Timer/Pods-Timer.release.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				8FB953E11C86364C00EF95C1 /* PickerViewController.swift */,
 				8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */,
 				8F41E0DE1CC40D8E005BD00A /* CoundownViewController.swift */,
+				8FF021CE1CC5169000E5DDE0 /* TabBarController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FB953B51C861EC400EF95C1 /* AMRAPViewContoller.swift in Sources */,
+				8FF021CF1CC5169000E5DDE0 /* TabBarController.swift in Sources */,
 				8FB954471C87858700EF95C1 /* Utilites.swift in Sources */,
 				8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */,
 				8FB9544D1C8871A400EF95C1 /* Timer.swift in Sources */,

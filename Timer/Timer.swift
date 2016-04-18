@@ -18,6 +18,7 @@ class Timer {
     var presets = [Preset]()
     var style = TimerStyle.StopWatch
     var title = ""
+    var image: String? = nil
     var prefCount: Int {
         return presets.count
     }
@@ -27,6 +28,7 @@ class Timer {
         timer.title = "StopWatch"
         timer.style = TimerStyle.StopWatch
         timer.presets = [Preset.preparePreset(), Preset.timeCapPreset()]
+        timer.image = "Gym"
         return timer
     }
     
@@ -35,6 +37,7 @@ class Timer {
         timer.title = "AMRAP"
         timer.style = TimerStyle.AMRAP
         timer.presets = [Preset.preparePreset(), Preset.startTimePreset()]
+        timer.image = "Gym2"
         return timer
     }
     
@@ -49,6 +52,7 @@ class Timer {
             Preset.cyclesPreset(),
             Preset.restBetweenCyclesPreset()
         ]
+        timer.image = "Round"
         return timer
     }
 }

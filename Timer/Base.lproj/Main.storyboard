@@ -55,7 +55,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="TabBarController" customModule="Timer" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -73,7 +73,7 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Second-->
+        <!--Settings-->
         <scene sceneID="qUJ-81-OPS">
             <objects>
                 <viewController id="FnK-AY-mfO" customClass="SettingsViewController" customModule="Timer" customModuleProvider="target" sceneMemberID="viewController">
@@ -99,11 +99,49 @@
                             <constraint firstAttribute="centerX" secondItem="yJG-wE-lhe" secondAttribute="centerX" id="cye-2f-aL2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="VCy-qj-fiJ"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="tabSettings" id="VCy-qj-fiJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibw-go-WBp" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="766"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="NcF-EN-J5f">
+            <objects>
+                <viewController id="qFb-AU-nSw" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zAA-gQ-c0u"/>
+                        <viewControllerLayoutGuide type="bottom" id="H4a-tn-LWB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hsf-Aq-RdR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="Cag-Bu-Nav"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eex-vu-dEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="-1705"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="c4F-rk-wO3">
+            <objects>
+                <viewController id="VHs-q3-CYm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SzI-dI-cNt"/>
+                        <viewControllerLayoutGuide type="bottom" id="kgw-gw-RKm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MpA-Vq-oh5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="UHb-cx-8nY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hul-t5-x8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="-2365"/>
         </scene>
         <!--Coundown View Controller-->
         <scene sceneID="WdU-re-7op">
@@ -158,11 +196,11 @@
             </objects>
             <point key="canvasLocation" x="-2" y="-693"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Stopwatch-->
         <scene sceneID="yAm-h1-lEa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VpV-Vv-D0N" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" image="Gym" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Stopwatch" image="tabStopwatch" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vjc-MB-trT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -267,11 +305,11 @@
             </objects>
             <point key="canvasLocation" x="1582" y="752"/>
         </scene>
-        <!--Item-->
+        <!--AMRAP-->
         <scene sceneID="e4I-Gh-azO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kq6-nE-kB4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="QUH-rN-psY"/>
+                    <tabBarItem key="tabBarItem" title="AMRAP" image="tabAMRAP" id="QUH-rN-psY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YlK-5D-lAl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -286,11 +324,11 @@
             </objects>
             <point key="canvasLocation" x="838" y="-52"/>
         </scene>
-        <!--Item-->
+        <!--tabata-->
         <scene sceneID="a8a-e2-bkA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SgU-Gm-RAK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="xx9-BM-kCN"/>
+                    <tabBarItem key="tabBarItem" title="tabata" image="tabTabata" id="xx9-BM-kCN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rNm-cS-VXx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -307,8 +345,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gym" width="128" height="128"/>
         <image name="Menu" width="512" height="512"/>
-        <image name="second" width="30" height="30"/>
+        <image name="tabAMRAP" width="30" height="30"/>
+        <image name="tabSettings" width="30" height="30"/>
+        <image name="tabStopwatch" width="30" height="30"/>
+        <image name="tabTabata" width="30" height="30"/>
     </resources>
 </document>
