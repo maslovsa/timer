@@ -203,7 +203,6 @@ extension PickerViewController: UIPickerViewDataSource {
         guard let type = preset?.type else {
             return "no value"
         }
-        
         switch type {
         case .IntType(let unit):
             return "\(row + unit.low)"

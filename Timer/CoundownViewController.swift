@@ -12,9 +12,13 @@ class CoundownViewController: UIViewController {
     var timer: Timer?
     var tickTimer: NSTimer? = nil
     var timerCoundownValue = 0
+    var timerMaxValue = 0
     
-    lazy var timeView1 = DDHTimerControl()
-    lazy var timeView2 = DDHTimerControl()
+    
+    var progressView: KDCircularProgress!
+    lazy var buttonPlay = UIButton()
+    lazy var buttonReset = UIButton()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +30,25 @@ class CoundownViewController: UIViewController {
         
         restartTimer()
         
-        timeView1.color = UIColor.greenColor()
-        timeView1.titleLabel.text = "sec"
-        timeView1.minutesOrSeconds = timerCoundownValue
-        timeView1.userInteractionEnabled = false
-        self.view.addSubview(timeView1)
-        timeView1.snp_makeConstraints {
+        progressView = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        progressView.startAngle = -90
+        progressView.progressThickness = 0.3
+        progressView.trackThickness = 0.1
+        progressView.clockwise = false
+        progressView.gradientRotateSpeed = 2
+        progressView.roundedCorners = true
+        progressView.glowMode = .Constant
+        progressView.glowAmount = 0.9
+        progressView.trackColor = UIColor.lightGrayColor()
+        progressView.setColors( UIColor.cyanColor(), UIColor.greenColor())
+        progressView.center = CGPoint(x: view.center.x, y: view.center.y + 25)
+        self.view.addSubview(progressView)
+        progressView.snp_makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view)
-            make.width.equalTo(100)
-            make.height.equalTo(100)
+            make.width.equalTo(300)
+            make.height.equalTo(300)
         }
     }
     
@@ -56,13 +68,11 @@ class CoundownViewController: UIViewController {
     func updateTime() {
         dispatch_async(dispatch_get_main_queue()) { 
             self.printTimerValue()
-            
-            self.timeView1.minutesOrSeconds = self.timerCoundownValue
-            
+            self.progressView.angle = 360 * ( Double(self.timerCoundownValue) / Double(self.timerMaxValue) )
+            print(self.progressView.angle)
             if self.timerCoundownValue == 0 {
                 self.tickTimer?.invalidate()
             }
-            
             self.timerCoundownValue -= 1
         }
     }
@@ -84,7 +94,8 @@ class CoundownViewController: UIViewController {
     
     private func restartTimer() {
         tickTimer?.invalidate()
-        timerCoundownValue = (timer?.presets[0].seconds)!
+        timerCoundownValue = 60 //(timer?.presets[0].seconds)!
+        timerMaxValue = timerCoundownValue
         self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
         updateTime()
     }

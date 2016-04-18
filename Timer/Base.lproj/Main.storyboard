@@ -153,40 +153,7 @@
                     <view key="view" contentMode="scaleToFill" id="wM4-eU-6Us">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfC-xt-L5c" userLabel="Menu Button">
-                                <rect key="frame" x="8" y="8" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="L9d-ay-Lee"/>
-                                    <constraint firstAttribute="height" constant="44" id="lc3-6w-Ulg"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="Menu"/>
-                                <connections>
-                                    <action selector="clickMenu:" destination="CDQ-Ch-nt9" eventType="touchUpInside" id="prM-6Z-ypi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJJ-u4-7zp">
-                                <rect key="frame" x="108" y="506" width="30" height="30"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <action selector="clickPlayPause:" destination="CDQ-Ch-nt9" eventType="touchUpInside" id="vbr-2w-cxH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5g-em-QOU">
-                                <rect key="frame" x="292" y="506" width="39" height="30"/>
-                                <state key="normal" title="Reset"/>
-                                <connections>
-                                    <action selector="clickReset:" destination="CDQ-Ch-nt9" eventType="touchUpInside" id="fWf-ui-Bgw"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BfC-xt-L5c" firstAttribute="leading" secondItem="wM4-eU-6Us" secondAttribute="leading" constant="8" id="Nyv-98-SvC"/>
-                            <constraint firstItem="BfC-xt-L5c" firstAttribute="top" secondItem="wM4-eU-6Us" secondAttribute="top" constant="8" id="bt2-hI-212"/>
-                        </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -344,7 +311,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Menu" width="512" height="512"/>
         <image name="tabAMRAP" width="30" height="30"/>
         <image name="tabSettings" width="30" height="30"/>
         <image name="tabStopwatch" width="30" height="30"/>
