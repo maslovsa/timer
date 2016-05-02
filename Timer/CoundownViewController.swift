@@ -162,10 +162,20 @@ extension CoundownViewController: TimerModelProtocol{
         } else {
             initWorkout()
         }
+        
+        
+    }
+    
+    func didActivityChanged() {
+        if !timerModel.isPaused {
+            buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
+        } else {
+            buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
+        }
     }
     
     func didTickTimer() {
-        labelTime.text = Utilites.secondsToTimer(Int(timerModel.timerCoundownValue) )
+        labelTime.text = Utilites.secondsToTimer( Int(ceil(timerModel.timerCoundownValue)) )
         progressView.angle = degreesOnCircle * ( timerModel.timerCoundownValue / Double(timerModel.timerMaxValue) )
     }
 }

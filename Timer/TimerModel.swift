@@ -10,6 +10,7 @@ import Foundation
 
 protocol TimerModelProtocol: class {
     func didStateChanged()
+    func didActivityChanged()
     func didTickTimer()
 }
 
@@ -51,14 +52,12 @@ class TimerModel: NSObject {
                 isActive = false
                 isPaused = true
                 
-                delegate?.didStateChanged()
                 tickTimer?.invalidate()
             } else {
                 isActive = true
-                isPaused = false
                 
-                delegate?.didStateChanged()
                 restartTimer()
+                isPaused = false
             }
 
             
@@ -66,10 +65,18 @@ class TimerModel: NSObject {
             print("stop")
             
         }
+        
+        
+        delegate?.didActivityChanged()
+
     }
     
     func reset() {
-        
+        isActive = false
+        isPaused = false
+        state = .Prepare
+        tickTimer?.invalidate()
+        delegate?.didStateChanged()
     }
     
     func stopTimer() {
@@ -95,9 +102,9 @@ class TimerModel: NSObject {
                         self.tickTimer?.invalidate()
                         self.tickTimer = nil
         
-//                        self.timerConfig.state = .Workout
-//                        self.initWorkout()
-//                        self.restartTimer()
+                        self.state = .Workout
+                        self.delegate?.didStateChanged()
+                        self.restartTimer()
                     }
                     self.timerCoundownValue -= self.timerTickInterval
                     self.delegate?.didTickTimer()
