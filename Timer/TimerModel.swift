@@ -32,7 +32,7 @@ class TimerModel: NSObject {
     var state = TimerState.Reset
     
     var timerCoundownValue = 0.0
-    var timerMaxValue = 1
+    var timerMaxValue = 1.0
     
     init(timerConfig: TimerConfig) {
         self.timerConfig = timerConfig
@@ -94,7 +94,7 @@ class TimerModel: NSObject {
 
         if !isPaused {
             let seconds = state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
-            timerMaxValue = seconds
+            timerMaxValue = Double(seconds)
             timerCoundownValue = Double(seconds)
         }
         tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)

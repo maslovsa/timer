@@ -11,15 +11,15 @@ import UIKit
 let squareFont = "SquareSansSerif7"
 let digitalFont = "Digital-7"
 let trsFont = "TRSMillion-Regular"
-
+let digiFont = "DS-Digital-Bold"
 
 struct Constants {
     struct Fonts {
         static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
         static let TimerCellTitleFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold)
-        static let TimeLabelFontSize =  UIFont(name: digitalFont, size: 66) ?? UIFont.systemFontOfSize(66, weight: UIFontWeightMedium)
+        static let TimeLabelFontSize =  UIFont(name: digiFont, size: 66) ?? UIFont.systemFontOfSize(66, weight: UIFontWeightMedium)
 
-        static let TimeLabelInfoFontSize =  UIFont(name: digitalFont, size: 25) ?? UIFont.systemFontOfSize(25, weight: UIFontWeightMedium)
+        static let TimeLabelInfoFontSize =  UIFont(name: digiFont, size: 25) ?? UIFont.systemFontOfSize(25, weight: UIFontWeightMedium)
         
         
         

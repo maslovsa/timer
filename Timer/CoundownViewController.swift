@@ -271,8 +271,7 @@ extension CoundownViewController: TimerModelProtocol{
             labelInfo.text = timerModel.state == .Prepare ? "Prepare" : timerConfig.title
             buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
             buttonReset.enabled = false
-            
-            
+
             if timerModel.state != .Prepare {
                 labelInfo.textColor = colorPlay
                 labelTime.textColor = colorPlay
@@ -282,7 +281,15 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didTickTimer() {
-        labelTime.text = Utilites.secondsToTimer( Int(ceil(timerModel.timerCoundownValue)) )
+        switch timerConfig.style {
+        case .StopWatch:
+            labelTime.text = Utilites.secondsToTimer( Int(ceil(timerModel.timerMaxValue - timerModel.timerCoundownValue)) )
+        case .AMRAP:
+            labelTime.text = Utilites.secondsToTimer( Int(ceil(timerModel.timerCoundownValue)) )
+        case .Tabata:
+            print("tabata")
+        }
+        
         progressView.angle = degreesOnCircle * ( timerModel.timerCoundownValue / Double(timerModel.timerMaxValue) )
     }
 }

@@ -34,5 +34,15 @@ class Utilites {
         }
         
     }
+    
+    class func printFonts() {
+        let fontFamilyNames = UIFont.familyNames()
+        for familyName in fontFamilyNames {
+            print("------------------------------")
+            print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNamesForFamilyName(familyName as! String)
+            print("Font Names = [\(names)]")
+        }
+    }
 
 }
