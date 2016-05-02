@@ -52,7 +52,7 @@ class CoundownViewController: UIViewController {
         progressView.roundedCorners = true
         progressView.glowMode = .Constant
         progressView.glowAmount = 0.9
-        progressView.trackColor = UIColor.lightGrayColor()
+        progressView.trackColor = UIColor.darkGrayColor()
         progressView.setColors( UIColor.cyanColor(), UIColor.greenColor())
         progressView.center = CGPoint(x: view.center.x, y: view.center.y + 25)
         self.view.addSubview(progressView)
@@ -110,7 +110,19 @@ class CoundownViewController: UIViewController {
         progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
         progressView.angle = 360
         
-        buttonMenu.tintColor = UIColor.orangeColor()
+        buttonMenu.tintColor = UIColor.yellowColor()
+    }
+    
+    func initWorkout() {
+        labelTime.textColor = colorPlay
+        labelTime.text = Utilites.secondsToTimer(timer.presets[1].seconds)
+        buttonPlay.tintColor = colorPlay
+        buttonReset.tintColor = colorPlay
+        
+        progressView.setColors(UIColor.cyanColor(), UIColor.greenColor())
+        progressView.angle = 360
+        
+        buttonMenu.tintColor = UIColor.cyanColor()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -148,14 +160,14 @@ class CoundownViewController: UIViewController {
                 tickTimer?.invalidate()
                 
                 if timerCoundownValue == 0 {
-                    timerCoundownValue = timer.presets[0].seconds
-                    timerMaxValue = timer.presets[0].seconds
+                    timerCoundownValue = timer.state == .Prepare ? timer.presets[0].seconds : timer.presets[1].seconds
+                    timerMaxValue = timerCoundownValue
                 }
                 
                 self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
                 
-                updateTime()
                 
+                labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
             }
             
             
@@ -166,7 +178,11 @@ class CoundownViewController: UIViewController {
     }
     
     func clickReset() {
-        restartTimer()
+        if timer.state == TimerState.Prepare {
+            initPrepare()
+        } else {
+            
+        }
     }
     
     func clickMenu() {
@@ -178,13 +194,21 @@ class CoundownViewController: UIViewController {
     
     func updateTime() {
         dispatch_async(dispatch_get_main_queue()) { 
+            
+            if self.timerCoundownValue == 0 {
+                self.tickTimer?.invalidate()
+                self.tickTimer = nil
+                
+                self.timer.state = .Workout
+                self.initWorkout()
+            }
+            self.timerCoundownValue -= 1
+
             self.labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
             self.progressView.angle = 360 * ( Double(self.timerCoundownValue) / Double(self.timerMaxValue) )
             print(self.progressView.angle)
-            if self.timerCoundownValue == 0 {
-                self.tickTimer?.invalidate()
-            }
-            self.timerCoundownValue -= 1
+
+            
         }
     }
 

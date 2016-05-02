@@ -24,10 +24,14 @@ class Utilites {
     
     
     class func secondsToTimer(seconds: Int) -> String {
-        let minutes = seconds/60
-        let seconds = seconds - minutes * 60
+        if seconds < 60 {
+            return NSString(format: "  :%02d",seconds) as String
+        } else {
+            let minutes = seconds/60
+            let sec = seconds - minutes * 60
         
-        return NSString(format: "%02d:%02d", minutes,seconds) as String
+            return NSString(format: "%02d:%02d", minutes, sec) as String
+        }
         
     }
 
