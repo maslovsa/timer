@@ -96,20 +96,17 @@ class TimerModel: NSObject {
     }
     
     func updateTime() {
-                dispatch_async(dispatch_get_main_queue()) {
-        
-                    if self.timerCoundownValue <= 0 {
-                        self.tickTimer?.invalidate()
-                        self.tickTimer = nil
-        
-                        self.state = .Workout
-                        self.delegate?.didStateChanged()
-                        self.restartTimer()
-                    }
-                    self.timerCoundownValue -= self.timerTickInterval
-                    self.delegate?.didTickTimer()
-                    
-                    
-                }
+        dispatch_async(dispatch_get_main_queue()) {
+            if self.timerCoundownValue <= 0 {
+                self.tickTimer?.invalidate()
+                self.tickTimer = nil
+
+                self.state = .Workout
+                self.delegate?.didStateChanged()
+                self.restartTimer()
+            }
+            self.timerCoundownValue -= self.timerTickInterval
+            self.delegate?.didTickTimer()
+        }
     }
 }

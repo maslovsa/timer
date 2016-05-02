@@ -33,7 +33,7 @@ struct IntPreset {
     }
     
     static func MinutePreset() -> IntPreset {
-        return IntPreset(value: 30, low: 0, high: 90)
+        return IntPreset(value: 10, low: 0, high: 90)
     }
     
     static func Minute60Preset() -> IntPreset {
