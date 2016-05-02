@@ -15,21 +15,14 @@ class CoundownViewController: UIViewController {
     
     let buttonPlaySize = 44
     let verticaButtonlOffset = 55
-    
-    
-    var timerConfig: TimerConfig!
-    
-    //2delete
-    var tickTimer: NSTimer? = nil
-//    var timerCoundownValue = 0
-//    var timerMaxValue = 1
-    
+    let degreesOnCircle = 360.0
     // UI items
     var progressView: KDCircularProgress!
     lazy var buttonPlay = UIButton(type: .System)
     lazy var buttonReset = UIButton(type: .System)
     lazy var buttonMenu = UIButton(type: .System)
     lazy var labelTime = UILabel()
+    var timerConfig: TimerConfig!
     var timerModel: TimerModel!
     
     override func viewDidLoad() {
@@ -106,6 +99,36 @@ class CoundownViewController: UIViewController {
         initPrepare()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    deinit {
+        timerModel.stopTimer()
+    }
+
+    // MARK: Buttons
+    func clickPlayPause() {
+        timerModel.startStop()
+    }
+    
+    func clickReset() {
+        timerModel.reset()
+    }
+    
+    func clickMenu() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // Mark: Private
     func initPrepare() {
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
@@ -113,7 +136,7 @@ class CoundownViewController: UIViewController {
         buttonReset.tintColor = colorPause
         
         progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
-        progressView.angle = 360
+        progressView.angle = degreesOnCircle
         
         buttonMenu.tintColor = UIColor.yellowColor()
     }
@@ -125,93 +148,24 @@ class CoundownViewController: UIViewController {
         buttonReset.tintColor = colorPlay
         
         progressView.setColors(UIColor.cyanColor(), UIColor.greenColor())
-        progressView.angle = 360
+        progressView.angle = degreesOnCircle
         
         buttonMenu.tintColor = UIColor.cyanColor()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    deinit {
-        tickTimer?.invalidate()
-        tickTimer = nil
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    func restartTimer() {
-//        tickTimer?.invalidate()
-//        
-//        if timerCoundownValue == 0 {
-//            timerCoundownValue = timerConfig.state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
-//            timerMaxValue = timerCoundownValue
-//        }
-//        
-//        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
-//        
-//        
-//        labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
-    }
-    // MARK: Buttons
-    
-    func clickPlayPause() {
-        timerModel.startStop()
-    }
-    
-    func clickReset() {
-        timerModel.reset()
-//        if timerConfig.state == TimerState.Prepare {
-//            initPrepare()
-//        } else {
-//            
-//        }
-    }
-    
-    func clickMenu() {
-        self.tickTimer?.invalidate()
-        self.dismissViewControllerAnimated(true) {
-            
-        }
-    }
-    
-    func updateTime() {
-//        dispatch_async(dispatch_get_main_queue()) { 
-//            
-//            if self.timerCoundownValue == 0 {
-//                self.tickTimer?.invalidate()
-//                self.tickTimer = nil
-//                
-//                self.timerConfig.state = .Workout
-//                self.initWorkout()
-//                self.restartTimer()
-//            }
-//            self.timerCoundownValue -= 1
-//
-//            self.labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
-//            self.progressView.angle = 360 * ( Double(self.timerCoundownValue) / Double(self.timerMaxValue) )
-//            print(self.progressView.angle)
-//
-//            
-//        }
     }
     
 }
 
 extension CoundownViewController: TimerModelProtocol{
     func didStateChanged() {
-        
+        if timerModel.state == .Prepare {
+            initPrepare()
+        } else {
+            initWorkout()
+        }
     }
     
     func didTickTimer() {
-            labelTime.text = Utilites.secondsToTimer(Int(timerModel.timerCoundownValue) )
-            progressView.angle = 360 * ( Double(timerModel.timerCoundownValue) / Double(timerModel.timerMaxValue) )
+        labelTime.text = Utilites.secondsToTimer(Int(timerModel.timerCoundownValue) )
+        progressView.angle = degreesOnCircle * ( timerModel.timerCoundownValue / Double(timerModel.timerMaxValue) )
     }
 }

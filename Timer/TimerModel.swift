@@ -19,11 +19,11 @@ enum TimerState {
 }
 
 class TimerModel: NSObject {
-    let timerTickInterval = 0.5
+    let timerTickInterval = 0.02
     
     var timerConfig: TimerConfig
     var tickTimer: NSTimer? = nil
-    var delegate: TimerModelProtocol?
+    weak var delegate: TimerModelProtocol?
     
     var isActive = false
     var isPaused = false
@@ -71,20 +71,21 @@ class TimerModel: NSObject {
     func reset() {
         
     }
-
+    
+    func stopTimer() {
+        tickTimer?.invalidate()
+        tickTimer = nil
+    }
+    
     func restartTimer() {
         tickTimer?.invalidate()
 
         if !isPaused {
-            //timerCoundownValue = state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
-//            timerMaxValue = timerCoundownValue
+            let seconds = state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
+            timerMaxValue = seconds
+            timerCoundownValue = Double(seconds)
         }
-        
-        
-
-
         tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
-
     }
     
     func updateTime() {
