@@ -16,6 +16,7 @@ class CoundownViewController: UIViewController {
     
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
+    
     let buttonPlaySize = 44
     let verticaButtonlOffset = 55
     
@@ -72,7 +73,7 @@ class CoundownViewController: UIViewController {
         }
         
         buttonReset.tintColor = colorPause
-        buttonReset.setImage(UIImage(named: "Rounds"), forState: .Normal)
+        buttonReset.setImage(UIImage(named: "Reset"), forState: .Normal)
         buttonReset.addTarget(self, action: #selector(CoundownViewController.clickReset), forControlEvents: .TouchDown)
         self.view.addSubview(buttonReset)
         buttonReset.snp_makeConstraints { (make) -> Void in
@@ -95,13 +96,10 @@ class CoundownViewController: UIViewController {
         }
         
     }
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //restartTimer()
-        
-
     }
     
     deinit {
@@ -116,6 +114,9 @@ class CoundownViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    
+    // MARK: Buttons
     
     func clickPlayPause() {
 

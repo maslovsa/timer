@@ -14,10 +14,16 @@ enum TimerStyle {
     case Tabata
 }
 
+enum TimerState {
+    case Prepare
+    case Workout
+}
+
 class Timer {
     var presets = [Preset]()
     var style = TimerStyle.StopWatch
     var title = ""
+    var state = TimerState.Prepare
     var prefCount: Int {
         return presets.count
     }
