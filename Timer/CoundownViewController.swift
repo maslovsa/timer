@@ -18,6 +18,8 @@ class CoundownViewController: UIViewController {
     
     
     var timerConfig: TimerConfig!
+    
+    //2delete
     var tickTimer: NSTimer? = nil
     var timerCoundownValue = 0
     var timerMaxValue = 1
@@ -99,7 +101,8 @@ class CoundownViewController: UIViewController {
             make.width.height.equalTo(30)
         }
         
-        timerModel = TimerModel(timer: timerConfig)
+        timerModel = TimerModel(timerConfig: timerConfig)
+        timerModel.delegate = self
         initPrepare()
     }
 
@@ -145,48 +148,51 @@ class CoundownViewController: UIViewController {
     }
     
     func restartTimer() {
-        tickTimer?.invalidate()
-        
-        if timerCoundownValue == 0 {
-            timerCoundownValue = timerConfig.state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
-            timerMaxValue = timerCoundownValue
-        }
-        
-        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
-        
-        
-        labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
+//        tickTimer?.invalidate()
+//        
+//        if timerCoundownValue == 0 {
+//            timerCoundownValue = timerConfig.state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
+//            timerMaxValue = timerCoundownValue
+//        }
+//        
+//        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
+//        
+//        
+//        labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
     }
     // MARK: Buttons
     
     func clickPlayPause() {
-        switch timerConfig.style {
-        case .StopWatch, .AMRAP:
-            
-            if timerConfig.isActive {
-                timerConfig.isActive = false
-                buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
-                tickTimer?.invalidate()
-            } else {
-                timerConfig.isActive = true
-                buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
-                
-                restartTimer()
-            }
-            
-            
-        case .Tabata:
-            print("stop")
-            
-        }
+        
+        timerModel.startStop()
+//        switch timerConfig.style {
+//        case .StopWatch, .AMRAP:
+//            
+//            if timerConfig.isActive {
+//                timerConfig.isActive = false
+//                buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
+//                tickTimer?.invalidate()
+//            } else {
+//                timerConfig.isActive = true
+//                buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
+//                
+//                restartTimer()
+//            }
+//            
+//            
+//        case .Tabata:
+//            print("stop")
+//            
+//        }
     }
     
     func clickReset() {
-        if timerConfig.state == TimerState.Prepare {
-            initPrepare()
-        } else {
-            
-        }
+        timerModel.reset()
+//        if timerConfig.state == TimerState.Prepare {
+//            initPrepare()
+//        } else {
+//            
+//        }
     }
     
     func clickMenu() {
@@ -197,24 +203,37 @@ class CoundownViewController: UIViewController {
     }
     
     func updateTime() {
-        dispatch_async(dispatch_get_main_queue()) { 
-            
-            if self.timerCoundownValue == 0 {
-                self.tickTimer?.invalidate()
-                self.tickTimer = nil
-                
-                self.timerConfig.state = .Workout
-                self.initWorkout()
-                self.restartTimer()
-            }
-            self.timerCoundownValue -= 1
-
-            self.labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
-            self.progressView.angle = 360 * ( Double(self.timerCoundownValue) / Double(self.timerMaxValue) )
-            print(self.progressView.angle)
-
-            
-        }
+//        dispatch_async(dispatch_get_main_queue()) { 
+//            
+//            if self.timerCoundownValue == 0 {
+//                self.tickTimer?.invalidate()
+//                self.tickTimer = nil
+//                
+//                self.timerConfig.state = .Workout
+//                self.initWorkout()
+//                self.restartTimer()
+//            }
+//            self.timerCoundownValue -= 1
+//
+//            self.labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
+//            self.progressView.angle = 360 * ( Double(self.timerCoundownValue) / Double(self.timerMaxValue) )
+//            print(self.progressView.angle)
+//
+//            
+//        }
     }
     
+}
+
+extension CoundownViewController: TimerModelProtocol{
+    func didStateChanged() {
+        
+    }
+    
+    func didTickTimer() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.labelTime.text = Utilites.secondsToTimer(Int(self.timerModel.timerCoundownValue) )
+            self.progressView.angle = 360 * ( Double(self.timerModel.timerCoundownValue) / Double(self.timerModel.timerMaxValue) )
+        }
+    }
 }
