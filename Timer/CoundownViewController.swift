@@ -16,7 +16,7 @@ class CoundownViewController: UIViewController {
     
     let animationLength = 0.3
     let buttonPlaySize = 44
-    let verticaButtonlOffset = 55
+    let verticaButtonlOffset = 60
     let degreesOnCircle = 360.0
     let buttonPlayOffsetX = 30
     
@@ -29,12 +29,40 @@ class CoundownViewController: UIViewController {
     lazy var buttonReset = UIButton(type: .System)
     lazy var buttonMenu = UIButton(type: .System)
     lazy var labelTime = UILabel()
+    lazy var labelInfo = UILabel()
+    
     var timerConfig: TimerConfig!
     var timerModel: TimerModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let dcgr = UITapGestureRecognizer(target: self, action: #selector(CoundownViewController.handleLongPress(_:)))
+        dcgr.delegate = self
+        dcgr.numberOfTapsRequired = 1
+        self.view.addGestureRecognizer(dcgr)
+        self.view.userInteractionEnabled = true
+        
+        timerModel = TimerModel(timerConfig: timerConfig)
+        timerModel.delegate = self
+        
+        initUI()
+        onReset()
+    }
+    
+    func initUI(){
+        labelInfo.textColor = colorPause
+        labelInfo.font = Constants.Fonts.TimeLabelInfoFontSize
+        labelInfo.textAlignment = .Center
+        self.view.addSubview(labelInfo)
+        labelInfo.snp_makeConstraints {
+            (make) -> Void in
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view).offset(-60)
+            
+            make.width.equalTo(bigProgressSize)
+            make.height.equalTo(70)
+        }
         
         labelTime.textColor = colorPause
         labelTime.font = Constants.Fonts.TimeLabelFontSize
@@ -100,11 +128,6 @@ class CoundownViewController: UIViewController {
             make.left.top.equalTo(self.view).offset(20)
             make.width.height.equalTo(30)
         }
-        
-        timerModel = TimerModel(timerConfig: timerConfig)
-        timerModel.delegate = self
-        
-        onReset()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -122,7 +145,14 @@ class CoundownViewController: UIViewController {
     deinit {
         timerModel.stopTimer()
     }
-
+    
+    func handleLongPress(gestureRecognizer: UIGestureRecognizer) {
+        if (gestureRecognizer.state != UIGestureRecognizerState.Ended) {
+            return
+        }
+        
+        timerModel.startStop()
+    }
     // MARK: Buttons
     func clickPlayPause() {
         timerModel.startStop()
@@ -138,6 +168,8 @@ class CoundownViewController: UIViewController {
     
     // Mark: Private
     func onReset() {
+        labelInfo.text = "Ready?"
+        
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.getPreviewValue())
         
@@ -151,7 +183,6 @@ class CoundownViewController: UIViewController {
         buttonReset.tintColor = colorButtons
         buttonReset.hidden = true
         
-        progressView.trackThickness = 0.1
         progressView.angle = 0
         progressView.snp_updateConstraints {
             (make) -> Void in
@@ -165,6 +196,9 @@ class CoundownViewController: UIViewController {
     }
     
     func onPrepare() {
+        labelInfo.text = "Prepare"
+        labelInfo.textColor = colorPause
+        
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
         buttonPlay.tintColor = colorButtons
@@ -180,7 +214,6 @@ class CoundownViewController: UIViewController {
         buttonReset.hidden = false
         buttonReset.enabled = false
 
-        progressView.trackThickness = 0.1
         progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
         progressView.angle = 0
         progressView.snp_updateConstraints {
@@ -196,8 +229,12 @@ class CoundownViewController: UIViewController {
     }
     
     func onWorkout() {
+        labelInfo.text = timerConfig.title
+        labelInfo.textColor = colorPlay
+            
         labelTime.textColor = colorPlay
         labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
+
         buttonPlay.tintColor = colorButtons
         buttonReset.tintColor = colorButtons
         
@@ -223,11 +260,24 @@ extension CoundownViewController: TimerModelProtocol{
     
     func didActivityChanged() {
         if timerModel.isPaused {
+            labelInfo.text = "Paused"
             buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
             buttonReset.enabled = true
+            
+            labelInfo.textColor = colorPause
+            labelTime.textColor = colorPause
+            progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
         } else {
+            labelInfo.text = timerModel.state == .Prepare ? "Prepare" : timerConfig.title
             buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
             buttonReset.enabled = false
+            
+            
+            if timerModel.state != .Prepare {
+                labelInfo.textColor = colorPlay
+                labelTime.textColor = colorPlay
+                progressView.setColors(UIColor.cyanColor(), UIColor.greenColor())
+            }
         }
     }
     
@@ -235,4 +285,8 @@ extension CoundownViewController: TimerModelProtocol{
         labelTime.text = Utilites.secondsToTimer( Int(ceil(timerModel.timerCoundownValue)) )
         progressView.angle = degreesOnCircle * ( timerModel.timerCoundownValue / Double(timerModel.timerMaxValue) )
     }
+}
+
+extension CoundownViewController: UIGestureRecognizerDelegate {
+    
 }

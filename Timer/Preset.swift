@@ -63,12 +63,11 @@ struct Preset {
         case .TimeType(let min, let sec):
             return min.value * 60 + sec.value
         }
-        
     }
     
     static func preparePreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.IntType(unit: IntPreset(value: 5, low: 3, high: 59))
+        preset.type = PresetType.IntType(unit: IntPreset(value: 3, low: 3, high: 59))
         preset.title = "Prepare"
         preset.description = "Countdown before you start"
         preset.units = "sec"
