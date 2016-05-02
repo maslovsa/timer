@@ -21,5 +21,14 @@ class Utilites {
         UIGraphicsEndImageContext()
         return newImage
     }
+    
+    
+    class func secondsToTimer(seconds: Int) -> String {
+        let minutes = seconds/60
+        let seconds = seconds - minutes * 60
+        
+        return NSString(format: "%02d:%02d", minutes,seconds) as String
+        
+    }
 
 }

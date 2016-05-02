@@ -24,6 +24,8 @@ class Timer {
     var style = TimerStyle.StopWatch
     var title = ""
     var state = TimerState.Prepare
+    var isActive = false
+    
     var prefCount: Int {
         return presets.count
     }
