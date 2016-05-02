@@ -8,11 +8,19 @@
 
 import UIKit
 
+let squareFont = "SquareSansSerif7"
+let digitalFont = "Digital-7"
+let trsFont = "TRSMillion-Regular"
+
+
 struct Constants {
     struct Fonts {
         static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
         static let TimerCellTitleFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold)
-        static let TimeLabelFontSize = UIFont.systemFontOfSize(44, weight: UIFontWeightMedium)
+        static let TimeLabelFontSize =  UIFont(name: digitalFont, size: 60) ?? UIFont.systemFontOfSize(60, weight: UIFontWeightMedium)
+        
+        
+        
         static let TimerCellValueFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightBold)
         static let TimerCellDescriptionFontSize = UIFont.systemFontOfSize(12, weight: UIFontWeightRegular)
     }

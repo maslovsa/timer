@@ -19,6 +19,10 @@ class CoundownViewController: UIViewController {
     let verticaButtonlOffset = 55
     let degreesOnCircle = 360.0
     let buttonPlayOffsetX = 30
+    
+    let smallProgressSize = 220
+    let bigProgressSize = 340
+    
     // UI items
     var progressView: KDCircularProgress!
     lazy var buttonPlay = UIButton(type: .System)
@@ -31,6 +35,7 @@ class CoundownViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         labelTime.textColor = colorPause
         labelTime.font = Constants.Fonts.TimeLabelFontSize
         labelTime.textAlignment = .Center
@@ -38,11 +43,11 @@ class CoundownViewController: UIViewController {
         labelTime.snp_makeConstraints {
             (make) -> Void in
             make.centerX.centerY.equalTo(self.view)
-            make.width.equalTo(200)
-            make.height.equalTo(55)
+            make.width.equalTo(bigProgressSize)
+            make.height.equalTo(70)
         }
         
-        progressView = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        progressView = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: bigProgressSize, height: bigProgressSize))
         progressView.startAngle = -90
         progressView.progressThickness = 0.2
         progressView.trackThickness = 0.1
@@ -59,8 +64,8 @@ class CoundownViewController: UIViewController {
             (make) -> Void in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view)
-            make.width.equalTo(300)
-            make.height.equalTo(300)
+            make.width.equalTo(bigProgressSize)
+            make.height.equalTo(bigProgressSize)
         }
         
         buttonPlay.tintColor = colorButtons
@@ -70,8 +75,7 @@ class CoundownViewController: UIViewController {
         buttonPlay.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
-            make.width.equalTo(buttonPlaySize)
-            make.height.equalTo(buttonPlaySize)
+            make.width.height.equalTo(buttonPlaySize)
         }
         
         buttonReset.tintColor = colorButtons
@@ -135,10 +139,11 @@ class CoundownViewController: UIViewController {
     // Mark: Private
     func onReset() {
         labelTime.textColor = colorPause
-        labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
+        labelTime.text = Utilites.secondsToTimer(timerConfig.getPreviewValue())
         
         buttonPlay.tintColor = colorButtons
         buttonPlay.hidden = false
+        buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
         buttonPlay.snp_updateConstraints { (make) in
             make.centerX.equalTo(self.view)
         }
@@ -146,16 +151,15 @@ class CoundownViewController: UIViewController {
         buttonReset.tintColor = colorButtons
         buttonReset.hidden = true
         
+        progressView.trackThickness = 0.1
         progressView.angle = 0
         progressView.snp_updateConstraints {
             (make) -> Void in
-            make.width.equalTo(200)
-            make.height.equalTo(200)
+            make.width.height.equalTo(bigProgressSize*3)
         }
-        
-        UIView.animateWithDuration(animationLength) {
+        UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-        }
+        }, completion: nil)
         
         buttonMenu.tintColor = UIColor.yellowColor()
     }
@@ -174,19 +178,19 @@ class CoundownViewController: UIViewController {
 
         buttonReset.tintColor = colorButtons
         buttonReset.hidden = false
-        
-        
+        buttonReset.enabled = false
+
+        progressView.trackThickness = 0.1
         progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
         progressView.angle = 0
         progressView.snp_updateConstraints {
             (make) -> Void in
-            make.width.equalTo(300)
-            make.height.equalTo(300)
+            make.width.height.equalTo(bigProgressSize)
         }
         
-        UIView.animateWithDuration(animationLength) {
+        UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-        }
+            }, completion: nil)
         
         buttonMenu.tintColor = UIColor.yellowColor()
     }
@@ -218,10 +222,12 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didActivityChanged() {
-        if !timerModel.isPaused {
-            buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
-        } else {
+        if timerModel.isPaused {
             buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
+            buttonReset.enabled = true
+        } else {
+            buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
+            buttonReset.enabled = false
         }
     }
     

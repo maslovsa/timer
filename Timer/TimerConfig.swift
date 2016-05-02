@@ -25,6 +25,17 @@ class TimerConfig {
         return presets.count
     }
     
+    func getPreviewValue() -> Int {
+        switch self.style {
+        case .StopWatch:
+        return presets[1].seconds
+        case .AMRAP:
+        return presets[1].seconds
+        case .Tabata:
+        return 0
+        }
+    }
+    
     class func createStopWatch() -> TimerConfig{
         let timer = TimerConfig()
         timer.title = "StopWatch"
