@@ -12,7 +12,7 @@ class TabataViewController: TimerConfigViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.timer = Timer.createTabata()
+        self.timerConfig = TimerConfig.createTabata()
     }
     
     override func didReceiveMemoryWarning() {

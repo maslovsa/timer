@@ -19,10 +19,11 @@ enum TimerState {
     case Workout
 }
 
-class Timer {
+class TimerConfig {
     var presets = [Preset]()
     var style = TimerStyle.StopWatch
     var title = ""
+    // 2remove
     var state = TimerState.Prepare
     var isActive = false
     
@@ -30,24 +31,24 @@ class Timer {
         return presets.count
     }
     
-    class func createStopWatch() -> Timer{
-        let timer = Timer()
+    class func createStopWatch() -> TimerConfig{
+        let timer = TimerConfig()
         timer.title = "StopWatch"
         timer.style = TimerStyle.StopWatch
         timer.presets = [Preset.preparePreset(), Preset.timeCapPreset()]
         return timer
     }
     
-    class func createAMRAP() -> Timer{
-        let timer = Timer()
+    class func createAMRAP() -> TimerConfig{
+        let timer = TimerConfig()
         timer.title = "AMRAP"
         timer.style = TimerStyle.AMRAP
         timer.presets = [Preset.preparePreset(), Preset.startTimePreset()]
         return timer
     }
     
-    class func createTabata() -> Timer{
-        let timer = Timer()
+    class func createTabata() -> TimerConfig{
+        let timer = TimerConfig()
         timer.title = "Tabata"
         timer.style = TimerStyle.Tabata
         timer.presets = [Preset.preparePreset(),

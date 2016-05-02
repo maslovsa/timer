@@ -11,6 +11,7 @@
 		8F41E0DC1CC3D2C6005BD00A /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F41E0DB1CC3D2C6005BD00A /* TimerCell.swift */; };
 		8F41E0DF1CC40D8E005BD00A /* CoundownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F41E0DE1CC40D8E005BD00A /* CoundownViewController.swift */; };
 		8F7AE6881CD77D8F00EFAA6D /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AE6871CD77D8F00EFAA6D /* ImageHelper.swift */; };
+		8F7AE68A1CD7971E00EFAA6D /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AE6891CD7971E00EFAA6D /* TimerModel.swift */; };
 		8FB953B11C861EC400EF95C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953B01C861EC400EF95C1 /* AppDelegate.swift */; };
 		8FB953B31C861EC400EF95C1 /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */; };
 		8FB953B51C861EC400EF95C1 /* AMRAPViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953B41C861EC400EF95C1 /* AMRAPViewContoller.swift */; };
@@ -25,7 +26,7 @@
 		8FB954471C87858700EF95C1 /* Utilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB954461C87858700EF95C1 /* Utilites.swift */; };
 		8FB954491C8785A200EF95C1 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB954481C8785A200EF95C1 /* TimePickerView.swift */; };
 		8FB9544B1C886CE900EF95C1 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9544A1C886CE800EF95C1 /* Preset.swift */; };
-		8FB9544D1C8871A400EF95C1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9544C1C8871A400EF95C1 /* Timer.swift */; };
+		8FB9544D1C8871A400EF95C1 /* TimerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9544C1C8871A400EF95C1 /* TimerConfig.swift */; };
 		8FCF2EF81C906CDA001BCB0C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCF2EF71C906CDA001BCB0C /* Constants.swift */; };
 		8FF021CA1CC41DC900E5DDE0 /* DDHTimerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF021C91CC41DC900E5DDE0 /* DDHTimerControl.m */; };
 		8FF021CF1CC5169000E5DDE0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF021CE1CC5169000E5DDE0 /* TabBarController.swift */; };
@@ -47,6 +48,7 @@
 		8F41E0DB1CC3D2C6005BD00A /* TimerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
 		8F41E0DE1CC40D8E005BD00A /* CoundownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoundownViewController.swift; sourceTree = "<group>"; };
 		8F7AE6871CD77D8F00EFAA6D /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		8F7AE6891CD7971E00EFAA6D /* TimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		8FB953AD1C861EC400EF95C1 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB953B01C861EC400EF95C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FB953B21C861EC400EF95C1 /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +67,7 @@
 		8FB954461C87858700EF95C1 /* Utilites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilites.swift; sourceTree = "<group>"; };
 		8FB954481C8785A200EF95C1 /* TimePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		8FB9544A1C886CE800EF95C1 /* Preset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
-		8FB9544C1C8871A400EF95C1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		8FB9544C1C8871A400EF95C1 /* TimerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerConfig.swift; sourceTree = "<group>"; };
 		8FCF2EF71C906CDA001BCB0C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8FF021C81CC41DC900E5DDE0 /* DDHTimerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHTimerControl.h; sourceTree = "<group>"; };
 		8FF021C91CC41DC900E5DDE0 /* DDHTimerControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHTimerControl.m; sourceTree = "<group>"; };
@@ -205,7 +207,8 @@
 			children = (
 				8FB9544A1C886CE800EF95C1 /* Preset.swift */,
 				8FCF2EF71C906CDA001BCB0C /* Constants.swift */,
-				8FB9544C1C8871A400EF95C1 /* Timer.swift */,
+				8FB9544C1C8871A400EF95C1 /* TimerConfig.swift */,
+				8F7AE6891CD7971E00EFAA6D /* TimerModel.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -378,7 +381,7 @@
 				8FB954471C87858700EF95C1 /* Utilites.swift in Sources */,
 				8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */,
 				8FF021D11CC56B8700E5DDE0 /* KDCircularProgress.swift in Sources */,
-				8FB9544D1C8871A400EF95C1 /* Timer.swift in Sources */,
+				8FB9544D1C8871A400EF95C1 /* TimerConfig.swift in Sources */,
 				8FB954491C8785A200EF95C1 /* TimePickerView.swift in Sources */,
 				8FF021CA1CC41DC900E5DDE0 /* DDHTimerControl.m in Sources */,
 				8F41E0DF1CC40D8E005BD00A /* CoundownViewController.swift in Sources */,
@@ -388,6 +391,7 @@
 				8F41E0DC1CC3D2C6005BD00A /* TimerCell.swift in Sources */,
 				8FCF2EF81C906CDA001BCB0C /* Constants.swift in Sources */,
 				8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */,
+				8F7AE68A1CD7971E00EFAA6D /* TimerModel.swift in Sources */,
 				8FB9544B1C886CE900EF95C1 /* Preset.swift in Sources */,
 				8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */,
 				8FB953B31C861EC400EF95C1 /* StopWatchViewController.swift in Sources */,

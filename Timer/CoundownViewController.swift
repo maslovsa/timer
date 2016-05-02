@@ -17,7 +17,7 @@ class CoundownViewController: UIViewController {
     let verticaButtonlOffset = 55
     
     
-    var timer: Timer!
+    var timerConfig: TimerConfig!
     var tickTimer: NSTimer? = nil
     var timerCoundownValue = 0
     var timerMaxValue = 1
@@ -28,6 +28,7 @@ class CoundownViewController: UIViewController {
     lazy var buttonReset = UIButton(type: .System)
     lazy var buttonMenu = UIButton(type: .System)
     lazy var labelTime = UILabel()
+    var timerModel: TimerModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,12 +99,13 @@ class CoundownViewController: UIViewController {
             make.width.height.equalTo(30)
         }
         
+        timerModel = TimerModel(timer: timerConfig)
         initPrepare()
     }
 
     func initPrepare() {
         labelTime.textColor = colorPause
-        labelTime.text = Utilites.secondsToTimer(timer.presets[1].seconds)
+        labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
         buttonPlay.tintColor = colorPause
         buttonReset.tintColor = colorPause
         
@@ -115,7 +117,7 @@ class CoundownViewController: UIViewController {
     
     func initWorkout() {
         labelTime.textColor = colorPlay
-        labelTime.text = Utilites.secondsToTimer(timer.presets[1].seconds)
+        labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
         buttonPlay.tintColor = colorPlay
         buttonReset.tintColor = colorPlay
         
@@ -142,32 +144,34 @@ class CoundownViewController: UIViewController {
         return true
     }
     
-    
+    func restartTimer() {
+        tickTimer?.invalidate()
+        
+        if timerCoundownValue == 0 {
+            timerCoundownValue = timerConfig.state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
+            timerMaxValue = timerCoundownValue
+        }
+        
+        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
+        
+        
+        labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
+    }
     // MARK: Buttons
     
     func clickPlayPause() {
-        switch timer.style {
+        switch timerConfig.style {
         case .StopWatch, .AMRAP:
             
-            if timer.isActive {
-                timer.isActive = false
+            if timerConfig.isActive {
+                timerConfig.isActive = false
                 buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
                 tickTimer?.invalidate()
             } else {
-                timer.isActive = true
+                timerConfig.isActive = true
                 buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
                 
-                tickTimer?.invalidate()
-                
-                if timerCoundownValue == 0 {
-                    timerCoundownValue = timer.state == .Prepare ? timer.presets[0].seconds : timer.presets[1].seconds
-                    timerMaxValue = timerCoundownValue
-                }
-                
-                self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
-                
-                
-                labelTime.text = Utilites.secondsToTimer(self.timerCoundownValue)
+                restartTimer()
             }
             
             
@@ -178,7 +182,7 @@ class CoundownViewController: UIViewController {
     }
     
     func clickReset() {
-        if timer.state == TimerState.Prepare {
+        if timerConfig.state == TimerState.Prepare {
             initPrepare()
         } else {
             
@@ -199,8 +203,9 @@ class CoundownViewController: UIViewController {
                 self.tickTimer?.invalidate()
                 self.tickTimer = nil
                 
-                self.timer.state = .Workout
+                self.timerConfig.state = .Workout
                 self.initWorkout()
+                self.restartTimer()
             }
             self.timerCoundownValue -= 1
 
@@ -210,14 +215,6 @@ class CoundownViewController: UIViewController {
 
             
         }
-    }
-
-    private func restartTimer() {
-        tickTimer?.invalidate()
-        timerCoundownValue = 60 //(timer?.presets[0].seconds)!
-        timerMaxValue = timerCoundownValue
-        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
-        updateTime()
     }
     
 }
