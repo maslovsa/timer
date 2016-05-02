@@ -12,10 +12,13 @@ class CoundownViewController: UIViewController {
     // Constants
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
+    let colorButtons = UIColor.whiteColor()
     
+    let animationLength = 0.3
     let buttonPlaySize = 44
     let verticaButtonlOffset = 55
     let degreesOnCircle = 360.0
+    let buttonPlayOffsetX = 30
     // UI items
     var progressView: KDCircularProgress!
     lazy var buttonPlay = UIButton(type: .System)
@@ -60,23 +63,23 @@ class CoundownViewController: UIViewController {
             make.height.equalTo(300)
         }
         
-        buttonPlay.tintColor = colorPause
+        buttonPlay.tintColor = colorButtons
         buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
         buttonPlay.addTarget(self, action: #selector(CoundownViewController.clickPlayPause), forControlEvents: .TouchDown)
         self.view.addSubview(buttonPlay)
         buttonPlay.snp_makeConstraints { (make) -> Void in
-            make.centerX.equalTo(self.view).offset(-30)
+            make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
             make.width.equalTo(buttonPlaySize)
             make.height.equalTo(buttonPlaySize)
         }
         
-        buttonReset.tintColor = colorPause
+        buttonReset.tintColor = colorButtons
         buttonReset.setImage(UIImage.getResetIcon(), forState: .Normal)
         buttonReset.addTarget(self, action: #selector(CoundownViewController.clickReset), forControlEvents: .TouchDown)
         self.view.addSubview(buttonReset)
         buttonReset.snp_makeConstraints { (make) -> Void in
-            make.centerX.equalTo(self.view).offset(30)
+            make.centerX.equalTo(self.view).offset(buttonPlayOffsetX)
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
             make.width.equalTo(buttonPlaySize)
             make.height.equalTo(buttonPlaySize)
@@ -96,7 +99,8 @@ class CoundownViewController: UIViewController {
         
         timerModel = TimerModel(timerConfig: timerConfig)
         timerModel.delegate = self
-        initPrepare()
+        
+        onReset()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -129,23 +133,69 @@ class CoundownViewController: UIViewController {
     }
     
     // Mark: Private
-    func initPrepare() {
+    func onReset() {
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
-        buttonPlay.tintColor = colorPause
-        buttonReset.tintColor = colorPause
         
-        progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
-        progressView.angle = degreesOnCircle
+        buttonPlay.tintColor = colorButtons
+        buttonPlay.hidden = false
+        buttonPlay.snp_updateConstraints { (make) in
+            make.centerX.equalTo(self.view)
+        }
+        
+        buttonReset.tintColor = colorButtons
+        buttonReset.hidden = true
+        
+        progressView.angle = 0
+        progressView.snp_updateConstraints {
+            (make) -> Void in
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+        }
+        
+        UIView.animateWithDuration(animationLength) {
+            self.view.layoutIfNeeded()
+        }
         
         buttonMenu.tintColor = UIColor.yellowColor()
     }
     
-    func initWorkout() {
+    func onPrepare() {
+        labelTime.textColor = colorPause
+        labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
+        buttonPlay.tintColor = colorButtons
+        buttonPlay.hidden = false
+
+        buttonPlay.snp_updateConstraints { (make) in
+            make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
+        }
+
+
+
+        buttonReset.tintColor = colorButtons
+        buttonReset.hidden = false
+        
+        
+        progressView.setColors(UIColor.yellowColor(), UIColor.orangeColor())
+        progressView.angle = 0
+        progressView.snp_updateConstraints {
+            (make) -> Void in
+            make.width.equalTo(300)
+            make.height.equalTo(300)
+        }
+        
+        UIView.animateWithDuration(animationLength) {
+            self.view.layoutIfNeeded()
+        }
+        
+        buttonMenu.tintColor = UIColor.yellowColor()
+    }
+    
+    func onWorkout() {
         labelTime.textColor = colorPlay
         labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
-        buttonPlay.tintColor = colorPlay
-        buttonReset.tintColor = colorPlay
+        buttonPlay.tintColor = colorButtons
+        buttonReset.tintColor = colorButtons
         
         progressView.setColors(UIColor.cyanColor(), UIColor.greenColor())
         progressView.angle = degreesOnCircle
@@ -157,13 +207,14 @@ class CoundownViewController: UIViewController {
 
 extension CoundownViewController: TimerModelProtocol{
     func didStateChanged() {
-        if timerModel.state == .Prepare {
-            initPrepare()
-        } else {
-            initWorkout()
+        switch  timerModel.state {
+        case .Reset:
+            onReset()
+        case .Prepare:
+            onPrepare()
+        case .Workout:
+            onWorkout()
         }
-        
-        
     }
     
     func didActivityChanged() {

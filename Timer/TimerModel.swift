@@ -15,6 +15,7 @@ protocol TimerModelProtocol: class {
 }
 
 enum TimerState {
+    case Reset
     case Prepare
     case Workout
 }
@@ -28,7 +29,7 @@ class TimerModel: NSObject {
     
     var isActive = false
     var isPaused = false
-    var state = TimerState.Prepare
+    var state = TimerState.Reset
     
     var timerCoundownValue = 0.0
     var timerMaxValue = 1
@@ -47,7 +48,11 @@ class TimerModel: NSObject {
     func startStop() {
         switch timerConfig.style {
         case .StopWatch, .AMRAP:
-
+            if state == .Reset {
+                state = .Prepare
+                delegate?.didStateChanged()
+            }
+            
             if isActive {
                 isActive = false
                 isPaused = true
@@ -74,7 +79,7 @@ class TimerModel: NSObject {
     func reset() {
         isActive = false
         isPaused = false
-        state = .Prepare
+        state = .Reset
         tickTimer?.invalidate()
         delegate?.didStateChanged()
     }
