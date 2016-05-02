@@ -21,8 +21,8 @@ class CoundownViewController: UIViewController {
     
     //2delete
     var tickTimer: NSTimer? = nil
-    var timerCoundownValue = 0
-    var timerMaxValue = 1
+//    var timerCoundownValue = 0
+//    var timerMaxValue = 1
     
     // UI items
     var progressView: KDCircularProgress!
@@ -163,27 +163,7 @@ class CoundownViewController: UIViewController {
     // MARK: Buttons
     
     func clickPlayPause() {
-        
         timerModel.startStop()
-//        switch timerConfig.style {
-//        case .StopWatch, .AMRAP:
-//            
-//            if timerConfig.isActive {
-//                timerConfig.isActive = false
-//                buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
-//                tickTimer?.invalidate()
-//            } else {
-//                timerConfig.isActive = true
-//                buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
-//                
-//                restartTimer()
-//            }
-//            
-//            
-//        case .Tabata:
-//            print("stop")
-//            
-//        }
     }
     
     func clickReset() {
@@ -231,9 +211,7 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didTickTimer() {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.labelTime.text = Utilites.secondsToTimer(Int(self.timerModel.timerCoundownValue) )
-            self.progressView.angle = 360 * ( Double(self.timerModel.timerCoundownValue) / Double(self.timerModel.timerMaxValue) )
-        }
+            labelTime.text = Utilites.secondsToTimer(Int(timerModel.timerCoundownValue) )
+            progressView.angle = 360 * ( Double(timerModel.timerCoundownValue) / Double(timerModel.timerMaxValue) )
     }
 }

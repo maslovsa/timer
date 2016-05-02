@@ -11,8 +11,11 @@ import Foundation
 protocol TimerModelProtocol: class {
     func didStateChanged()
     func didTickTimer()
-    //    func didSelectPostImage(cell:BaseCell)
-    //    func didSelectUserProfile(cell:BaseCell, userProfile: UserProfile)
+}
+
+enum TimerState {
+    case Prepare
+    case Workout
 }
 
 class TimerModel: NSObject {
@@ -23,6 +26,9 @@ class TimerModel: NSObject {
     var delegate: TimerModelProtocol?
     
     var isActive = false
+    var isPaused = false
+    var state = TimerState.Prepare
+    
     var timerCoundownValue = 0.0
     var timerMaxValue = 1
     
@@ -41,13 +47,18 @@ class TimerModel: NSObject {
         switch timerConfig.style {
         case .StopWatch, .AMRAP:
 
-            if timerConfig.isActive {
-                timerConfig.isActive = false
+            if isActive {
+                isActive = false
+                isPaused = true
+                
+                delegate?.didStateChanged()
                 tickTimer?.invalidate()
             } else {
-                timerConfig.isActive = true
-
-                //restartTimer()
+                isActive = true
+                isPaused = false
+                
+                delegate?.didStateChanged()
+                restartTimer()
             }
 
             
@@ -61,17 +72,20 @@ class TimerModel: NSObject {
         
     }
 
-//    func restartTimer() {
-//        tickTimer?.invalidate()
-//
-//        if timerCoundownValue == 0 {
-//            timerCoundownValue = timerConfig.state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
+    func restartTimer() {
+        tickTimer?.invalidate()
+
+        if !isPaused {
+            //timerCoundownValue = state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
 //            timerMaxValue = timerCoundownValue
-//        }
-//
-//        self.tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
-//
-//    }
+        }
+        
+        
+
+
+        tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
+
+    }
     
     func updateTime() {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -85,7 +99,7 @@ class TimerModel: NSObject {
 //                        self.restartTimer()
                     }
                     self.timerCoundownValue -= self.timerTickInterval
-        
+                    self.delegate?.didTickTimer()
                     
                     
                 }

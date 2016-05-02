@@ -14,18 +14,12 @@ enum TimerStyle {
     case Tabata
 }
 
-enum TimerState {
-    case Prepare
-    case Workout
-}
+
 
 class TimerConfig {
     var presets = [Preset]()
     var style = TimerStyle.StopWatch
     var title = ""
-    // 2remove
-    var state = TimerState.Prepare
-    var isActive = false
     
     var prefCount: Int {
         return presets.count
