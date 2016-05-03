@@ -18,6 +18,7 @@ enum TimerState {
     case Reset
     case Prepare
     case Workout
+    case Finished
 }
 
 class TimerModel: NSObject {
@@ -154,16 +155,11 @@ class TimerModel: NSObject {
                     self.restartTimer()
                     self.delegate?.didStateChanged()
                 case .Workout:
-                    self.state = .Workout
-                    //self.isPaused = true
-                    //self.delegate?.didActivityChanged()
+                    self.state = .Finished
+                    self.delegate?.didStateChanged()
+                default:
+                    break
                 }
-                
-//                if self.state == .Prepare {
-//                    self.state = .Workout
-//                    self.delegate?.didStateChanged()
-//                    self.restartTimer()
-//                }
                 
                 return
             }
