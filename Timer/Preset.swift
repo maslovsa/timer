@@ -77,7 +77,9 @@ struct Preset {
     
     static func timeCapPreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
+        //preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
+        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 10, low: 0, high: 59))
+        
         preset.title = "Time Cap"
         preset.description = "Clock will stop at this time"
         preset.image = "Run"

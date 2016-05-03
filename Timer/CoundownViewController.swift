@@ -216,6 +216,7 @@ class CoundownViewController: UIViewController {
     // Mark: Private
     func onReset() {
         labelInfo.text = readyText
+        labelInfo.textColor = colorPause
         
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.getPreviewValue())
@@ -350,8 +351,6 @@ extension CoundownViewController: TimerModelProtocol{
         labelTime.text = Utilites.secondsToTimer( Int(timerModel.secondsToShow) )
         progressView.angle = timerModel.progressToShow
         progressView.setColorsArray(getProgressColors())
-        
-        labelClock.text = "12:23"
     }
 }
 

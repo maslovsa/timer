@@ -46,11 +46,15 @@ class TimerModel: NSObject {
     }
     
     var secondsToShow: Double {
+        if state == .Prepare {
+            return ceil(timerCoundownValue)
+        }
+        
         switch timerConfig.style {
         case .StopWatch:
-            return ceil(timerMaxValue - timerCoundownValue)
+            return (timerMaxValue - timerCoundownValue)
         case .AMRAP:
-            return ceil(timerCoundownValue)
+            return (timerCoundownValue)
         case .Tabata:
             return timerCoundownValue
         }
@@ -84,8 +88,8 @@ class TimerModel: NSObject {
     }
     
     func startStop() {
-        switch timerConfig.style {
-        case .StopWatch, .AMRAP:
+//        switch timerConfig.style {
+//        case .StopWatch, .AMRAP:
             if state == .Reset {
                 state = .Prepare
                 delegate?.didStateChanged()
@@ -104,10 +108,10 @@ class TimerModel: NSObject {
             }
 
             
-        case .Tabata:
-            print("stop")
-            
-        }
+//        case .Tabata:
+//            print("stop")
+//            
+//        }
         
         
         delegate?.didActivityChanged()
@@ -143,10 +147,25 @@ class TimerModel: NSObject {
             if self.timerCoundownValue <= 0 {
                 self.tickTimer?.invalidate()
                 self.tickTimer = nil
-
-                self.state = .Workout
-                self.delegate?.didStateChanged()
-                self.restartTimer()
+            
+                switch self.state {
+                case .Prepare, .Reset:
+                    self.state = .Workout
+                    self.restartTimer()
+                    self.delegate?.didStateChanged()
+                case .Workout:
+                    self.state = .Workout
+                    //self.isPaused = true
+                    //self.delegate?.didActivityChanged()
+                }
+                
+//                if self.state == .Prepare {
+//                    self.state = .Workout
+//                    self.delegate?.didStateChanged()
+//                    self.restartTimer()
+//                }
+                
+                return
             }
             self.timerCoundownValue -= self.timerTickInterval
             self.delegate?.didTickTimer()
