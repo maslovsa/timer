@@ -13,10 +13,6 @@ class CoundownViewController: UIViewController {
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
     let colorButtons = UIColor.whiteColor()
-    let prepareText = "prepare"
-    let finishedText = "finished!"
-    let pausedText = "paused"
-    let readyText = "ready?"
     
     let greenColors = [UIColor.greenColor(), UIColor.cyanColor()]
     let yellowColors = [UIColor.yellowColor(), UIColor.orangeColor()]
@@ -24,13 +20,14 @@ class CoundownViewController: UIViewController {
     
     let animationLength = 0.3
     let buttonPlaySize = 44
-    let verticaButtonlOffset = 60
+    let verticaButtonlOffset = 60.0
     let degreesOnCircle = 360.0
     let buttonPlayOffsetX = 30
     
     let smallProgressSize = 220
     let bigProgressSize = 340
     
+    let verticalTabateOffset = 40.0
     // UI items
     var progressView: KDCircularProgress!
     lazy var buttonPlay = UIButton(type: .System)
@@ -86,18 +83,6 @@ class CoundownViewController: UIViewController {
             make.height.equalTo(35)
         }
         
-        labelInfo.textColor = colorPause
-        labelInfo.font = Constants.Fonts.TimeLabelInfoFontSize
-        labelInfo.textAlignment = .Center
-        self.view.addSubview(labelInfo)
-        labelInfo.snp_makeConstraints {
-            (make) -> Void in
-            make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view).offset(-60)
-            
-            make.width.equalTo(bigProgressSize)
-            make.height.equalTo(70)
-        }
         
         labelInfo.textColor = colorPause
         labelInfo.font = Constants.Fonts.TimeLabelInfoFontSize
@@ -106,7 +91,7 @@ class CoundownViewController: UIViewController {
         labelInfo.snp_makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view).offset(-60)
+            make.centerY.equalTo(self.view).offset(-60 - getVerticalOffset)
             
             make.width.equalTo(bigProgressSize)
             make.height.equalTo(70)
@@ -118,7 +103,8 @@ class CoundownViewController: UIViewController {
         self.view.addSubview(labelTime)
         labelTime.snp_makeConstraints {
             (make) -> Void in
-            make.centerX.centerY.equalTo(self.view)
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view).offset(-getVerticalOffset)
             make.width.equalTo(bigProgressSize)
             make.height.equalTo(70)
         }
@@ -138,7 +124,7 @@ class CoundownViewController: UIViewController {
         progressView.snp_makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view)
+            make.centerY.equalTo(self.view).offset(-getVerticalOffset)
             make.width.equalTo(bigProgressSize)
             make.height.equalTo(bigProgressSize)
         }
@@ -149,7 +135,7 @@ class CoundownViewController: UIViewController {
         self.view.addSubview(buttonPlay)
         buttonPlay.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
-            make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
+            make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getVerticalOffset)
             make.width.height.equalTo(buttonPlaySize)
         }
         
@@ -159,7 +145,7 @@ class CoundownViewController: UIViewController {
         self.view.addSubview(buttonReset)
         buttonReset.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view).offset(buttonPlayOffsetX)
-            make.centerY.equalTo(self.view).offset(verticaButtonlOffset)
+            make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getVerticalOffset)
             make.width.equalTo(buttonPlaySize)
             make.height.equalTo(buttonPlaySize)
         }
@@ -217,7 +203,7 @@ class CoundownViewController: UIViewController {
     
     // Mark: Private
     func onReset() {
-        labelInfo.text = readyText
+        labelInfo.text = timerModel.informationString
         labelInfo.textColor = colorPause
         
         labelTime.textColor = colorPause
@@ -249,7 +235,7 @@ class CoundownViewController: UIViewController {
     }
     
     func onPrepare() {
-        labelInfo.text = prepareText
+        labelInfo.text = timerModel.informationString
         labelInfo.textColor = colorPause
         
         labelTime.textColor = colorPause
@@ -283,7 +269,7 @@ class CoundownViewController: UIViewController {
     }
     
     func onWorkout() {
-        labelInfo.text = timerConfig.title
+        labelInfo.text = timerModel.informationString
         labelInfo.textColor = colorPlay
             
         labelTime.textColor = colorPlay
@@ -305,7 +291,7 @@ class CoundownViewController: UIViewController {
     }
     
     func onFinished() {
-        labelInfo.text = finishedText
+        labelInfo.text = timerModel.informationString
         labelInfo.textColor = colorPause
         
         labelTime.textColor = colorPause
@@ -345,6 +331,10 @@ class CoundownViewController: UIViewController {
             return timerModel.isCriticalTimer ? redColors : greenColors
         }
     }
+    
+    private var getVerticalOffset: Double {
+        return timerConfig.style == .Tabata ? verticalTabateOffset : 0.0
+    }
 }
 
 extension CoundownViewController: TimerModelProtocol{
@@ -362,8 +352,9 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didActivityChanged() {
+        labelInfo.text = timerModel.informationString
+
         if timerModel.isPaused {
-            labelInfo.text = pausedText
             buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
             buttonReset.enabled = true
             
@@ -373,7 +364,6 @@ extension CoundownViewController: TimerModelProtocol{
             progressView.setColorsArray(yellowColors)
             labelClock.textColor = UIColor.yellowColor()
         } else {
-            labelInfo.text = timerModel.state == .Prepare ? prepareText : timerConfig.title
             buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
             buttonReset.enabled = false
 

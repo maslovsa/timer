@@ -61,6 +61,24 @@ class TimerModel: NSObject {
         }
     }
     
+    var informationString: String {
+        if isPaused {
+            return "paused"
+        }
+        switch self.state {
+        case .Prepare:
+            return "prepare"
+        case .Reset:
+            return "ready?"
+        case .Workout:
+            return timerConfig.title
+        case .Finished:
+            return "finished"
+        }
+        
+        return timerConfig.title
+    }
+    
     var progressToShow: Double {
         if state == .Prepare {
             return directSeconds
@@ -77,7 +95,7 @@ class TimerModel: NSObject {
     }
     
     var isCriticalTimer: Bool {
-        return timerCoundownValue / timerMaxValue < 0.1
+        return timerCoundownValue / timerMaxValue < 0.25
     }
     
     private var directSeconds: Double {
