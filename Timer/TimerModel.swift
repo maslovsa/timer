@@ -71,6 +71,10 @@ class TimerModel: NSObject {
         }
     }
     
+    var isCriticalTimer: Bool {
+        return timerCoundownValue / timerMaxValue < 0.1
+    }
+    
     private var directSeconds: Double {
         return 360 * ( timerCoundownValue / timerMaxValue )
     }

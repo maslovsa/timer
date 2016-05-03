@@ -34,7 +34,8 @@ struct Constants {
     struct Colors {
         static let TimerCellTitleFontColor = UIColor.blackColor()
         static let TimerCellValueFontColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
-        static let BlueThemeColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
+        static let BlueThemeColor = UIColor.orangeColor()
+        //static let BlueThemeColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
         //static let BlueThemeColor = UIColor(red:135.0/255.0, green:153.0/255.0, blue:189.0/255.0, alpha:1.0)
         static let TimerCellDescriptionFontColor = UIColor.darkGrayColor()
         static let RedFontColor = UIColor(red:213.0/255.0, green:34.0/255.0, blue:42.0/255.0, alpha:1.0)

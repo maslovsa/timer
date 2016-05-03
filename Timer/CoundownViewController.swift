@@ -13,10 +13,13 @@ class CoundownViewController: UIViewController {
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
     let colorButtons = UIColor.whiteColor()
-    
+    let prepareText = "Prepare"
+    let pausedText = "Paused"
+    let readyText = "Ready?"
     
     let greenColors = [UIColor.greenColor(), UIColor.cyanColor()]
     let yellowColors = [UIColor.yellowColor(), UIColor.orangeColor()]
+    let redColors = [UIColor.redColor(), UIColor.orangeColor()]
     
     let animationLength = 0.3
     let buttonPlaySize = 44
@@ -90,7 +93,7 @@ class CoundownViewController: UIViewController {
         progressView.glowAmount = 0.9
         progressView.trackColor = UIColor.darkGrayColor()
         progressView.setColorsArray(greenColors)
-        progressView.center = CGPoint(x: view.center.x, y: view.center.y + 25)
+//        progressView.center = CGPoint(x: view.center.x, y: view.center.y + 25)
         self.view.addSubview(progressView)
         progressView.snp_makeConstraints {
             (make) -> Void in
@@ -122,8 +125,6 @@ class CoundownViewController: UIViewController {
         }
         
         buttonMenu.tintColor = UIColor.whiteColor()
-        buttonMenu.layer.cornerRadius = 10
-        buttonMenu.layer.masksToBounds = true
         buttonMenu.contentMode = .ScaleAspectFit
         buttonMenu.setImage(UIImage.getMenuIcon(), forState: .Normal)
         buttonMenu.addTarget(self, action: #selector(CoundownViewController.clickMenu), forControlEvents: .TouchDown)
@@ -172,7 +173,7 @@ class CoundownViewController: UIViewController {
     
     // Mark: Private
     func onReset() {
-        labelInfo.text = "Ready?"
+        labelInfo.text = readyText
         
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.getPreviewValue())
@@ -190,7 +191,7 @@ class CoundownViewController: UIViewController {
         progressView.angle = 0
         progressView.snp_updateConstraints {
             (make) -> Void in
-            make.width.height.equalTo(bigProgressSize*3)
+            make.width.height.equalTo(bigProgressSize * 3)
         }
         UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
             self.view.layoutIfNeeded()
@@ -200,19 +201,17 @@ class CoundownViewController: UIViewController {
     }
     
     func onPrepare() {
-        labelInfo.text = "Prepare"
+        labelInfo.text = prepareText
         labelInfo.textColor = colorPause
         
         labelTime.textColor = colorPause
-        labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
+        //labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
         buttonPlay.tintColor = colorButtons
         buttonPlay.hidden = false
 
         buttonPlay.snp_updateConstraints { (make) in
             make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
         }
-
-
 
         buttonReset.tintColor = colorButtons
         buttonReset.hidden = false
@@ -237,7 +236,7 @@ class CoundownViewController: UIViewController {
         labelInfo.textColor = colorPlay
             
         labelTime.textColor = colorPlay
-        labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
+        //labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
 
         buttonPlay.tintColor = colorButtons
         buttonReset.tintColor = colorButtons
@@ -245,9 +244,16 @@ class CoundownViewController: UIViewController {
         progressView.setColorsArray(greenColors)
         progressView.angle = degreesOnCircle
         
-        buttonMenu.tintColor = UIColor.cyanColor()
+        buttonMenu.tintColor = UIColor.greenColor()
     }
     
+    private func getProgressColors() -> [UIColor] {
+        if timerModel.state == .Prepare {
+            return yellowColors
+        } else {
+            return timerModel.isCriticalTimer ? redColors : greenColors
+        }
+    }
 }
 
 extension CoundownViewController: TimerModelProtocol{
@@ -264,7 +270,7 @@ extension CoundownViewController: TimerModelProtocol{
     
     func didActivityChanged() {
         if timerModel.isPaused {
-            labelInfo.text = "Paused"
+            labelInfo.text = pausedText
             buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
             buttonReset.enabled = true
             
@@ -273,22 +279,23 @@ extension CoundownViewController: TimerModelProtocol{
             buttonMenu.tintColor = UIColor.yellowColor()
             progressView.setColorsArray(yellowColors)
         } else {
-            labelInfo.text = timerModel.state == .Prepare ? "Prepare" : timerConfig.title
+            labelInfo.text = timerModel.state == .Prepare ? prepareText : timerConfig.title
             buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
             buttonReset.enabled = false
 
             if timerModel.state != .Prepare {
                 labelInfo.textColor = colorPlay
                 labelTime.textColor = colorPlay
-                progressView.setColorsArray(greenColors)
+                progressView.setColorsArray(getProgressColors())
+                buttonMenu.tintColor = UIColor.greenColor()
             }
-            buttonMenu.tintColor = UIColor.cyanColor()
         }
     }
     
     func didTickTimer() {
         labelTime.text = Utilites.secondsToTimer( Int(timerModel.secondsToShow) )
         progressView.angle = timerModel.progressToShow
+        progressView.setColorsArray(getProgressColors())
     }
 }
 
