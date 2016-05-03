@@ -98,7 +98,7 @@ struct Preset {
     
     static func workPreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 20, low: 0, high: 59))
+        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 5, low: 0, high: 59))
         preset.title = "Work"
         preset.description = "Do exercise for this long"
         preset.image = "Paddling"
@@ -107,7 +107,7 @@ struct Preset {
     
     static func restPreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 10, low: 0, high: 59))
+        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 5, low: 0, high: 59))
         preset.title = "Rest"
         preset.description = "Rest for this long"
         preset.image = "Walking"

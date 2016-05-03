@@ -32,8 +32,14 @@ class TimerModel: NSObject {
     var isPaused = false
     var state = TimerState.Reset
     
-    var timerCoundownValue = 0.0
-    var timerMaxValue = 1.0
+    var countdownValue = 0.0
+    var countdownMaxValue = 1.0
+    
+    var roundsValue = 0
+    var roundsMaxValue = 1
+    
+    var circleValue = 0
+    var circleMaxValue = 1
     
     init(timerConfig: TimerConfig) {
         self.timerConfig = timerConfig
@@ -48,16 +54,16 @@ class TimerModel: NSObject {
     
     var secondsToShow: Double {
         if state == .Prepare {
-            return ceil(timerCoundownValue)
+            return ceil(countdownValue)
         }
         
         switch timerConfig.style {
         case .StopWatch:
-            return (timerMaxValue - timerCoundownValue)
+            return (countdownMaxValue - countdownValue)
         case .AMRAP:
-            return (timerCoundownValue)
+            return (countdownValue)
         case .Tabata:
-            return timerCoundownValue
+            return countdownValue
         }
     }
     
@@ -75,8 +81,6 @@ class TimerModel: NSObject {
         case .Finished:
             return "finished"
         }
-        
-        return timerConfig.title
     }
     
     var progressToShow: Double {
@@ -94,47 +98,42 @@ class TimerModel: NSObject {
         }
     }
     
+    var progressRoundsToShow: Double {
+        return 360 * ( Double(roundsValue) / Double(roundsMaxValue) )
+    }
+
+    
     var isCriticalTimer: Bool {
-        return timerCoundownValue / timerMaxValue < 0.25
+        return countdownValue / countdownMaxValue < 0.25
     }
     
     private var directSeconds: Double {
-        return 360 * ( timerCoundownValue / timerMaxValue )
+        return 360 * ( countdownValue / countdownMaxValue )
     }
     
     private var unDirectSeconds: Double {
-        return 360 * ( 1 - timerCoundownValue / timerMaxValue )
+        return 360 * ( 1 - countdownValue / countdownMaxValue )
     }
     
     func startStop() {
-//        switch timerConfig.style {
-//        case .StopWatch, .AMRAP:
-            if state == .Reset {
-                state = .Prepare
-                delegate?.didStateChanged()
-            }
+        if state == .Reset {
+            state = .Prepare
+            delegate?.didStateChanged()
+        }
+        
+        if isActive {
+            isActive = false
+            isPaused = true
             
-            if isActive {
-                isActive = false
-                isPaused = true
-                
-                tickTimer?.invalidate()
-            } else {
-                isActive = true
-                
-                restartTimer()
-                isPaused = false
-            }
+            tickTimer?.invalidate()
+        } else {
+            isActive = true
+            
+            restartTimer()
+            isPaused = false
+        }
 
-            
-//        case .Tabata:
-//            print("stop")
-//            
-//        }
-        
-        
         delegate?.didActivityChanged()
-
     }
     
     func reset() {
@@ -155,15 +154,15 @@ class TimerModel: NSObject {
 
         if !isPaused {
             let seconds = state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
-            timerMaxValue = Double(seconds)
-            timerCoundownValue = Double(seconds)
+            countdownMaxValue = Double(seconds)
+            countdownValue = Double(seconds)
         }
         tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
     }
     
     func updateTime() {
         dispatch_async(dispatch_get_main_queue()) {
-            if self.timerCoundownValue <= 0 {
+            if self.countdownValue <= 0 {
                 self.tickTimer?.invalidate()
                 self.tickTimer = nil
             
@@ -181,7 +180,7 @@ class TimerModel: NSObject {
                 
                 return
             }
-            self.timerCoundownValue -= self.timerTickInterval
+            self.countdownValue -= self.timerTickInterval
             self.delegate?.didTickTimer()
         }
     }
