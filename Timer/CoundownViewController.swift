@@ -13,9 +13,9 @@ class CoundownViewController: UIViewController {
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
     let colorButtons = UIColor.whiteColor()
-    let prepareText = "Prepare"
-    let pausedText = "Paused"
-    let readyText = "Ready?"
+    let prepareText = "prepare"
+    let pausedText = "paused"
+    let readyText = "ready?"
     
     let greenColors = [UIColor.greenColor(), UIColor.cyanColor()]
     let yellowColors = [UIColor.yellowColor(), UIColor.orangeColor()]
@@ -37,10 +37,11 @@ class CoundownViewController: UIViewController {
     lazy var buttonMenu = UIButton(type: .System)
     lazy var labelTime = UILabel()
     lazy var labelInfo = UILabel()
+    lazy var labelClock = UILabel()
     
     var timerConfig: TimerConfig!
     var timerModel: TimerModel!
-    
+    var tickTimer: NSTimer? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,9 +56,48 @@ class CoundownViewController: UIViewController {
         
         initUI()
         onReset()
+        
+        tickTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
+        
+        updateTime()
+    }
+    
+    func updateTime() {
+        dispatch_async(dispatch_get_main_queue()) {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            self.labelClock.text = dateFormatter.stringFromDate(NSDate())
+        }
     }
     
     func initUI(){
+        
+        labelClock.textColor = colorPause
+        labelClock.font = Constants.Fonts.ClockLabelFontSize
+        labelClock.textAlignment = .Right
+        self.view.addSubview(labelClock)
+        labelClock.snp_makeConstraints {
+            (make) -> Void in
+            make.right.equalTo(self.view).offset(-10)
+            make.top.equalTo(self.view).offset(17)
+            
+            make.width.equalTo(150)
+            make.height.equalTo(35)
+        }
+        
+        labelInfo.textColor = colorPause
+        labelInfo.font = Constants.Fonts.TimeLabelInfoFontSize
+        labelInfo.textAlignment = .Center
+        self.view.addSubview(labelInfo)
+        labelInfo.snp_makeConstraints {
+            (make) -> Void in
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view).offset(-60)
+            
+            make.width.equalTo(bigProgressSize)
+            make.height.equalTo(70)
+        }
+        
         labelInfo.textColor = colorPause
         labelInfo.font = Constants.Fonts.TimeLabelInfoFontSize
         labelInfo.textAlignment = .Center
@@ -93,7 +133,6 @@ class CoundownViewController: UIViewController {
         progressView.glowAmount = 0.9
         progressView.trackColor = UIColor.darkGrayColor()
         progressView.setColorsArray(greenColors)
-//        progressView.center = CGPoint(x: view.center.x, y: view.center.y + 25)
         self.view.addSubview(progressView)
         progressView.snp_makeConstraints {
             (make) -> Void in
@@ -149,6 +188,9 @@ class CoundownViewController: UIViewController {
     
     deinit {
         timerModel.stopTimer()
+        
+        tickTimer?.invalidate()
+        tickTimer = nil
     }
     
     func handleLongPress(gestureRecognizer: UIGestureRecognizer) {
@@ -197,7 +239,8 @@ class CoundownViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-        buttonMenu.tintColor = UIColor.yellowColor()
+        buttonMenu.tintColor = colorPause
+        labelClock.textColor = colorPause
         progressView.clockwise = false
     }
     
@@ -229,7 +272,8 @@ class CoundownViewController: UIViewController {
             self.view.layoutIfNeeded()
             }, completion: nil)
         
-        buttonMenu.tintColor = UIColor.yellowColor()
+        buttonMenu.tintColor = colorPause
+        labelClock.textColor = colorPause
         progressView.clockwise = false
     }
     
@@ -245,7 +289,8 @@ class CoundownViewController: UIViewController {
         progressView.setColorsArray(greenColors)
         progressView.angle = degreesOnCircle
         
-        buttonMenu.tintColor = UIColor.greenColor()
+        buttonMenu.tintColor = colorPlay
+        labelClock.textColor = colorPlay
         
         if timerConfig.style == .StopWatch {
             progressView.clockwise = true
@@ -285,6 +330,7 @@ extension CoundownViewController: TimerModelProtocol{
             labelTime.textColor = colorPause
             buttonMenu.tintColor = UIColor.yellowColor()
             progressView.setColorsArray(yellowColors)
+            labelClock.textColor = UIColor.yellowColor()
         } else {
             labelInfo.text = timerModel.state == .Prepare ? prepareText : timerConfig.title
             buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
@@ -295,6 +341,7 @@ extension CoundownViewController: TimerModelProtocol{
                 labelTime.textColor = colorPlay
                 progressView.setColorsArray(getProgressColors())
                 buttonMenu.tintColor = UIColor.greenColor()
+                labelClock.textColor = UIColor.greenColor()
             }
         }
     }
@@ -303,6 +350,8 @@ extension CoundownViewController: TimerModelProtocol{
         labelTime.text = Utilites.secondsToTimer( Int(timerModel.secondsToShow) )
         progressView.angle = timerModel.progressToShow
         progressView.setColorsArray(getProgressColors())
+        
+        labelClock.text = "12:23"
     }
 }
 

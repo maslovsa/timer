@@ -25,7 +25,7 @@ struct Constants {
 
         static let TimeLabelInfoFontSize =  UIFont(name: squareFont, size: 25) ?? UIFont.systemFontOfSize(25, weight: UIFontWeightMedium)
         
-        
+        static let ClockLabelFontSize =  UIFont(name: squareFont, size: 35) ?? UIFont.systemFontOfSize(35, weight: UIFontWeightMedium)
         
         static let TimerCellValueFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightBold)
         static let TimerCellDescriptionFontSize = UIFont.systemFontOfSize(12, weight: UIFontWeightRegular)
