@@ -17,9 +17,13 @@ struct Constants {
     struct Fonts {
         static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
         static let TimerCellTitleFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold)
-        static let TimeLabelFontSize =  UIFont(name: digiFont, size: 66) ?? UIFont.systemFontOfSize(66, weight: UIFontWeightMedium)
+        
+        
+        static let TimeLabelFontSize = UIFont.monospacedDigitSystemFontOfSize(66, weight: UIFontWeightRegular)
+        
+        //static let TimeLabelFontSize =  UIFont(name: digiFont, size: 66) ?? UIFont.systemFontOfSize(66, weight: UIFontWeightMedium)
 
-        static let TimeLabelInfoFontSize =  UIFont(name: digiFont, size: 25) ?? UIFont.systemFontOfSize(25, weight: UIFontWeightMedium)
+        static let TimeLabelInfoFontSize =  UIFont(name: squareFont, size: 25) ?? UIFont.systemFontOfSize(25, weight: UIFontWeightMedium)
         
         
         
