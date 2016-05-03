@@ -198,6 +198,7 @@ class CoundownViewController: UIViewController {
         }, completion: nil)
         
         buttonMenu.tintColor = UIColor.yellowColor()
+        progressView.clockwise = false
     }
     
     func onPrepare() {
@@ -205,7 +206,7 @@ class CoundownViewController: UIViewController {
         labelInfo.textColor = colorPause
         
         labelTime.textColor = colorPause
-        //labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
+
         buttonPlay.tintColor = colorButtons
         buttonPlay.hidden = false
 
@@ -229,6 +230,7 @@ class CoundownViewController: UIViewController {
             }, completion: nil)
         
         buttonMenu.tintColor = UIColor.yellowColor()
+        progressView.clockwise = false
     }
     
     func onWorkout() {
@@ -236,7 +238,6 @@ class CoundownViewController: UIViewController {
         labelInfo.textColor = colorPlay
             
         labelTime.textColor = colorPlay
-        //labelTime.text = Utilites.secondsToTimer(timerConfig.presets[1].seconds)
 
         buttonPlay.tintColor = colorButtons
         buttonReset.tintColor = colorButtons
@@ -245,6 +246,12 @@ class CoundownViewController: UIViewController {
         progressView.angle = degreesOnCircle
         
         buttonMenu.tintColor = UIColor.greenColor()
+        
+        if timerConfig.style == .StopWatch {
+            progressView.clockwise = true
+        } else {
+            progressView.clockwise = false
+        }
     }
     
     private func getProgressColors() -> [UIColor] {
