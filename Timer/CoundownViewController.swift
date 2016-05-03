@@ -28,6 +28,7 @@ class CoundownViewController: UIViewController {
     let bigProgressSize = 340
     
     let verticalTabateOffset = 40.0
+    let verticalInfoOffset = -60.0
     // UI items
     var progressView: KDCircularProgress!
     lazy var buttonPlay = UIButton(type: .System)
@@ -91,7 +92,7 @@ class CoundownViewController: UIViewController {
         labelInfo.snp_makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view).offset(-60 - getVerticalOffset)
+            make.centerY.equalTo(self.view).offset(verticalInfoOffset - getVerticalOffset)
             
             make.width.equalTo(bigProgressSize)
             make.height.equalTo(70)
@@ -188,6 +189,34 @@ class CoundownViewController: UIViewController {
             timerModel.startStop()
         }
     }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+
+        progressView.snp_updateConstraints {
+            (make) -> Void in
+            make.centerY.equalTo(self.view).offset(-getVerticalOffset)
+        }
+        
+        buttonPlay.snp_updateConstraints { (make) -> Void in
+            make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getVerticalOffset)
+        }
+        
+        buttonReset.snp_updateConstraints { (make) -> Void in
+            make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getVerticalOffset)
+        }
+        
+        labelInfo.snp_updateConstraints {
+            (make) -> Void in
+            make.centerY.equalTo(self.view).offset(verticalInfoOffset - getVerticalOffset)
+        }
+        
+        labelTime.snp_updateConstraints {
+            (make) -> Void in
+            make.centerY.equalTo(self.view).offset(-getVerticalOffset)
+        }
+    }
+    
     // MARK: Buttons
     func clickPlayPause() {
         timerModel.startStop()
@@ -333,7 +362,11 @@ class CoundownViewController: UIViewController {
     }
     
     private var getVerticalOffset: Double {
-        return timerConfig.style == .Tabata ? verticalTabateOffset : 0.0
+        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            return 0.0
+        } else {
+            return timerConfig.style == .Tabata ? verticalTabateOffset : 0.0
+        }
     }
 }
 
