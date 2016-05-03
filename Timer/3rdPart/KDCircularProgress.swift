@@ -252,6 +252,10 @@ public class KDCircularProgress: UIView {
         setColors(colors)
     }
     
+    public func setColorsArray(colors: [UIColor]) {
+        setColors(colors)
+    }
+    
     private func setColors(colors: [UIColor]) {
         progressLayer.colorsArray = colors
         progressLayer.setNeedsDisplay()

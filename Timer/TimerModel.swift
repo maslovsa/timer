@@ -45,6 +45,40 @@ class TimerModel: NSObject {
         tickTimer = nil
     }
     
+    var secondsToShow: Double {
+        switch timerConfig.style {
+        case .StopWatch:
+            return ceil(timerMaxValue - timerCoundownValue)
+        case .AMRAP:
+            return ceil(timerCoundownValue)
+        case .Tabata:
+            return timerCoundownValue
+        }
+    }
+    
+    var progressToShow: Double {
+        if state == .Prepare {
+            return directSeconds
+        }
+        
+        switch timerConfig.style {
+        case .StopWatch:
+            return unDirectSeconds
+        case .AMRAP:
+            return directSeconds
+        case .Tabata:
+            return directSeconds
+        }
+    }
+    
+    private var directSeconds: Double {
+        return 360 * ( timerCoundownValue / timerMaxValue )
+    }
+    
+    private var unDirectSeconds: Double {
+        return 360 * ( 1 - timerCoundownValue / timerMaxValue )
+    }
+    
     func startStop() {
         switch timerConfig.style {
         case .StopWatch, .AMRAP:

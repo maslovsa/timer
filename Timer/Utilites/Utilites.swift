@@ -25,7 +25,7 @@ class Utilites {
     
     class func secondsToTimer(seconds: Int) -> String {
         if seconds < 60 {
-            return NSString(format: "  :%02d",seconds) as String
+            return NSString(format: ":%02d",seconds) as String
         } else {
             let minutes = seconds/60
             let sec = seconds - minutes * 60
