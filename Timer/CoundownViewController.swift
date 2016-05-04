@@ -32,6 +32,9 @@ class CoundownViewController: UIViewController {
     
     let verticalTabateOffset = 40.0
     let verticalInfoOffset = -60.0
+    let progressCircleThickness: CGFloat = 0.5
+    let progressCircleOffsetX = 30
+    
     // UI items
     var progressTimer: KDCircularProgress!
     var progressRounds: KDCircularProgress!
@@ -62,7 +65,6 @@ class CoundownViewController: UIViewController {
         
         initUI()
         onReset()
-        
         clockTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
         
         updateTime()
@@ -144,41 +146,44 @@ class CoundownViewController: UIViewController {
         
         progressRounds = KDCircularProgress(frame: CGRectZero)
         progressRounds.startAngle = -90
-        progressRounds.progressThickness = 0.8
-        progressRounds.trackThickness = 0.8
+        progressRounds.progressThickness = progressCircleThickness
+        progressRounds.trackThickness = progressCircleThickness
         progressRounds.clockwise = false
         progressRounds.roundedCorners = false
-        progressRounds.glowMode = .Constant
+        progressRounds.glowMode = .NoGlow
         progressRounds.glowAmount = 1.0
         progressRounds.trackColor = UIColor.darkGrayColor()
-        progressRounds.setColorsArray([UIColor.magentaColor(),UIColor.whiteColor()])
+        progressRounds.setColorsArray([UIColor.magentaColor()])
         self.view.addSubview(progressRounds)
         progressRounds.snp_makeConstraints {
             (make) -> Void in
-            make.left.equalTo(self.view).offset(10)
+            make.left.equalTo(self.view).offset(progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
             make.width.equalTo(roundsProgressSize)
             make.height.equalTo(roundsProgressSize)
         }
+        progressRounds.hidden = true
+
         
         progressCircles = KDCircularProgress(frame: CGRectZero)
         progressCircles.startAngle = -90
-        progressCircles.progressThickness = 0.8
-        progressCircles.trackThickness = 0.8
+        progressCircles.progressThickness = progressCircleThickness
+        progressCircles.trackThickness = progressCircleThickness
         progressCircles.clockwise = false
         progressCircles.roundedCorners = false
-        progressCircles.glowMode = .Constant
+        progressCircles.glowMode = .NoGlow
         progressCircles.glowAmount = 1.0
         progressCircles.trackColor = UIColor.darkGrayColor()
-        progressCircles.setColorsArray([UIColor.orangeColor(), UIColor.whiteColor()])
+        progressCircles.setColorsArray([UIColor.orangeColor()])
         self.view.addSubview(progressCircles)
         progressCircles.snp_makeConstraints {
             (make) -> Void in
-            make.right.equalTo(self.view).offset(-10)
+            make.right.equalTo(self.view).offset(-progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
             make.width.equalTo(roundsProgressSize)
             make.height.equalTo(roundsProgressSize)
         }
+        progressCircles.hidden = true
         
         buttonPlay.tintColor = colorButtons
         buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
@@ -211,6 +216,7 @@ class CoundownViewController: UIViewController {
             make.width.height.equalTo(30)
         }
         
+        buttonLogo.alpha = 0
         buttonLogo.contentMode = .ScaleAspectFit
         buttonLogo.setImage(UIImage(named:"SteelwodLogo"), forState: .Normal)
         buttonLogo.addTarget(self, action: #selector(CoundownViewController.clickLogo), forControlEvents: .TouchDown)
@@ -221,11 +227,11 @@ class CoundownViewController: UIViewController {
             make.width.equalTo(200)
             make.height.equalTo(20)
         }
-        
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -313,6 +319,8 @@ class CoundownViewController: UIViewController {
     
     // Mark: Private
     func onReset() {
+        
+
         labelInfo.text = timerModel.informationString
         labelInfo.textColor = colorPause
         
@@ -339,12 +347,15 @@ class CoundownViewController: UIViewController {
             (make) -> Void in
             make.width.height.equalTo(bigProgressSize * 3)
         }
+        self.buttonLogo.alpha = 1
         UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
         buttonMenu.tintColor = colorPause
         labelClock.textColor = colorPause
+        
+        Utilites.showWithAnimation(buttonLogo)
     }
     
     func onPrepare() {
@@ -375,14 +386,14 @@ class CoundownViewController: UIViewController {
             (make) -> Void in
             make.width.height.equalTo(bigProgressSize)
         }
-        
+        self.buttonLogo.alpha = 0
         UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
             self.view.layoutIfNeeded()
             }, completion: nil)
         
         buttonMenu.tintColor = colorPause
         labelClock.textColor = colorPause
-       
+        
     }
     
     func onWorkout() {

@@ -44,5 +44,12 @@ class Utilites {
             print("Font Names = [\(names)]")
         }
     }
+    
+    class func showWithAnimation(view: UIView) {
+        view.alpha = 0
+        UIView.animateWithDuration(5.0, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                    view.alpha = 1
+        }, completion: nil)
+    }
 
 }

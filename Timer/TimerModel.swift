@@ -60,11 +60,11 @@ class TimerModel: NSObject {
         
         switch timerConfig.style {
         case .StopWatch:
-            return round(countdownMaxValue - countdownValue)
+            return (countdownMaxValue - countdownValue)
         case .AMRAP:
-            return round(countdownValue)
+            return (countdownValue)
         case .Tabata:
-            return round(countdownValue)
+            return (countdownValue)
         }
     }
     
