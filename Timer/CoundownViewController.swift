@@ -21,7 +21,7 @@ class CoundownViewController: UIViewController {
     let animationLength = 0.3
     let buttonPlaySize = 44
     let verticaButtonlOffset = 60.0
-    let degreesOnCircle = 360.0
+
     let buttonPlayOffsetX = 30
     
     let smallProgressSize = 220

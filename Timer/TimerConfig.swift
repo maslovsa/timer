@@ -14,14 +14,14 @@ enum TimerStyle {
     case Tabata
 }
 
+let prepareIndex = 0
+let workIndex = 1
+let restIndex = 2
+let roundsIndex = 3
+let cyclesIndex = 4
+let restBetweenIndex = 5
 
 class TimerConfig {
-    let prepareIndex = 0
-    let workoutIndex = 1
-    let restIndex = 2
-    let roundsIndex = 3
-    let cyclesIndex = 4
-    let restBetweenIndex = 5
     
     var presets = [Preset]()
     var style = TimerStyle.StopWatch
@@ -34,11 +34,11 @@ class TimerConfig {
     func getPreviewValue() -> Int {
         switch self.style {
         case .StopWatch:
-        return presets[workoutIndex].seconds
+        return presets[workIndex].seconds
         case .AMRAP:
-        return presets[workoutIndex].seconds
+        return presets[workIndex].seconds
         case .Tabata: // (W+R)*Rounds*Cycles + (Cycles-1)*RestBetween
-            let totalWork = (presets[workoutIndex].seconds + presets[restIndex].seconds) * presets[roundsIndex].seconds * presets[cyclesIndex].seconds
+            let totalWork = (presets[workIndex].seconds + presets[restIndex].seconds) * presets[roundsIndex].seconds * presets[cyclesIndex].seconds
             return totalWork + (presets[cyclesIndex].seconds - 1) * presets[restBetweenIndex].seconds
         }
     }

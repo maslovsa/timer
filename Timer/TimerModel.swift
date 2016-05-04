@@ -30,6 +30,7 @@ class TimerModel: NSObject {
     
     var isActive = false
     var isPaused = false
+    var isWork = true
     var state = TimerState.Reset
     
     var countdownValue = 0.0
@@ -77,7 +78,10 @@ class TimerModel: NSObject {
         case .Reset:
             return "ready?"
         case .Workout:
-            return timerConfig.title
+            if timerConfig.style != .Tabata {
+                return timerConfig.title
+            }
+            return "work"
         case .Finished:
             return "finished"
         }
@@ -99,7 +103,7 @@ class TimerModel: NSObject {
     }
     
     var progressRoundsToShow: Double {
-        return 360 * ( Double(roundsValue) / Double(roundsMaxValue) )
+        return degreesOnCircle * ( Double(roundsValue) / Double(roundsMaxValue) )
     }
 
     
@@ -108,11 +112,11 @@ class TimerModel: NSObject {
     }
     
     private var directSeconds: Double {
-        return 360 * ( countdownValue / countdownMaxValue )
+        return degreesOnCircle * ( countdownValue / countdownMaxValue )
     }
     
     private var unDirectSeconds: Double {
-        return 360 * ( 1 - countdownValue / countdownMaxValue )
+        return degreesOnCircle * ( 1 - countdownValue / countdownMaxValue )
     }
     
     func startStop() {
@@ -137,8 +141,10 @@ class TimerModel: NSObject {
     }
     
     func reset() {
+        print("Reset")
         isActive = false
         isPaused = false
+        isWork = true
         state = .Reset
         tickTimer?.invalidate()
         delegate?.didStateChanged()
@@ -153,10 +159,19 @@ class TimerModel: NSObject {
         tickTimer?.invalidate()
 
         if !isPaused {
-            let seconds = state == .Prepare ? timerConfig.presets[0].seconds : timerConfig.presets[1].seconds
+            let seconds = state == .Prepare ? timerConfig.presets[prepareIndex].seconds : isWork ? timerConfig.presets[workIndex].seconds : timerConfig.presets[restIndex].seconds
             countdownMaxValue = Double(seconds)
             countdownValue = Double(seconds)
+            
+            if timerConfig.style == .Tabata {
+                roundsValue = timerConfig.presets[roundsIndex].seconds
+                roundsMaxValue = timerConfig.presets[roundsIndex].seconds
+            
+                circleValue = timerConfig.presets[cyclesIndex].seconds
+                circleMaxValue = timerConfig.presets[cyclesIndex].seconds
+            }
         }
+        
         tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
     }
     
@@ -168,12 +183,17 @@ class TimerModel: NSObject {
             
                 switch self.state {
                 case .Prepare, .Reset:
+                    print("Workout")
                     self.state = .Workout
                     self.restartTimer()
                     self.delegate?.didStateChanged()
                 case .Workout:
-                    self.state = .Finished
-                    self.delegate?.didStateChanged()
+                    if self.timerConfig.style != .Tabata {
+                        self.state = .Finished
+                        self.delegate?.didStateChanged()
+                    } else {
+                        // TODO:
+                    }
                 default:
                     break
                 }

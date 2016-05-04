@@ -13,6 +13,8 @@ let digitalFont = "Digital-7"
 let trsFont = "TRSMillion-Regular"
 let digiFont = "DS-Digital-Bold"
 
+let degreesOnCircle = 360.0
+
 struct Constants {
     struct Fonts {
         static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
