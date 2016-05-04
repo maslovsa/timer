@@ -434,6 +434,9 @@ public class KDCircularProgress: UIView {
             CGContextSetLineWidth(ctx, trackLineWidth)
             CGContextSetLineCap(ctx, CGLineCap.Butt)
             CGContextDrawPath(ctx, .FillStroke)
+
+
+            
             
             UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
             let imageCtx = UIGraphicsGetCurrentContext()
@@ -499,6 +502,22 @@ public class KDCircularProgress: UIView {
                 
                 fillRectWithContext(ctx, color: color)
             }
+            
+            
+
+//            let colorLine = trackColor
+//            CGContextBeginPath(ctx)
+//            CGContextMoveToPoint(ctx, CGFloat(size.width/2.0), CGFloat(0))
+//            CGContextAddLineToPoint(ctx, CGFloat(size.width/2.0),CGFloat(size.height))
+//            CGContextClosePath(ctx)
+//            
+//            colorLine.set()
+//            CGContextSetStrokeColorWithColor(ctx, colorLine.CGColor)
+//            CGContextSetFillColorWithColor(ctx, progressInsideFillColor.CGColor)
+//            CGContextSetLineWidth(ctx, trackLineWidth)
+//            CGContextSetLineCap(ctx, CGLineCap.Butt)
+//            CGContextDrawPath(ctx, .FillStroke)
+
             CGContextRestoreGState(ctx)
             UIGraphicsPopContext()
         }
