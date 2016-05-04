@@ -38,6 +38,7 @@ class CoundownViewController: UIViewController {
     lazy var buttonPlay = UIButton(type: .System)
     lazy var buttonReset = UIButton(type: .System)
     lazy var buttonMenu = UIButton(type: .System)
+    lazy var buttonLogo = UIButton(type: .Custom)
     lazy var labelTime = UILabel()
     lazy var labelInfo = UILabel()
     lazy var labelClock = UILabel()
@@ -188,6 +189,18 @@ class CoundownViewController: UIViewController {
             make.left.top.equalTo(self.view).offset(20)
             make.width.height.equalTo(30)
         }
+        
+        buttonLogo.contentMode = .ScaleAspectFit
+        buttonLogo.setImage(UIImage(named:"SteelwodLogo"), forState: .Normal)
+        buttonLogo.addTarget(self, action: #selector(CoundownViewController.clickLogo), forControlEvents: .TouchDown)
+        self.view.addSubview(buttonLogo)
+        buttonLogo.snp_makeConstraints { (make) -> Void in
+            make.centerX.equalTo(self.view)
+            make.bottom.equalTo(self.view).offset(-20)
+            make.width.equalTo(200)
+            make.height.equalTo(20)
+        }
+        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -257,6 +270,12 @@ class CoundownViewController: UIViewController {
     
     func clickMenu() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func clickLogo() {
+        if let requestUrl = NSURL(string: "http://www.steelwod.ru") {
+            UIApplication.sharedApplication().openURL(requestUrl)
+        }
     }
     
     // Mark: Private
