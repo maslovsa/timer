@@ -514,25 +514,23 @@ public class KDCircularProgress: UIView {
             
             if sectorsCount != 0 {
                 let colorLine = trackColor
+                colorLine.set()
+                CGContextSetStrokeColorWithColor(ctx, colorLine.CGColor)
+                CGContextSetFillColorWithColor(ctx, progressInsideFillColor.CGColor)
+                CGContextSetLineWidth(ctx, 3.0)
+                CGContextSetLineCap(ctx, CGLineCap.Butt)
                 
                 for index in 0...sectorsCount {
                     let center = size.width / 2.0
                     let radius: CGFloat = size.width / 2.0
-                    let angle: CGFloat = CGFloat(360 * index / sectorsCount)
+                    let angle: CGFloat = CGFloat(360 * index / sectorsCount + Int(startAngle) )
                     let radians = ConversionFunctions.DegreesToRadians(CGFloat(angle))
                     let pointX: CGFloat = center + radius * cos(radians)
                     let pointY: CGFloat = center + radius * sin(radians)
-                    print("\(angle)... \(pointX):\(pointY)")
                     CGContextBeginPath(ctx)
                     CGContextMoveToPoint(ctx, center, center)
                     CGContextAddLineToPoint(ctx, pointX, pointY)
                     CGContextClosePath(ctx)
-                    
-                    colorLine.set()
-                    CGContextSetStrokeColorWithColor(ctx, colorLine.CGColor)
-                    CGContextSetFillColorWithColor(ctx, progressInsideFillColor.CGColor)
-                    CGContextSetLineWidth(ctx, 2.0)
-                    CGContextSetLineCap(ctx, CGLineCap.Butt)
                     CGContextDrawPath(ctx, .FillStroke)
                 }
             }
