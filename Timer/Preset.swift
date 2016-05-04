@@ -56,7 +56,7 @@ struct Preset {
     var description: String = ""
     var units: String = ""
     var image: String? = nil
-    var seconds: Int {
+    var value: Int {
         switch type {
         case .IntType(let unit):
             return unit.value

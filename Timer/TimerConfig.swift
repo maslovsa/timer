@@ -21,11 +21,45 @@ let roundsIndex = 3
 let cyclesIndex = 4
 let restBetweenIndex = 5
 
+struct TabataPreset {
+    var isWork = true
+    var title = ""
+    var seconds = 0
+    var round = 0
+    var cycle = 0
+}
+
 class TimerConfig {
     
     var presets = [Preset]()
     var style = TimerStyle.StopWatch
     var title = ""
+    
+    
+    var tabataPresets: [TabataPreset] {
+        var result = [TabataPreset]()
+        if self.style != .Tabata {
+            return result
+        }
+        
+        let maxCycle = presets[cyclesIndex].value
+        for cycleIndex in 0...maxCycle {
+            let maxRound = presets[roundsIndex].value
+            for roundIndex in 0...maxRound {
+                let presetWork = TabataPreset(isWork: true, title: "work", seconds: presets[workIndex].value, round: roundIndex, cycle: cycleIndex)
+                result.append(presetWork)
+                
+                let presetRest = TabataPreset(isWork: false, title: "rest", seconds: presets[restIndex].value, round: roundIndex, cycle: cycleIndex)
+                result.append(presetRest)
+                
+            }
+            if cycleIndex != maxCycle {
+                let presetRecovery = TabataPreset(isWork: false, title: "recovery", seconds: presets[restBetweenIndex].value, round: maxRound, cycle: cycleIndex)
+                result.append(presetRecovery)
+            }
+        }
+        return result
+    }
     
     var prefCount: Int {
         return presets.count
@@ -34,12 +68,12 @@ class TimerConfig {
     func getPreviewValue() -> Int {
         switch self.style {
         case .StopWatch:
-        return presets[workIndex].seconds
+        return presets[workIndex].value
         case .AMRAP:
-        return presets[workIndex].seconds
+        return presets[workIndex].value
         case .Tabata: // (W+R)*Rounds*Cycles + (Cycles-1)*RestBetween
-            let totalWork = (presets[workIndex].seconds + presets[restIndex].seconds) * presets[roundsIndex].seconds * presets[cyclesIndex].seconds
-            return totalWork + (presets[cyclesIndex].seconds - 1) * presets[restBetweenIndex].seconds
+            let totalWork = (presets[workIndex].value + presets[restIndex].value) * (presets[roundsIndex].value + 1) * (presets[cyclesIndex].value + 1 )
+            return totalWork + presets[cyclesIndex].value * presets[restBetweenIndex].value
         }
     }
     

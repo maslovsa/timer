@@ -21,6 +21,8 @@ enum TimerState {
     case Finished
 }
 
+
+
 class TimerModel: NSObject {
     let timerTickInterval = 0.02
     
@@ -42,8 +44,13 @@ class TimerModel: NSObject {
     var circleValue = 0
     var circleMaxValue = 1
     
+    var tabataPresets = [TabataPreset]()
+    
     init(timerConfig: TimerConfig) {
         self.timerConfig = timerConfig
+        if timerConfig.style == .Tabata {
+            self.tabataPresets = timerConfig.tabataPresets
+        }
     }
     
     deinit {
@@ -159,16 +166,16 @@ class TimerModel: NSObject {
         tickTimer?.invalidate()
 
         if !isPaused {
-            let seconds = state == .Prepare ? timerConfig.presets[prepareIndex].seconds : isWork ? timerConfig.presets[workIndex].seconds : timerConfig.presets[restIndex].seconds
+            let seconds = state == .Prepare ? timerConfig.presets[prepareIndex].value : isWork ? timerConfig.presets[workIndex].value : timerConfig.presets[restIndex].value
             countdownMaxValue = Double(seconds)
             countdownValue = Double(seconds)
             
             if timerConfig.style == .Tabata {
-                roundsValue = timerConfig.presets[roundsIndex].seconds
-                roundsMaxValue = timerConfig.presets[roundsIndex].seconds
+                roundsValue = timerConfig.presets[roundsIndex].value
+                roundsMaxValue = timerConfig.presets[roundsIndex].value
             
-                circleValue = timerConfig.presets[cyclesIndex].seconds
-                circleMaxValue = timerConfig.presets[cyclesIndex].seconds
+                circleValue = timerConfig.presets[cyclesIndex].value
+                circleMaxValue = timerConfig.presets[cyclesIndex].value
             }
         }
         
