@@ -108,7 +108,7 @@ class TimerModel: NSObject {
         }
         let roundsValue = tabataPresets[tabataIndex].round
         let roundsMaxValue = timerConfig.presets[roundsIndex].value
-        return degreesOnCircle * ( 1 - Double(roundsValue) / Double(roundsMaxValue) )
+        return degreesOnCircle * ( 1 - Double(roundsValue - 1) / Double(roundsMaxValue) )
     }
 
     var progressCyclesToShow: Double {
@@ -117,7 +117,7 @@ class TimerModel: NSObject {
         }
         let circleValue = tabataPresets[tabataIndex].cycle
         let circleMaxValue = timerConfig.presets[cyclesIndex].value
-        return degreesOnCircle * ( 1 - Double(circleValue) / Double(circleMaxValue) )
+        return degreesOnCircle * ( 1 - Double(circleValue - 1) / Double(circleMaxValue) )
     }
     
     var isCriticalTimer: Bool {

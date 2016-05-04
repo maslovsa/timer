@@ -144,8 +144,8 @@ class CoundownViewController: UIViewController {
         
         progressRounds = KDCircularProgress(frame: CGRectZero)
         progressRounds.startAngle = -90
-        progressRounds.progressThickness = 0.6
-        progressRounds.trackThickness = 0.7
+        progressRounds.progressThickness = 1.9
+        progressRounds.trackThickness = 1.0
         progressRounds.clockwise = false
         progressRounds.roundedCorners = false
         progressRounds.glowMode = .Constant
@@ -163,18 +163,18 @@ class CoundownViewController: UIViewController {
         
         progressCircles = KDCircularProgress(frame: CGRectZero)
         progressCircles.startAngle = -90
-        progressCircles.progressThickness = 0.6
-        progressCircles.trackThickness = 0.7
+        progressCircles.progressThickness = 1.9
+        progressCircles.trackThickness = 1.0
         progressCircles.clockwise = false
         progressCircles.roundedCorners = false
         progressCircles.glowMode = .Constant
         progressCircles.glowAmount = 0.9
         progressCircles.trackColor = UIColor.darkGrayColor()
-        progressCircles.setColorsArray([UIColor.purpleColor()])
+        progressCircles.setColorsArray([UIColor.orangeColor()])
         self.view.addSubview(progressCircles)
         progressCircles.snp_makeConstraints {
             (make) -> Void in
-            make.right.equalTo(self.view).offset(10)
+            make.right.equalTo(self.view).offset(-10)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
             make.width.equalTo(roundsProgressSize)
             make.height.equalTo(roundsProgressSize)
@@ -366,6 +366,7 @@ class CoundownViewController: UIViewController {
         buttonReset.enabled = false
         
         progressRounds.hidden = timerConfig.style != .Tabata
+        progressCircles.hidden = timerConfig.style != .Tabata
         
         progressTimer.clockwise = false
         progressTimer.setColorsArray(yellowColors)
@@ -394,6 +395,7 @@ class CoundownViewController: UIViewController {
         buttonReset.tintColor = colorButtons
         
         progressRounds.hidden = timerConfig.style != .Tabata
+        progressCircles.hidden = timerConfig.style != .Tabata
         
         if timerConfig.style == .StopWatch {
             progressTimer.clockwise = true
@@ -489,7 +491,7 @@ class CoundownViewController: UIViewController {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue {
             return 0.0
         } else {
-            return 220.0
+            return 180.0
         }
     }
 
