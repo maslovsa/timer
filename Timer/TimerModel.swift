@@ -22,7 +22,7 @@ enum TimerState {
 }
 
 class TimerModel: NSObject {
-    let timerTickInterval = 0.02
+    let timerTickInterval = 0.03
     
     var timerConfig: TimerConfig
     var tickTimer: NSTimer? = nil
@@ -60,11 +60,11 @@ class TimerModel: NSObject {
         
         switch timerConfig.style {
         case .StopWatch:
-            return (countdownMaxValue - countdownValue)
+            return round(countdownMaxValue - countdownValue)
         case .AMRAP:
-            return (countdownValue)
+            return round(countdownValue)
         case .Tabata:
-            return ceil(countdownValue)
+            return round(countdownValue)
         }
     }
     

@@ -504,7 +504,7 @@ public class KDCircularProgress: UIView {
             }
             
             
-
+//
 //            let colorLine = trackColor
 //            CGContextBeginPath(ctx)
 //            CGContextMoveToPoint(ctx, CGFloat(size.width/2.0), CGFloat(0))
