@@ -43,9 +43,9 @@ class TimerConfig {
         }
         
         let maxCycle = presets[cyclesIndex].value
-        for cycleIndex in 0...maxCycle {
+        for cycleIndex in 1...maxCycle {
             let maxRound = presets[roundsIndex].value
-            for roundIndex in 0...maxRound {
+            for roundIndex in 1...maxRound {
                 let presetWork = TabataPreset(isWork: true, title: "work", seconds: presets[workIndex].value, round: roundIndex, cycle: cycleIndex)
                 result.append(presetWork)
                 
@@ -72,8 +72,8 @@ class TimerConfig {
         case .AMRAP:
         return presets[workIndex].value
         case .Tabata: // (W+R)*Rounds*Cycles + (Cycles-1)*RestBetween
-            let totalWork = (presets[workIndex].value + presets[restIndex].value) * (presets[roundsIndex].value + 1) * (presets[cyclesIndex].value + 1 )
-            return totalWork + presets[cyclesIndex].value * presets[restBetweenIndex].value
+            let totalWork = (presets[workIndex].value + presets[restIndex].value) * (presets[roundsIndex].value) * (presets[cyclesIndex].value)
+            return totalWork + (presets[cyclesIndex].value - 1) * presets[restBetweenIndex].value
         }
     }
     

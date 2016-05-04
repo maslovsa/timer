@@ -107,7 +107,7 @@ struct Preset {
     
     static func restPreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 5, low: 0, high: 59))
+        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 4, low: 0, high: 59))
         preset.title = "Rest"
         preset.description = "Rest for this long"
         preset.image = "Walking"
@@ -116,7 +116,7 @@ struct Preset {
     
     static func roundsPreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.IntType(unit: IntPreset(value: 2, low: 1, high: 90))
+        preset.type = PresetType.IntType(unit: IntPreset(value: 3, low: 1, high: 90))
         preset.title = "Rounds"
         preset.description = "One round is Work + Rest"
         preset.image = "WorkRest"
@@ -134,7 +134,7 @@ struct Preset {
     
     static func restBetweenCyclesPreset() -> Preset {
         var preset = Preset()
-        preset.type = PresetType.TimeType(min: IntPreset.Minute60Preset(), sec: IntPreset.SecondPreset())
+        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 10), sec: IntPreset(value: 5, low: 0, high: 59))
         preset.title = "Rest between Cycles"
         preset.description = "Recovery Interval"
         preset.image = "Drink"
