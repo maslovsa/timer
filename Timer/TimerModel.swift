@@ -64,7 +64,7 @@ class TimerModel: NSObject {
         case .AMRAP:
             return (countdownValue)
         case .Tabata:
-            return countdownValue
+            return ceil(countdownValue)
         }
     }
     
@@ -188,6 +188,7 @@ class TimerModel: NSObject {
                     countdownValue = Double(seconds)
                 } else {
                     let tabataPreset = tabataPresets[tabataIndex]
+                    print("set timer \(tabataPreset.title) - \(tabataPreset.seconds)")
                     countdownMaxValue = Double(tabataPreset.seconds)
                     countdownValue = Double(tabataPreset.seconds)
                 }
@@ -218,9 +219,9 @@ class TimerModel: NSObject {
                         self.state = .Finished
                         self.delegate?.didStateChanged()
                     } else {
+                        self.tabataIndex += 1
                         
                         if self.tabataIndex < self.tabataPresets.count {
-                            self.tabataIndex += 1
                             print(self.tabataPresets[self.tabataIndex].title)
                             self.restartTimer()
                             self.delegate?.didStateChanged()
