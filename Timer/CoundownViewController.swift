@@ -144,14 +144,14 @@ class CoundownViewController: UIViewController {
         
         progressRounds = KDCircularProgress(frame: CGRectZero)
         progressRounds.startAngle = -90
-        progressRounds.progressThickness = 1.9
-        progressRounds.trackThickness = 1.0
+        progressRounds.progressThickness = 0.8
+        progressRounds.trackThickness = 0.8
         progressRounds.clockwise = false
         progressRounds.roundedCorners = false
         progressRounds.glowMode = .Constant
-        progressRounds.glowAmount = 0.9
+        progressRounds.glowAmount = 1.0
         progressRounds.trackColor = UIColor.darkGrayColor()
-        progressRounds.setColorsArray([UIColor.magentaColor()])
+        progressRounds.setColorsArray([UIColor.magentaColor(),UIColor.whiteColor()])
         self.view.addSubview(progressRounds)
         progressRounds.snp_makeConstraints {
             (make) -> Void in
@@ -163,14 +163,14 @@ class CoundownViewController: UIViewController {
         
         progressCircles = KDCircularProgress(frame: CGRectZero)
         progressCircles.startAngle = -90
-        progressCircles.progressThickness = 1.9
-        progressCircles.trackThickness = 1.0
+        progressCircles.progressThickness = 0.8
+        progressCircles.trackThickness = 0.8
         progressCircles.clockwise = false
         progressCircles.roundedCorners = false
         progressCircles.glowMode = .Constant
-        progressCircles.glowAmount = 0.9
+        progressCircles.glowAmount = 1.0
         progressCircles.trackColor = UIColor.darkGrayColor()
-        progressCircles.setColorsArray([UIColor.orangeColor()])
+        progressCircles.setColorsArray([UIColor.orangeColor(), UIColor.whiteColor()])
         self.view.addSubview(progressCircles)
         progressCircles.snp_makeConstraints {
             (make) -> Void in
