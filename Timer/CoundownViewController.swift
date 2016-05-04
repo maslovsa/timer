@@ -33,7 +33,7 @@ class CoundownViewController: UIViewController {
     let verticalTabateOffset = 40.0
     let verticalInfoOffset = -60.0
     let progressCircleThickness: CGFloat = 0.5
-    let progressCircleOffsetX = 30
+    let progressCircleOffsetX = 40
     
     // UI items
     var progressTimer: KDCircularProgress!
@@ -376,8 +376,12 @@ class CoundownViewController: UIViewController {
         buttonReset.hidden = false
         buttonReset.enabled = false
         
-        progressRounds.hidden = timerConfig.style != .Tabata
-        progressCircles.hidden = timerConfig.style != .Tabata
+        if timerConfig.style == .Tabata {
+            progressRounds.hidden = false
+            progressRounds.sectorsCount = timerConfig.presets[roundsIndex].value
+            progressCircles.hidden = false
+            progressCircles.sectorsCount = timerConfig.presets[cyclesIndex].value
+        }
         
         progressTimer.clockwise = false
         progressTimer.setColorsArray(yellowColors)

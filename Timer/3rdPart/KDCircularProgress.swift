@@ -178,6 +178,13 @@ public class KDCircularProgress: UIView {
         }
     }
     
+    @IBInspectable public var sectorsCount: Int = 0 {
+        didSet {
+            progressLayer.sectorsCount = sectorsCount
+            progressLayer.setNeedsDisplay()
+        }
+    }
+    
     //These are used only from the Interface-Builder. Changing these from code will have no effect.
     //Also IB colors are limited to 3, whereas programatically we can have an arbitrary number of them.
     @objc @IBInspectable private var IBColor1: UIColor?
@@ -363,6 +370,7 @@ public class KDCircularProgress: UIView {
         var progressThickness: CGFloat!
         var trackThickness: CGFloat!
         var trackColor: UIColor!
+        var sectorsCount = 0
         var progressInsideFillColor: UIColor = UIColor.clearColor()
         var colorsArray: [UIColor]! {
             didSet {
@@ -504,20 +512,31 @@ public class KDCircularProgress: UIView {
             }
             
             
-//
-//            let colorLine = trackColor
-//            CGContextBeginPath(ctx)
-//            CGContextMoveToPoint(ctx, CGFloat(size.width/2.0), CGFloat(0))
-//            CGContextAddLineToPoint(ctx, CGFloat(size.width/2.0),CGFloat(size.height))
-//            CGContextClosePath(ctx)
-//            
-//            colorLine.set()
-//            CGContextSetStrokeColorWithColor(ctx, colorLine.CGColor)
-//            CGContextSetFillColorWithColor(ctx, progressInsideFillColor.CGColor)
-//            CGContextSetLineWidth(ctx, trackLineWidth)
-//            CGContextSetLineCap(ctx, CGLineCap.Butt)
-//            CGContextDrawPath(ctx, .FillStroke)
-
+            if sectorsCount != 0 {
+                let colorLine = trackColor
+                
+                for index in 0...sectorsCount {
+                    let center = size.width / 2.0
+                    let radius: CGFloat = size.width / 2.0
+                    let angle: CGFloat = CGFloat(360 * index / sectorsCount)
+                    let radians = ConversionFunctions.DegreesToRadians(CGFloat(angle))
+                    let pointX: CGFloat = center + radius * cos(radians)
+                    let pointY: CGFloat = center + radius * sin(radians)
+                    print("\(angle)... \(pointX):\(pointY)")
+                    CGContextBeginPath(ctx)
+                    CGContextMoveToPoint(ctx, center, center)
+                    CGContextAddLineToPoint(ctx, pointX, pointY)
+                    CGContextClosePath(ctx)
+                    
+                    colorLine.set()
+                    CGContextSetStrokeColorWithColor(ctx, colorLine.CGColor)
+                    CGContextSetFillColorWithColor(ctx, progressInsideFillColor.CGColor)
+                    CGContextSetLineWidth(ctx, 2.0)
+                    CGContextSetLineCap(ctx, CGLineCap.Butt)
+                    CGContextDrawPath(ctx, .FillStroke)
+                }
+            }
+            
             CGContextRestoreGState(ctx)
             UIGraphicsPopContext()
         }
