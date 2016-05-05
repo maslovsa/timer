@@ -102,6 +102,24 @@ class TimerModel: NSObject {
         }
     }
     
+    var roundsValue: Int {
+        guard timerConfig.style == .Tabata else {
+            return 0
+        }
+        let roundsValue = tabataPresets[tabataIndex].round
+        let roundsMaxValue = timerConfig.presets[roundsIndex].value
+        return roundsMaxValue - roundsValue + 1
+    }
+
+    var circleValue: Int {
+        guard timerConfig.style == .Tabata else {
+            return 0
+        }
+        let circleValue = tabataPresets[tabataIndex].cycle
+        let circleMaxValue = timerConfig.presets[cyclesIndex].value
+        return circleMaxValue - circleValue + 1
+    }
+    
     var progressRoundsToShow: Double {
         guard timerConfig.style == .Tabata else {
             return 0.0

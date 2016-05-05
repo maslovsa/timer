@@ -13,12 +13,13 @@ class CoundownViewController: UIViewController {
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
     let colorButtons = UIColor.whiteColor()
+    let colorRounds = UIColor.greenColor()
+    let colorCycles = UIColor.cyanColor()
     
     let greenColors = [UIColor.greenColor(), UIColor.cyanColor()]
     let yellowColors = [UIColor.yellowColor(), UIColor.orangeColor()]
     let redColors = [UIColor.redColor(), UIColor.orangeColor()]
     let blueColors = [UIColor.blueColor(), UIColor.cyanColor()]
-    
     
     let animationLength = 0.3
     let buttonPlaySize = 44
@@ -28,17 +29,17 @@ class CoundownViewController: UIViewController {
     
     let smallProgressSize = 220
     let bigProgressSize = 340
-    let roundsProgressSize = 100
+    let roundsProgressSize = 120
     
     let verticalTabateOffset = 40.0
     let verticalInfoOffset = -60.0
     let progressCircleThickness: CGFloat = 0.5
-    let progressCircleOffsetX = 40
+    let progressCircleOffsetX = 30
     
     // UI items
     var progressTimer: KDCircularProgress!
     var progressRounds: KDCircularProgress!
-    var progressCircles: KDCircularProgress!
+    var progressCycles: KDCircularProgress!
     
     lazy var buttonPlay = UIButton(type: .System)
     lazy var buttonReset = UIButton(type: .System)
@@ -47,6 +48,9 @@ class CoundownViewController: UIViewController {
     lazy var labelTime = UILabel()
     lazy var labelInfo = UILabel()
     lazy var labelClock = UILabel()
+    lazy var labelRounds = UILabel()
+    lazy var labelCycles = UILabel()
+    
     
     var timerConfig: TimerConfig!
     var timerModel: TimerModel!
@@ -124,6 +128,30 @@ class CoundownViewController: UIViewController {
             make.height.equalTo(70)
         }
         
+        labelRounds.textColor = colorRounds
+        labelRounds.font = Constants.Fonts.RoundsLabelFontSize
+        labelRounds.textAlignment = .Center
+        self.view.addSubview(labelRounds)
+        labelRounds.snp_makeConstraints {
+            (make) -> Void in
+            make.left.equalTo(self.view).offset(progressCircleOffsetX)
+            make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
+            make.width.equalTo(roundsProgressSize)
+            make.height.equalTo(roundsProgressSize)
+        }
+        
+        labelCycles.textColor = colorCycles
+        labelCycles.font = Constants.Fonts.RoundsLabelFontSize
+        labelCycles.textAlignment = .Center
+        self.view.addSubview(labelCycles)
+        labelCycles.snp_makeConstraints {
+            (make) -> Void in
+            make.right.equalTo(self.view).offset(-progressCircleOffsetX)
+            make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
+            make.width.equalTo(roundsProgressSize)
+            make.height.equalTo(roundsProgressSize)
+        }
+        
         progressTimer = KDCircularProgress(frame: CGRectZero)
         progressTimer.startAngle = -90
         progressTimer.progressThickness = 0.2
@@ -153,7 +181,7 @@ class CoundownViewController: UIViewController {
         progressRounds.glowMode = .NoGlow
         progressRounds.glowAmount = 1.0
         progressRounds.trackColor = UIColor.darkGrayColor()
-        progressRounds.setColorsArray([UIColor.magentaColor()])
+        progressRounds.setColorsArray([colorRounds])
         self.view.addSubview(progressRounds)
         progressRounds.snp_makeConstraints {
             (make) -> Void in
@@ -165,25 +193,25 @@ class CoundownViewController: UIViewController {
         progressRounds.hidden = true
 
         
-        progressCircles = KDCircularProgress(frame: CGRectZero)
-        progressCircles.startAngle = -90
-        progressCircles.progressThickness = progressCircleThickness
-        progressCircles.trackThickness = progressCircleThickness
-        progressCircles.clockwise = false
-        progressCircles.roundedCorners = false
-        progressCircles.glowMode = .NoGlow
-        progressCircles.glowAmount = 1.0
-        progressCircles.trackColor = UIColor.darkGrayColor()
-        progressCircles.setColorsArray([UIColor.orangeColor()])
-        self.view.addSubview(progressCircles)
-        progressCircles.snp_makeConstraints {
+        progressCycles = KDCircularProgress(frame: CGRectZero)
+        progressCycles.startAngle = -90
+        progressCycles.progressThickness = progressCircleThickness
+        progressCycles.trackThickness = progressCircleThickness
+        progressCycles.clockwise = false
+        progressCycles.roundedCorners = false
+        progressCycles.glowMode = .NoGlow
+        progressCycles.glowAmount = 1.0
+        progressCycles.trackColor = UIColor.darkGrayColor()
+        progressCycles.setColorsArray([colorCycles])
+        self.view.addSubview(progressCycles)
+        progressCycles.snp_makeConstraints {
             (make) -> Void in
             make.right.equalTo(self.view).offset(-progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
             make.width.equalTo(roundsProgressSize)
             make.height.equalTo(roundsProgressSize)
         }
-        progressCircles.hidden = true
+        progressCycles.hidden = true
         
         buttonPlay.tintColor = colorButtons
         buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
@@ -272,7 +300,17 @@ class CoundownViewController: UIViewController {
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
         }
 
-        progressCircles.snp_updateConstraints {
+        progressCycles.snp_updateConstraints {
+            (make) -> Void in
+            make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
+        }
+        
+        labelRounds.snp_updateConstraints {
+            (make) -> Void in
+            make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
+        }
+        
+        labelCycles.snp_updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
         }
@@ -327,6 +365,9 @@ class CoundownViewController: UIViewController {
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.getPreviewValue())
         
+        labelRounds.hidden = true
+        labelCycles.hidden = true
+        
         buttonPlay.tintColor = colorButtons
         buttonPlay.hidden = false
         buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
@@ -339,7 +380,7 @@ class CoundownViewController: UIViewController {
         buttonReset.hidden = true
         
         progressRounds.hidden = true
-        progressCircles.hidden = true
+        progressCycles.hidden = true
         
         progressTimer.angle = 0
         progressTimer.clockwise = false
@@ -379,8 +420,12 @@ class CoundownViewController: UIViewController {
         if timerConfig.style == .Tabata {
             progressRounds.hidden = false
             progressRounds.sectorsCount = timerConfig.presets[roundsIndex].value
-            progressCircles.hidden = false
-            progressCircles.sectorsCount = timerConfig.presets[cyclesIndex].value
+            progressCycles.hidden = false
+            progressCycles.sectorsCount = timerConfig.presets[cyclesIndex].value
+            
+            labelRounds.hidden = false
+            labelCycles.hidden = false
+
         }
         
         progressTimer.clockwise = false
@@ -410,7 +455,7 @@ class CoundownViewController: UIViewController {
         buttonReset.tintColor = colorButtons
         
         progressRounds.hidden = timerConfig.style != .Tabata
-        progressCircles.hidden = timerConfig.style != .Tabata
+        progressCycles.hidden = timerConfig.style != .Tabata
         
         if timerConfig.style == .StopWatch {
             progressTimer.clockwise = true
@@ -556,10 +601,14 @@ extension CoundownViewController: TimerModelProtocol{
         labelTime.text = Utilites.secondsToTimer( Int(timerModel.secondsToShow) )
         progressTimer.angle = timerModel.progressToShow
         progressTimer.setColorsArray(getProgressColors())
-        
-        progressRounds.angle = timerModel.progressRoundsToShow
-        progressCircles.angle = timerModel.progressCyclesToShow
         labelInfo.text = timerModel.informationString
+        
+        if timerConfig.style == .Tabata {
+            labelRounds.text = String(timerModel.roundsValue)
+            labelCycles.text = String(timerModel.circleValue)
+            progressRounds.angle = timerModel.progressRoundsToShow
+            progressCycles.angle = timerModel.progressCyclesToShow
+        }
     }
 }
 

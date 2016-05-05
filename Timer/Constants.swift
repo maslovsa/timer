@@ -22,6 +22,8 @@ struct Constants {
         
         
         static let TimeLabelFontSize = UIFont.monospacedDigitSystemFontOfSize(66, weight: UIFontWeightRegular)
+        static let RoundsLabelFontSize = UIFont.monospacedDigitSystemFontOfSize(40, weight: UIFontWeightRegular)
+        
         
         //static let TimeLabelFontSize =  UIFont(name: digiFont, size: 66) ?? UIFont.systemFontOfSize(66, weight: UIFontWeightMedium)
 
