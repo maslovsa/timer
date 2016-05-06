@@ -46,15 +46,15 @@ class TimerConfig {
         for cycleIndex in 1...maxCycle {
             let maxRound = presets[roundsIndex].value
             for roundIndex in 1...maxRound {
-                let presetWork = TabataPreset(isWork: true, title: "work", seconds: presets[workIndex].value, round: roundIndex, cycle: cycleIndex)
+                let presetWork = TabataPreset(isWork: true, title: "Work", seconds: presets[workIndex].value, round: roundIndex, cycle: cycleIndex)
                 result.append(presetWork)
                 
-                let presetRest = TabataPreset(isWork: false, title: "rest", seconds: presets[restIndex].value, round: roundIndex, cycle: cycleIndex)
+                let presetRest = TabataPreset(isWork: false, title: "Rest", seconds: presets[restIndex].value, round: roundIndex, cycle: cycleIndex)
                 result.append(presetRest)
                 
             }
             if cycleIndex != maxCycle {
-                let presetRecovery = TabataPreset(isWork: false, title: "recovery", seconds: presets[restBetweenIndex].value, round: maxRound, cycle: cycleIndex)
+                let presetRecovery = TabataPreset(isWork: false, title: "Recovery", seconds: presets[restBetweenIndex].value, round: maxRound, cycle: cycleIndex)
                 result.append(presetRecovery)
             }
         }
