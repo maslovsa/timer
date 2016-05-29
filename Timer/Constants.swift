@@ -59,6 +59,7 @@ struct Constants {
     
     struct UserDefaultsKeys {
         static let UseActionIcons = "UserDefaultsKeyUseActionIcons"
+        static let UseActionVibrations = "UseActionVibrations"
     }
     
 }

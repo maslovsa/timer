@@ -32,6 +32,7 @@ class TimerConfigViewController: UIViewController {
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,6 +41,7 @@ class TimerConfigViewController: UIViewController {
     }
     
     func clickGo() {
+        Utilites.vibrate()
         let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CoundownViewController") as! CoundownViewController
         controller.modalTransitionStyle = .CrossDissolve
         controller.timerConfig = timerConfig

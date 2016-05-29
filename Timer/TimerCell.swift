@@ -37,8 +37,6 @@ class TimerCell: UITableViewCell {
     var preset: Preset?
     weak var delegate: TimerCellProtocol?
     
-    let useIcons = NSUserDefaults.standardUserDefaults().boolForKey(Constants.UserDefaultsKeys.UseActionIcons)
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         localInit()
@@ -80,19 +78,19 @@ class TimerCell: UITableViewCell {
         self.addSubview(labelTitle)
         labelTitle.snp_makeConstraints {
             (make) -> Void in
-            make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize: leftOffset)
+            make.left.equalTo(self).offset(Utilites.isUseIcons() ? 2*leftOffset + imageIconSize: leftOffset)
             make.top.equalTo(self).offset(topOffset)
             make.width.equalTo(200)
             make.height.equalTo(20)
         }
-        
+
         labelDescription.textColor = Constants.Colors.TimerCellDescriptionFontColor
         labelDescription.font = Constants.Fonts.TimerCellDescriptionFontSize
         labelDescription.textAlignment = .Left
         self.addSubview(labelDescription)
         labelDescription.snp_makeConstraints {
             (make) -> Void in
-            make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize : leftOffset)
+            make.left.equalTo(self).offset(Utilites.isUseIcons() ? 2*leftOffset + imageIconSize : leftOffset)
             make.bottom.equalTo(self).offset(-topOffset)
             make.width.equalTo(200)
             make.height.equalTo(20)
@@ -137,10 +135,22 @@ class TimerCell: UITableViewCell {
             labelValue.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
         }
         
+        let useIcons = Utilites.isUseIcons()
+        
         if useIcons {
             if let imageName = preset.image, let image = UIImage(named: imageName) {
                 imageViewIcon.image = image.imageWithRenderingMode(.AlwaysTemplate)
             }
+        }
+        imageViewIcon.hidden = !useIcons
+            
+        labelTitle.snp_updateConstraints {
+            (make) in
+            make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize: leftOffset)
+        }
+        labelDescription.snp_updateConstraints {
+            (make) in
+            make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize: leftOffset)
         }
     }
 }

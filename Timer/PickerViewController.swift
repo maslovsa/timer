@@ -167,6 +167,7 @@ class PickerViewController: UIViewController {
         }
         
         completion?(preset)
+        Utilites.vibrate()
         self.dismissViewControllerAnimated(true, completion: nil)
    }
 }

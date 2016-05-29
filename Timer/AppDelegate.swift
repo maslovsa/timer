@@ -15,11 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.UserDefaultsKeys.UseActionIcons)
-        NSUserDefaults.standardUserDefaults().synchronize()
+
         return true
     }
 

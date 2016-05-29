@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AudioToolbox
 
 class Utilites {
     class func scaleImage(image: UIImage, toSize newSize: CGSize) -> (UIImage) {
@@ -22,6 +23,29 @@ class Utilites {
         return newImage
     }
     
+    class func vibrate() {
+        if Utilites.isVibrateEnabled() {
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+        }
+    }
+    
+    class func isVibrateEnabled() -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let isVibrate = defaults.objectForKey(Constants.UserDefaultsKeys.UseActionVibrations) as? Bool {
+            return isVibrate
+        }
+        defaults.setBool(true, forKey: Constants.UserDefaultsKeys.UseActionVibrations)
+        return true
+    }
+    
+    class func isUseIcons() -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let isUseIcons = defaults.objectForKey(Constants.UserDefaultsKeys.UseActionIcons) as? Bool {
+            return isUseIcons
+        }
+        defaults.setBool(true, forKey: Constants.UserDefaultsKeys.UseActionIcons)
+        return true
+    }
     
     class func secondsToTimer(seconds: Int) -> String {
         if seconds < 60 {

@@ -8,8 +8,10 @@
 
 import UIKit
 
+
+let logoLink = "http://www.steelwod.ru"
+
 class CoundownViewController: UIViewController {
-    // Constants
     let colorPause = UIColor.yellowColor()
     let colorPlay = UIColor.greenColor()
     let colorButtons = UIColor.whiteColor()
@@ -252,7 +254,7 @@ class CoundownViewController: UIViewController {
         buttonLogo.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view)
             make.bottom.equalTo(self.view).offset(-20)
-            make.width.equalTo(200)
+            make.width.equalTo(150)
             make.height.equalTo(20)
         }
     }
@@ -346,11 +348,12 @@ class CoundownViewController: UIViewController {
     }
     
     func clickMenu() {
+        Utilites.vibrate()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func clickLogo() {
-        if let requestUrl = NSURL(string: "http://www.steelwod.ru") {
+        if let requestUrl = NSURL(string: logoLink) {
             UIApplication.sharedApplication().openURL(requestUrl)
         }
     }
@@ -559,6 +562,7 @@ class CoundownViewController: UIViewController {
 
 extension CoundownViewController: TimerModelProtocol{
     func didStateChanged() {
+        Utilites.vibrate()
         switch  timerModel.state {
         case .Reset:
             onReset()
@@ -572,6 +576,7 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didActivityChanged() {
+        Utilites.vibrate()
         labelInfo.text = timerModel.informationString
 
         if timerModel.isPaused {
