@@ -280,6 +280,16 @@ class CoundownViewController: UIViewController {
         clockTimer = nil
     }
     
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == .MotionShake {
+            clickPlayPause()
+        }
+    }
+    
     func handleLongPress(gestureRecognizer: UIGestureRecognizer) {
         if (gestureRecognizer.state != UIGestureRecognizerState.Ended) {
             return
