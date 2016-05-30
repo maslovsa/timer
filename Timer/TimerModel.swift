@@ -22,7 +22,7 @@ enum TimerState {
 }
 
 class TimerModel: NSObject {
-    let timerTickInterval = 0.03
+    let timerTickInterval: Double = 0.03
     
     var timerConfig: TimerConfig
     var tickTimer: NSTimer? = nil
@@ -33,8 +33,8 @@ class TimerModel: NSObject {
     
     var state = TimerState.Reset
     
-    var countdownValue = 0.0
-    var countdownMaxValue = 1.0
+    var countdownValue: Double = 0.0
+    var countdownMaxValue: Double = 1.0
     
     private var tabataPresets = [TabataPreset]()
     private var tabataIndex = 0
