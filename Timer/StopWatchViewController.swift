@@ -15,20 +15,15 @@ class StopWatchViewController: TimerConfigViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.timerConfig = TimerConfig.createStopWatch()
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
 
 }
 

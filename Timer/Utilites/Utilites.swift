@@ -24,6 +24,10 @@ class Utilites {
     }
     
     class func vibrate() {
+        if UIDevice.isSimulator {
+            return
+        }
+        
         if Utilites.isVibrateEnabled() {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         }
@@ -76,4 +80,11 @@ class Utilites {
         }, completion: nil)
     }
 
+}
+
+
+extension UIDevice {
+    static var isSimulator: Bool {
+        return NSProcessInfo.processInfo().environment["SIMULATOR_DEVICE_NAME"] != nil
+    }
 }

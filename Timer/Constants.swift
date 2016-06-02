@@ -38,7 +38,8 @@ struct Constants {
     struct Colors {
         static let TimerCellTitleFontColor = UIColor.blackColor()
         static let TimerCellValueFontColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
-        static let BlueThemeColor = UIColor.orangeColor()
+        static let MainThemeColor = UIColor(red:0.310, green:0.525, blue:0.969, alpha:1.0)
+            ///UIColor.purpleColor()
         //static let BlueThemeColor = UIColor(red:127.0/255.0, green:199.0/255.0, blue:226.0/255.0, alpha:1.0)
         //static let BlueThemeColor = UIColor(red:135.0/255.0, green:153.0/255.0, blue:189.0/255.0, alpha:1.0)
         static let TimerCellDescriptionFontColor = UIColor.darkGrayColor()
@@ -46,7 +47,8 @@ struct Constants {
     }
     
     struct Picker {
-        static let FontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightRegular)
+        static let FontSize = UIFont.systemFontOfSize(30, weight: UIFontWeightRegular)
+        static let TitleFontSize = UIFont.systemFontOfSize(25, weight: UIFontWeightRegular)
         static let FontColor = UIColor.blackColor()
         
         static let DescriptionFontSize = UIFont.systemFontOfSize(16, weight: UIFontWeightRegular)

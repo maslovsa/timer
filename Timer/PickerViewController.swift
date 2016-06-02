@@ -53,8 +53,8 @@ class PickerViewController: UIViewController {
         applyButton.layer.cornerRadius = 10
         applyButton.layer.masksToBounds = true
         applyButton.clipsToBounds = true
-        applyButton.titleLabel!.font = Constants.Picker.FontSize
-        applyButton.backgroundColor = Constants.Colors.BlueThemeColor
+        applyButton.titleLabel!.font = Constants.Picker.TitleFontSize
+        applyButton.backgroundColor = Constants.Colors.MainThemeColor
         applyButton.titleLabel?.textColor = UIColor.whiteColor()
         applyButton.setTitle("OK", forState: .Normal)
         applyButton.addTarget(self, action: #selector(PickerViewController.applyClicked(_:)), forControlEvents: .TouchDown)
@@ -87,7 +87,6 @@ class PickerViewController: UIViewController {
             make.top.equalTo(self.view).offset(titleLabelVerticalOffset + titleHeight)
             make.height.equalTo(titleHeight)
         }
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -103,9 +102,9 @@ class PickerViewController: UIViewController {
                 
                 firstLabel.backgroundColor = UIColor.clearColor()
                 firstLabel.text = preset.units
-                firstLabel.font = Constants.Picker.FontSize
+                firstLabel.font = Constants.Picker.TitleFontSize
                 firstLabel.textAlignment = .Left
-                firstLabel.textColor = Constants.Colors.BlueThemeColor
+                firstLabel.textColor = Constants.Colors.MainThemeColor
                 firstLabel.snp_makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(50)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
@@ -120,9 +119,9 @@ class PickerViewController: UIViewController {
                 self.view.addSubview(firstLabel)
                 firstLabel.backgroundColor = UIColor.clearColor()
                 firstLabel.text = "min"
-                firstLabel.font = Constants.Picker.FontSize
+                firstLabel.font = Constants.Picker.TitleFontSize
                 firstLabel.textAlignment = .Left
-                firstLabel.textColor = Constants.Colors.BlueThemeColor
+                firstLabel.textColor = Constants.Colors.MainThemeColor
                 firstLabel.snp_makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(0)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
@@ -133,9 +132,9 @@ class PickerViewController: UIViewController {
                 self.view.addSubview(secondLabel)
                 secondLabel.backgroundColor = UIColor.clearColor()
                 secondLabel.text = "sec"
-                secondLabel.font = Constants.Picker.FontSize
+                secondLabel.font = Constants.Picker.TitleFontSize
                 secondLabel.textAlignment = .Left
-                secondLabel.textColor = Constants.Colors.BlueThemeColor
+                secondLabel.textColor = Constants.Colors.MainThemeColor
                 secondLabel.snp_makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(110)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
@@ -217,15 +216,15 @@ extension PickerViewController: UIPickerViewDataSource {
 
 extension PickerViewController: UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 50.0
+        return 60.0
     }
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         let value = calculateValue(row, component: component)
         pickerView.subviews[1].hidden = false
         pickerView.subviews[2].hidden = false
-        pickerView.subviews[1].backgroundColor = Constants.Colors.BlueThemeColor
-        pickerView.subviews[2].backgroundColor = Constants.Colors.BlueThemeColor
+        pickerView.subviews[1].backgroundColor = Constants.Colors.MainThemeColor
+        pickerView.subviews[2].backgroundColor = Constants.Colors.MainThemeColor
         
         pickerView.subviews[1].bounds = CGRect(x: 0, y:  0, width: pickerView.subviews[2].bounds.width, height: 1)
         pickerView.subviews[2].bounds = CGRect(x: 0, y:  0, width: pickerView.subviews[2].bounds.width, height: 1)

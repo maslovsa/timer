@@ -476,6 +476,7 @@ class CoundownViewController: UIViewController {
             progressTimer.clockwise = true
         } else {
             progressTimer.angle = degreesOnCircle
+            progressTimer.animateToAngle(degreesOnCircle, duration: 0.1, completion: nil)
             progressTimer.clockwise = false
         }
         progressTimer.setColorsArray(getProgressColors())

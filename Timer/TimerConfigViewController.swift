@@ -25,7 +25,7 @@ class TimerConfigViewController: UIViewController {
         
         let button: UIButton = UIButton(type: UIButtonType.System)
         button.contentMode = .ScaleAspectFit
-        button.tintColor = Constants.Colors.BlueThemeColor
+        button.tintColor = Constants.Colors.MainThemeColor
         button.setTitle("Go", forState: .Normal)
         button.setImage(UIImage(named: "Exercise"), forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(TimerConfigViewController.clickGo), forControlEvents: .TouchUpInside)
@@ -61,7 +61,7 @@ extension TimerConfigViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 54.0
+        return 60.0
     }
 }
 

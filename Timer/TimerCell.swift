@@ -96,7 +96,7 @@ class TimerCell: UITableViewCell {
             make.height.equalTo(20)
         }
         
-        labelValue.textColor = Constants.Colors.BlueThemeColor
+        labelValue.textColor = Constants.Colors.MainThemeColor
         labelValue.font = Constants.Fonts.TimerCellValueFontSize
         labelValue.textAlignment = .Right
         self.addSubview(labelValue)
@@ -108,7 +108,7 @@ class TimerCell: UITableViewCell {
             make.height.equalTo(20)
         }
         
-        imageViewIcon.tintColor = Constants.Colors.BlueThemeColor
+        imageViewIcon.tintColor = Constants.Colors.MainThemeColor
         imageViewIcon.contentMode = .ScaleAspectFit
         self.addSubview(imageViewIcon)
         imageViewIcon.snp_makeConstraints {
