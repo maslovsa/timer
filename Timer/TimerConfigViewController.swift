@@ -26,6 +26,7 @@ class TimerConfigViewController: UIViewController {
         let button: UIButton = UIButton(type: UIButtonType.System)
         button.contentMode = .ScaleAspectFit
         button.tintColor = Constants.Colors.BlueThemeColor
+        button.setTitle("Go", forState: .Normal)
         button.setImage(UIImage(named: "Exercise"), forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(TimerConfigViewController.clickGo), forControlEvents: .TouchUpInside)
         button.frame = CGRectMake(0, 0, 30, 30)
@@ -37,11 +38,9 @@ class TimerConfigViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func clickGo() {
-        Utilites.vibrate()
         let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CoundownViewController") as! CoundownViewController
         controller.modalTransitionStyle = .CrossDissolve
         controller.timerConfig = timerConfig

@@ -18,7 +18,7 @@ let degreesOnCircle = 360.0
 struct Constants {
     struct Fonts {
         static let TimeSelectorFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
-        static let TimerCellTitleFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold)
+        static let TimerCellTitleFontSize = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)
         
         
         static let TimeLabelFontSize = UIFont.monospacedDigitSystemFontOfSize(85, weight: UIFontWeightRegular)
@@ -31,8 +31,8 @@ struct Constants {
         
         static let ClockLabelFontSize =  UIFont.systemFontOfSize(35, weight: UIFontWeightMedium)
         
-        static let TimerCellValueFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightBold)
-        static let TimerCellDescriptionFontSize = UIFont.systemFontOfSize(12, weight: UIFontWeightRegular)
+        static let TimerCellValueFontSize = UIFont.systemFontOfSize(20, weight: UIFontWeightBold)
+        static let TimerCellDescriptionFontSize = UIFont.systemFontOfSize(14, weight: UIFontWeightRegular)
     }
     
     struct Colors {

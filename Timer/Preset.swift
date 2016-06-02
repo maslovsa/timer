@@ -33,7 +33,7 @@ struct IntPreset {
     }
     
     static func MinutePreset() -> IntPreset {
-        return IntPreset(value: 10, low: 0, high: 90)
+        return IntPreset(value: 5, low: 0, high: 90)
     }
     
     static func Minute60Preset() -> IntPreset {
@@ -77,8 +77,8 @@ struct Preset {
     
     static func timeCapPreset() -> Preset {
         var preset = Preset()
-        //preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
-        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 90), sec: IntPreset(value: 5, low: 0, high: 59))
+        preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
+        //preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 90), sec: IntPreset(value: 5, low: 0, high: 59))
         
         preset.title = "Time Cap"
         preset.description = "Clock will stop at this time"
@@ -88,8 +88,8 @@ struct Preset {
     
     static func startTimePreset() -> Preset {
         var preset = Preset()
-        //preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
-        preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 90), sec: IntPreset(value: 5, low: 0, high: 59))
+        preset.type = PresetType.TimeType(min: IntPreset.MinutePreset(), sec: IntPreset.SecondPreset())
+        //preset.type = PresetType.TimeType(min: IntPreset(value: 0, low: 0, high: 90), sec: IntPreset(value: 5, low: 0, high: 59))
         preset.title = "Start time"
         preset.description = "Total duration of workout"
         preset.image = "Weightlift"

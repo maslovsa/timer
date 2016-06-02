@@ -24,10 +24,10 @@ class CoundownViewController: UIViewController {
     let blueColors = [UIColor.blueColor(), UIColor.cyanColor()]
     
     let animationLength = 0.3
-    let buttonPlaySize = 44
-    let verticaButtonlOffset = 60.0
+    let buttonPlaySize = 50
+    let verticaButtonlOffset = 70.0
 
-    let buttonPlayOffsetX = 30
+    let buttonPlayOffsetX = 35
     
     let smallProgressSize = 220
     let bigProgressSize = 340
@@ -37,7 +37,7 @@ class CoundownViewController: UIViewController {
     let verticalInfoOffset = -60.0
     let progressCircleThickness: CGFloat = 0.5
     let progressCircleOffsetX = 30
-    
+    let lastAngle: Double = 0.0
     // UI items
     var progressTimer: KDCircularProgress!
     var progressRounds: KDCircularProgress!
@@ -60,11 +60,11 @@ class CoundownViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dcgr = UITapGestureRecognizer(target: self, action: #selector(CoundownViewController.handleLongPress(_:)))
-        dcgr.delegate = self
-        dcgr.numberOfTapsRequired = 1
-        self.view.addGestureRecognizer(dcgr)
-        self.view.userInteractionEnabled = true
+//        let dcgr = UITapGestureRecognizer(target: self, action: #selector(CoundownViewController.handleLongPress(_:)))
+//        dcgr.delegate = self
+//        dcgr.numberOfTapsRequired = 1
+//        self.view.addGestureRecognizer(dcgr)
+//        self.view.userInteractionEnabled = true
         
         timerModel = TimerModel(timerConfig: timerConfig)
         timerModel.delegate = self
@@ -350,6 +350,7 @@ class CoundownViewController: UIViewController {
     
     // MARK: Buttons
     func clickPlayPause() {
+        Utilites.vibrate()
         timerModel.startStop()
     }
     
@@ -358,7 +359,7 @@ class CoundownViewController: UIViewController {
     }
     
     func clickMenu() {
-        Utilites.vibrate()
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -443,7 +444,7 @@ class CoundownViewController: UIViewController {
         
         progressTimer.clockwise = false
         progressTimer.setColorsArray(yellowColors)
-        progressTimer.angle = 0
+        progressTimer.angle = degreesOnCircle
         progressTimer.snp_updateConstraints {
             (make) -> Void in
             make.width.height.equalTo(bigProgressSize)
@@ -471,12 +472,14 @@ class CoundownViewController: UIViewController {
         progressCycles.hidden = timerConfig.style != .Tabata
         
         if timerConfig.style == .StopWatch {
+            progressTimer.angle = 0
             progressTimer.clockwise = true
         } else {
+            progressTimer.angle = degreesOnCircle
             progressTimer.clockwise = false
         }
         progressTimer.setColorsArray(getProgressColors())
-        progressTimer.angle = degreesOnCircle
+        
         
         buttonMenu.tintColor = getProgressColor()
         labelClock.textColor = getProgressColor()
@@ -572,7 +575,6 @@ class CoundownViewController: UIViewController {
 
 extension CoundownViewController: TimerModelProtocol{
     func didStateChanged() {
-        Utilites.vibrate()
         switch  timerModel.state {
         case .Reset:
             onReset()
@@ -586,7 +588,6 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didActivityChanged() {
-        Utilites.vibrate()
         labelInfo.text = timerModel.informationString
 
         if timerModel.isPaused {
@@ -613,8 +614,12 @@ extension CoundownViewController: TimerModelProtocol{
     }
     
     func didTickTimer() {
-        labelTime.text = Utilites.secondsToTimer( Int(timerModel.secondsToShow) )
-        progressTimer.angle = timerModel.progressToShow
+        labelTime.text = Utilites.secondsToTimer( Int(ceil(timerModel.secondsToShow)) )
+
+//      progressTimer.angle = timerModel.progressToShow
+        print(timerModel.progressToShow)
+        progressTimer.animateToAngle(timerModel.progressToShow, duration: timerModel.timerTickInterval, completion: nil)
+        
         progressTimer.setColorsArray(getProgressColors())
         labelInfo.text = timerModel.informationString
         

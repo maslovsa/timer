@@ -22,7 +22,7 @@ enum TimerState {
 }
 
 class TimerModel: NSObject {
-    let timerTickInterval: Double = 0.03
+    let timerTickInterval: Double = 0.5
     
     var timerConfig: TimerConfig
     var tickTimer: NSTimer? = nil
@@ -76,7 +76,7 @@ class TimerModel: NSObject {
         case .Prepare:
             return "prepare"
         case .Reset:
-            return "ready?"
+            return ""
         case .Workout:
             if timerConfig.style != .Tabata {
                 return timerConfig.title
