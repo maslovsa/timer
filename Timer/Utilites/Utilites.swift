@@ -10,15 +10,15 @@ import Foundation
 import AudioToolbox
 
 class Utilites {
-    class func scaleImage(image: UIImage, toSize newSize: CGSize) -> (UIImage) {
-        let newRect = CGRectIntegral(CGRectMake(0,0, newSize.width, newSize.height))
+    class func scaleImage(_ image: UIImage, toSize newSize: CGSize) -> (UIImage) {
+        let newRect = CGRect(x: 0,y: 0, width: newSize.width, height: newSize.height).integral
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetInterpolationQuality(context, .High)
-        let flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, newSize.height)
-        CGContextConcatCTM(context, flipVertical)
-        CGContextDrawImage(context, newRect, image.CGImage)
-        let newImage = UIImage(CGImage: CGBitmapContextCreateImage(context)!)
+        context!.interpolationQuality = .high
+        let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: newSize.height)
+        context?.concatenate(flipVertical)
+        context?.draw(image.cgImage!, in: newRect)
+        let newImage = UIImage(cgImage: (context?.makeImage()!)!)
         UIGraphicsEndImageContext()
         return newImage
     }
@@ -34,24 +34,24 @@ class Utilites {
     }
     
     class func isVibrateEnabled() -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let isVibrate = defaults.objectForKey(Constants.UserDefaultsKeys.UseActionVibrations) as? Bool {
+        let defaults = UserDefaults.standard
+        if let isVibrate = defaults.object(forKey: Constants.UserDefaultsKeys.UseActionVibrations) as? Bool {
             return isVibrate
         }
-        defaults.setBool(true, forKey: Constants.UserDefaultsKeys.UseActionVibrations)
+        defaults.set(true, forKey: Constants.UserDefaultsKeys.UseActionVibrations)
         return true
     }
     
     class func isUseIcons() -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let isUseIcons = defaults.objectForKey(Constants.UserDefaultsKeys.UseActionIcons) as? Bool {
+        let defaults = UserDefaults.standard
+        if let isUseIcons = defaults.object(forKey: Constants.UserDefaultsKeys.UseActionIcons) as? Bool {
             return isUseIcons
         }
-        defaults.setBool(true, forKey: Constants.UserDefaultsKeys.UseActionIcons)
+        defaults.set(true, forKey: Constants.UserDefaultsKeys.UseActionIcons)
         return true
     }
     
-    class func secondsToTimer(seconds: Int) -> String {
+    class func secondsToTimer(_ seconds: Int) -> String {
         if seconds < 60 {
             return NSString(format: ":%02d",seconds) as String
         } else {
@@ -64,18 +64,18 @@ class Utilites {
     }
     
     class func printFonts() {
-        let fontFamilyNames = UIFont.familyNames()
+        let fontFamilyNames = UIFont.familyNames
         for familyName in fontFamilyNames {
             print("------------------------------")
             print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNamesForFamilyName(familyName as! String)
+            let names = UIFont.fontNames(forFamilyName: familyName )
             print("Font Names = [\(names)]")
         }
     }
     
-    class func showWithAnimation(view: UIView) {
+    class func showWithAnimation(_ view: UIView) {
         view.alpha = 0
-        UIView.animateWithDuration(5.0, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animate(withDuration: 5.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                     view.alpha = 1
         }, completion: nil)
     }
@@ -85,6 +85,6 @@ class Utilites {
 
 extension UIDevice {
     static var isSimulator: Bool {
-        return NSProcessInfo.processInfo().environment["SIMULATOR_DEVICE_NAME"] != nil
+        return ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] != nil
     }
 }

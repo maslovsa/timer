@@ -37,13 +37,13 @@ class PickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         self.view.addSubview(picker)
         picker.delegate = self
         picker.dataSource = self
         picker.showsSelectionIndicator = true
         self.view.addSubview(picker)
-        picker.snp_makeConstraints { (make) -> Void in
+        picker.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view)
             make.height.equalTo(self.view).dividedBy(1.2)
@@ -55,11 +55,11 @@ class PickerViewController: UIViewController {
         applyButton.clipsToBounds = true
         applyButton.titleLabel!.font = Constants.Picker.TitleFontSize
         applyButton.backgroundColor = Constants.Colors.MainThemeColor
-        applyButton.titleLabel?.textColor = UIColor.whiteColor()
-        applyButton.setTitle("OK", forState: .Normal)
-        applyButton.addTarget(self, action: #selector(PickerViewController.applyClicked(_:)), forControlEvents: .TouchDown)
+        applyButton.titleLabel?.textColor = UIColor.white
+        applyButton.setTitle("OK", for: UIControlState())
+        applyButton.addTarget(self, action: #selector(PickerViewController.applyClicked(_:)), for: .touchDown)
         self.view.addSubview(applyButton)
-        applyButton.snp_makeConstraints { (make) -> Void in
+        applyButton.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(self.view).offset(defaultOffset)
             make.right.equalTo(self.view).offset(-defaultOffset)
             make.bottom.equalTo(self.view).offset(-defaultOffset)
@@ -67,10 +67,10 @@ class PickerViewController: UIViewController {
         }
 
         titleLabel.font = Constants.Picker.FontSize
-        titleLabel.textAlignment = .Center
+        titleLabel.textAlignment = .center
         titleLabel.textColor = Constants.Picker.FontColor
         self.view.addSubview(titleLabel)
-        titleLabel.snp_makeConstraints { (make) -> Void in
+        titleLabel.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(self.view).offset(defaultOffset)
             make.right.equalTo(self.view).offset(-defaultOffset)
             make.top.equalTo(self.view).offset(titleLabelVerticalOffset)
@@ -78,10 +78,10 @@ class PickerViewController: UIViewController {
         }
         
         descriptionLabel.font = Constants.Picker.DescriptionFontSize
-        descriptionLabel.textAlignment = .Center
+        descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = Constants.Picker.DescriptionFontColor
         self.view.addSubview(descriptionLabel)
-        descriptionLabel.snp_makeConstraints { (make) -> Void in
+        descriptionLabel.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(self.view).offset(defaultOffset)
             make.right.equalTo(self.view).offset(-defaultOffset)
             make.top.equalTo(self.view).offset(titleLabelVerticalOffset + titleHeight)
@@ -89,40 +89,40 @@ class PickerViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if let preset = preset {
             titleLabel.text = preset.title
             descriptionLabel.text = preset.description
             
             switch preset.type {
-            case .IntType(let unit):
+            case .intType(let unit):
                 picker.selectRow(unit.valueForRow, inComponent: 0, animated: true)
                 
                 self.view.addSubview(firstLabel)
                 
-                firstLabel.backgroundColor = UIColor.clearColor()
+                firstLabel.backgroundColor = UIColor.clear
                 firstLabel.text = preset.units
                 firstLabel.font = Constants.Picker.TitleFontSize
-                firstLabel.textAlignment = .Left
+                firstLabel.textAlignment = .left
                 firstLabel.textColor = Constants.Colors.MainThemeColor
-                firstLabel.snp_makeConstraints { (make) -> Void in
+                firstLabel.snp.makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(50)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
                     make.height.equalTo(unitsHeight)
                     make.width.equalTo(unitsWidth)
                 }
                 
-            case .TimeType(let min, let sec ):
+            case .timeType(let min, let sec ):
                 picker.selectRow(min.valueForRow, inComponent: 0, animated: true)
                 picker.selectRow(sec.valueForRow, inComponent: 1, animated: true)
                 
                 self.view.addSubview(firstLabel)
-                firstLabel.backgroundColor = UIColor.clearColor()
+                firstLabel.backgroundColor = UIColor.clear
                 firstLabel.text = "min"
                 firstLabel.font = Constants.Picker.TitleFontSize
-                firstLabel.textAlignment = .Left
+                firstLabel.textAlignment = .left
                 firstLabel.textColor = Constants.Colors.MainThemeColor
-                firstLabel.snp_makeConstraints { (make) -> Void in
+                firstLabel.snp.makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(0)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
                     make.height.equalTo(unitsHeight)
@@ -130,12 +130,12 @@ class PickerViewController: UIViewController {
                 }
                 
                 self.view.addSubview(secondLabel)
-                secondLabel.backgroundColor = UIColor.clearColor()
+                secondLabel.backgroundColor = UIColor.clear
                 secondLabel.text = "sec"
                 secondLabel.font = Constants.Picker.TitleFontSize
-                secondLabel.textAlignment = .Left
+                secondLabel.textAlignment = .left
                 secondLabel.textColor = Constants.Colors.MainThemeColor
-                secondLabel.snp_makeConstraints { (make) -> Void in
+                secondLabel.snp.makeConstraints { (make) -> Void in
                     make.centerX.equalTo(self.view).offset(110)
                     make.centerY.equalTo(self.view).offset(verticalCorrection)
                     make.height.equalTo(unitsHeight)
@@ -145,52 +145,52 @@ class PickerViewController: UIViewController {
         }
     }
     
-    func applyClicked(sender: AnyObject) {
+    func applyClicked(_ sender: AnyObject) {
         guard var preset = preset else {
             return
         }
         
-        let indexFirst = picker.selectedRowInComponent(0)
+        let indexFirst = picker.selectedRow(inComponent: 0)
 
         switch preset.type {
-        case .IntType(let unit):
-            preset.type = PresetType.IntType(unit: IntPreset(value: indexFirst + unit.low, low: unit.low, high: unit.high))
+        case .intType(let unit):
+            preset.type = PresetType.intType(unit: IntPreset(value: indexFirst + unit.low, low: unit.low, high: unit.high))
             
-        case .TimeType(let min, let sec ):
-            let indexSecond = picker.selectedRowInComponent(1)
+        case .timeType(let min, let sec ):
+            let indexSecond = picker.selectedRow(inComponent: 1)
 
             let minPreset = IntPreset(value: indexFirst + min.low, low: min.low, high: min.high)
             let secPreset = IntPreset(value: indexSecond + sec.low, low: sec.low, high: sec.high)
             
-            preset.type = PresetType.TimeType(min: minPreset, sec: secPreset)
+            preset.type = PresetType.timeType(min: minPreset, sec: secPreset)
         }
         
         completion?(preset)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
    }
 }
 
 extension PickerViewController: UIPickerViewDataSource {
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         guard let type = preset?.type else {
             return 1
         }
         switch type {
-        case .IntType(_):
+        case .intType(_):
             return 1
-        case .TimeType(_, _):
+        case .timeType(_, _):
             return 2
         }
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         guard let type = preset?.type else {
             return 1
         }
         switch type {
-        case .IntType(let unit):
+        case .intType(let unit):
             return unit.length
-        case .TimeType(let min, let sec):
+        case .timeType(let min, let sec):
             if component == 0 {
                 return min.length
             }
@@ -198,14 +198,14 @@ extension PickerViewController: UIPickerViewDataSource {
         }
     }
     
-    private func calculateValue(row: Int, component: Int) -> String {
+    fileprivate func calculateValue(_ row: Int, component: Int) -> String {
         guard let type = preset?.type else {
             return "no value"
         }
         switch type {
-        case .IntType(let unit):
+        case .intType(let unit):
             return "\(row + unit.low)"
-        case .TimeType(let min, let sec):
+        case .timeType(let min, let sec):
             if component == 0 {
                 return NSString(format: "%02d", row + min.low) as String
             }
@@ -215,14 +215,14 @@ extension PickerViewController: UIPickerViewDataSource {
 }
 
 extension PickerViewController: UIPickerViewDelegate {
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 60.0
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let value = calculateValue(row, component: component)
-        pickerView.subviews[1].hidden = false
-        pickerView.subviews[2].hidden = false
+        pickerView.subviews[1].isHidden = false
+        pickerView.subviews[2].isHidden = false
         pickerView.subviews[1].backgroundColor = Constants.Colors.MainThemeColor
         pickerView.subviews[2].backgroundColor = Constants.Colors.MainThemeColor
         
@@ -235,22 +235,22 @@ extension PickerViewController: UIPickerViewDelegate {
             return view
         }
         
-        let columnView = UILabel(frame: CGRectMake(150, 0, 150, 50))
+        let columnView = UILabel(frame: CGRect(x: 150, y: 0, width: 150, height: 50))
         columnView.font = Constants.Picker.FontSize
         columnView.textColor = Constants.Picker.FontColor
         columnView.text = value
-        columnView.textAlignment = NSTextAlignment.Center
+        columnView.textAlignment = NSTextAlignment.center
         
         return columnView
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "!!!!"
     }
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 100.0
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     }
 }

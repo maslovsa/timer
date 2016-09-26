@@ -16,20 +16,20 @@ class TimerConfigViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.separatorStyle = .None
-        tableView.registerClass(TimerCell.self, forCellReuseIdentifier: TimerCellIdentifier)
+        tableView.separatorStyle = .none
+        tableView.register(TimerCell.self, forCellReuseIdentifier: TimerCellIdentifier)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.topItem!.title = timerConfig.title
         
-        let button: UIButton = UIButton(type: UIButtonType.System)
-        button.contentMode = .ScaleAspectFit
+        let button: UIButton = UIButton(type: UIButtonType.system)
+        button.contentMode = .scaleAspectFit
         button.tintColor = Constants.Colors.MainThemeColor
-        button.setTitle("Go", forState: .Normal)
-        button.setImage(UIImage(named: "Exercise"), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(TimerConfigViewController.clickGo), forControlEvents: .TouchUpInside)
-        button.frame = CGRectMake(0, 0, 30, 30)
+        button.setTitle("Go", for: UIControlState())
+        button.setImage(UIImage(named: "Exercise"), for: UIControlState())
+        button.addTarget(self, action: #selector(TimerConfigViewController.clickGo), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
@@ -41,39 +41,39 @@ class TimerConfigViewController: UIViewController {
     }
     
     func clickGo() {
-        let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CoundownViewController") as! CoundownViewController
-        controller.modalTransitionStyle = .CrossDissolve
+        let controller =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CoundownViewController") as! CoundownViewController
+        controller.modalTransitionStyle = .crossDissolve
         controller.timerConfig = timerConfig
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: nil)
     }
 }
 
 extension TimerConfigViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timerConfig.prefCount
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TimerCellIdentifier, forIndexPath: indexPath) as! TimerCell
-        let preset = timerConfig.presets[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TimerCellIdentifier, for: indexPath) as! TimerCell
+        let preset = timerConfig.presets[(indexPath as NSIndexPath).row]
         cell.configure(preset)
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
 }
 
 extension TimerConfigViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = PickerViewController()
-        vc.preset = timerConfig.presets[indexPath.row]
+        vc.preset = timerConfig.presets[(indexPath as NSIndexPath).row]
         vc.completion = { [weak self](newValue) -> Void in
-            self?.timerConfig.presets[indexPath.row] = newValue
+            self?.timerConfig.presets[(indexPath as NSIndexPath).row] = newValue
             self?.tableView.reloadData()
         }
-        self.presentViewController(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
 }
 

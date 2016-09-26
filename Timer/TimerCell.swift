@@ -24,7 +24,7 @@ class TimerCell: UITableViewCell {
     
     var isLast: Bool = false {
         didSet {
-            self.onePixelLineBottom.hidden = true
+            self.onePixelLineBottom.isHidden = true
         }
     }
     lazy var labelTitle = UILabel()
@@ -47,7 +47,7 @@ class TimerCell: UITableViewCell {
         localInit()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
@@ -59,12 +59,12 @@ class TimerCell: UITableViewCell {
     func localInit() {
         
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         
-        onePixelLineBottom.backgroundColor = UIColor.lightGrayColor()
+        onePixelLineBottom.backgroundColor = UIColor.lightGray
         
         self.addSubview(onePixelLineBottom)
-        onePixelLineBottom.snp_makeConstraints {
+        onePixelLineBottom.snp.makeConstraints {
             (make) -> Void in
             make.left.equalTo(self).offset(10)
             make.right.equalTo(self).offset(-10)
@@ -74,9 +74,9 @@ class TimerCell: UITableViewCell {
         
         labelTitle.textColor = Constants.Colors.TimerCellTitleFontColor
         labelTitle.font = Constants.Fonts.TimerCellTitleFontSize
-        labelTitle.textAlignment = .Left
+        labelTitle.textAlignment = .left
         self.addSubview(labelTitle)
-        labelTitle.snp_makeConstraints {
+        labelTitle.snp.makeConstraints {
             (make) -> Void in
             make.left.equalTo(self).offset(Utilites.isUseIcons() ? 2*leftOffset + imageIconSize: leftOffset)
             make.top.equalTo(self).offset(topOffset)
@@ -86,9 +86,9 @@ class TimerCell: UITableViewCell {
 
         labelDescription.textColor = Constants.Colors.TimerCellDescriptionFontColor
         labelDescription.font = Constants.Fonts.TimerCellDescriptionFontSize
-        labelDescription.textAlignment = .Left
+        labelDescription.textAlignment = .left
         self.addSubview(labelDescription)
-        labelDescription.snp_makeConstraints {
+        labelDescription.snp.makeConstraints {
             (make) -> Void in
             make.left.equalTo(self).offset(Utilites.isUseIcons() ? 2*leftOffset + imageIconSize : leftOffset)
             make.bottom.equalTo(self).offset(-topOffset)
@@ -98,9 +98,9 @@ class TimerCell: UITableViewCell {
         
         labelValue.textColor = Constants.Colors.MainThemeColor
         labelValue.font = Constants.Fonts.TimerCellValueFontSize
-        labelValue.textAlignment = .Right
+        labelValue.textAlignment = .right
         self.addSubview(labelValue)
-        labelValue.snp_makeConstraints {
+        labelValue.snp.makeConstraints {
             (make) -> Void in
             make.right.equalTo(self).offset(-30)
             make.centerY.equalTo(self)
@@ -109,9 +109,9 @@ class TimerCell: UITableViewCell {
         }
         
         imageViewIcon.tintColor = Constants.Colors.MainThemeColor
-        imageViewIcon.contentMode = .ScaleAspectFit
+        imageViewIcon.contentMode = .scaleAspectFit
         self.addSubview(imageViewIcon)
-        imageViewIcon.snp_makeConstraints {
+        imageViewIcon.snp.makeConstraints {
             (make) -> Void in
             make.left.equalTo(self).offset(leftOffset)
             make.centerY.equalTo(self)
@@ -121,17 +121,17 @@ class TimerCell: UITableViewCell {
         
     }
     
-    func configure(preset: Preset) {
+    func configure(_ preset: Preset) {
         self.preset = preset
-        self.accessoryType = .DisclosureIndicator
+        self.accessoryType = .disclosureIndicator
         labelTitle.text = preset.title
         labelDescription.text = preset.description
         
         switch preset.type {
-        case .IntType(let unit):
+        case .intType(let unit):
             labelValue.text = NSString(format: ":%.2d", unit.value) as String
             
-        case .TimeType(let min, let sec):
+        case .timeType(let min, let sec):
             labelValue.text = NSString(format: "%.2d:%.2d", min.value, sec.value) as String
         }
         
@@ -139,16 +139,16 @@ class TimerCell: UITableViewCell {
         
         if useIcons {
             if let imageName = preset.image, let image = UIImage(named: imageName) {
-                imageViewIcon.image = image.imageWithRenderingMode(.AlwaysTemplate)
+                imageViewIcon.image = image.withRenderingMode(.alwaysTemplate)
             }
         }
-        imageViewIcon.hidden = !useIcons
+        imageViewIcon.isHidden = !useIcons
             
-        labelTitle.snp_updateConstraints {
+        labelTitle.snp.updateConstraints {
             (make) in
             make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize: leftOffset)
         }
-        labelDescription.snp_updateConstraints {
+        labelDescription.snp.updateConstraints {
             (make) in
             make.left.equalTo(self).offset(useIcons ? 2*leftOffset + imageIconSize: leftOffset)
         }

@@ -12,16 +12,16 @@ import UIKit
 let logoLink = "http://www.steelwod.ru"
 
 class CoundownViewController: UIViewController {
-    let colorPause = UIColor.yellowColor()
-    let colorPlay = UIColor.greenColor()
-    let colorButtons = UIColor.whiteColor()
-    let colorRounds = UIColor.greenColor()
-    let colorCycles = UIColor.cyanColor()
+    let colorPause = UIColor.yellow
+    let colorPlay = UIColor.green
+    let colorButtons = UIColor.white
+    let colorRounds = UIColor.green
+    let colorCycles = UIColor.cyan
     
-    let greenColors = [UIColor.greenColor(), UIColor.cyanColor()]
-    let yellowColors = [UIColor.yellowColor(), UIColor.orangeColor()]
-    let redColors = [UIColor.redColor(), UIColor.orangeColor()]
-    let blueColors = [UIColor.blueColor(), UIColor.cyanColor()]
+    let greenColors = [UIColor.green, UIColor.cyan]
+    let yellowColors = [UIColor.yellow, UIColor.orange]
+    let redColors = [UIColor.red, UIColor.orange]
+    let blueColors = [UIColor.blue, UIColor.cyan]
     
     let animationLength = 0.3
     let buttonPlaySize = 50
@@ -43,10 +43,10 @@ class CoundownViewController: UIViewController {
     var progressRounds: KDCircularProgress!
     var progressCycles: KDCircularProgress!
     
-    lazy var buttonPlay = UIButton(type: .System)
-    lazy var buttonReset = UIButton(type: .System)
-    lazy var buttonMenu = UIButton(type: .System)
-    lazy var buttonLogo = UIButton(type: .Custom)
+    lazy var buttonPlay = UIButton(type: .system)
+    lazy var buttonReset = UIButton(type: .system)
+    lazy var buttonMenu = UIButton(type: .system)
+    lazy var buttonLogo = UIButton(type: .custom)
     lazy var labelTime = UILabel()
     lazy var labelInfo = UILabel()
     lazy var labelClock = UILabel()
@@ -56,7 +56,7 @@ class CoundownViewController: UIViewController {
     
     var timerConfig: TimerConfig!
     var timerModel: TimerModel!
-    weak var clockTimer: NSTimer? = nil
+    weak var clockTimer: Foundation.Timer? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,21 +71,21 @@ class CoundownViewController: UIViewController {
         
         initUI()
         onReset()
-        clockTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
+        clockTimer = Foundation.Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(CoundownViewController.updateTime), userInfo: nil, repeats: true)
         
         updateTime()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         clockTimer?.invalidate()
         clockTimer = nil
     }
     
     func updateTime() {
-        dispatch_async(dispatch_get_main_queue()) {
-            let dateFormatter = NSDateFormatter()
+        DispatchQueue.main.async {
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
-            self.labelClock.text = dateFormatter.stringFromDate(NSDate())
+            self.labelClock.text = dateFormatter.string(from: Date())
         }
     }
     
@@ -93,9 +93,9 @@ class CoundownViewController: UIViewController {
         
         labelClock.textColor = colorPause
         labelClock.font = Constants.Fonts.ClockLabelFontSize
-        labelClock.textAlignment = .Right
+        labelClock.textAlignment = .right
         self.view.addSubview(labelClock)
-        labelClock.snp_makeConstraints {
+        labelClock.snp.makeConstraints {
             (make) -> Void in
             make.right.equalTo(self.view).offset(-10)
             make.top.equalTo(self.view).offset(17)
@@ -107,9 +107,9 @@ class CoundownViewController: UIViewController {
         
         labelInfo.textColor = colorPause
         labelInfo.font = Constants.Fonts.TimeLabelInfoFontSize
-        labelInfo.textAlignment = .Center
+        labelInfo.textAlignment = .center
         self.view.addSubview(labelInfo)
-        labelInfo.snp_makeConstraints {
+        labelInfo.snp.makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view).offset(verticalInfoOffset - getTimerVerticalOffset)
@@ -120,9 +120,9 @@ class CoundownViewController: UIViewController {
         
         labelTime.textColor = colorPause
         labelTime.font = Constants.Fonts.TimeLabelFontSize
-        labelTime.textAlignment = .Center
+        labelTime.textAlignment = .center
         self.view.addSubview(labelTime)
-        labelTime.snp_makeConstraints {
+        labelTime.snp.makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view).offset(-getTimerVerticalOffset)
@@ -132,9 +132,9 @@ class CoundownViewController: UIViewController {
         
         labelRounds.textColor = colorRounds
         labelRounds.font = Constants.Fonts.RoundsLabelFontSize
-        labelRounds.textAlignment = .Center
+        labelRounds.textAlignment = .center
         self.view.addSubview(labelRounds)
-        labelRounds.snp_makeConstraints {
+        labelRounds.snp.makeConstraints {
             (make) -> Void in
             make.left.equalTo(self.view).offset(progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
@@ -144,9 +144,9 @@ class CoundownViewController: UIViewController {
         
         labelCycles.textColor = colorCycles
         labelCycles.font = Constants.Fonts.RoundsLabelFontSize
-        labelCycles.textAlignment = .Center
+        labelCycles.textAlignment = .center
         self.view.addSubview(labelCycles)
-        labelCycles.snp_makeConstraints {
+        labelCycles.snp.makeConstraints {
             (make) -> Void in
             make.right.equalTo(self.view).offset(-progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
@@ -154,19 +154,19 @@ class CoundownViewController: UIViewController {
             make.height.equalTo(roundsProgressSize)
         }
         
-        progressTimer = KDCircularProgress(frame: CGRectZero)
+        progressTimer = KDCircularProgress(frame: CGRect.zero)
         progressTimer.startAngle = -90
         progressTimer.progressThickness = 0.2
         progressTimer.trackThickness = 0.1
         progressTimer.clockwise = false
         progressTimer.gradientRotateSpeed = 2
         progressTimer.roundedCorners = false
-        progressTimer.glowMode = .Constant
+        progressTimer.glowMode = .constant
         progressTimer.glowAmount = 0.9
-        progressTimer.trackColor = UIColor.darkGrayColor()
+        progressTimer.trackColor = UIColor.darkGray
         progressTimer.setColorsArray(greenColors)
         self.view.addSubview(progressTimer)
-        progressTimer.snp_makeConstraints {
+        progressTimer.snp.makeConstraints {
             (make) -> Void in
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view).offset(-getTimerVerticalOffset)
@@ -174,84 +174,84 @@ class CoundownViewController: UIViewController {
             make.height.equalTo(bigProgressSize)
         }
         
-        progressRounds = KDCircularProgress(frame: CGRectZero)
+        progressRounds = KDCircularProgress(frame: CGRect.zero)
         progressRounds.startAngle = -90
         progressRounds.progressThickness = progressCircleThickness
         progressRounds.trackThickness = progressCircleThickness
         progressRounds.clockwise = false
         progressRounds.roundedCorners = false
-        progressRounds.glowMode = .NoGlow
+        progressRounds.glowMode = .noGlow
         progressRounds.glowAmount = 1.0
-        progressRounds.trackColor = UIColor.darkGrayColor()
+        progressRounds.trackColor = UIColor.darkGray
         progressRounds.setColorsArray([colorRounds])
         self.view.addSubview(progressRounds)
-        progressRounds.snp_makeConstraints {
+        progressRounds.snp.makeConstraints {
             (make) -> Void in
             make.left.equalTo(self.view).offset(progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
             make.width.equalTo(roundsProgressSize)
             make.height.equalTo(roundsProgressSize)
         }
-        progressRounds.hidden = true
+        progressRounds.isHidden = true
 
         
-        progressCycles = KDCircularProgress(frame: CGRectZero)
+        progressCycles = KDCircularProgress(frame: CGRect.zero)
         progressCycles.startAngle = -90
         progressCycles.progressThickness = progressCircleThickness
         progressCycles.trackThickness = progressCircleThickness
         progressCycles.clockwise = false
         progressCycles.roundedCorners = false
-        progressCycles.glowMode = .NoGlow
+        progressCycles.glowMode = .noGlow
         progressCycles.glowAmount = 1.0
-        progressCycles.trackColor = UIColor.darkGrayColor()
+        progressCycles.trackColor = UIColor.darkGray
         progressCycles.setColorsArray([colorCycles])
         self.view.addSubview(progressCycles)
-        progressCycles.snp_makeConstraints {
+        progressCycles.snp.makeConstraints {
             (make) -> Void in
             make.right.equalTo(self.view).offset(-progressCircleOffsetX)
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
             make.width.equalTo(roundsProgressSize)
             make.height.equalTo(roundsProgressSize)
         }
-        progressCycles.hidden = true
+        progressCycles.isHidden = true
         
         buttonPlay.tintColor = colorButtons
-        buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
-        buttonPlay.addTarget(self, action: #selector(CoundownViewController.clickPlayPause), forControlEvents: .TouchDown)
+        buttonPlay.setImage(UIImage.getPlayIcon(), for: UIControlState())
+        buttonPlay.addTarget(self, action: #selector(CoundownViewController.clickPlayPause), for: .touchDown)
         self.view.addSubview(buttonPlay)
-        buttonPlay.snp_makeConstraints { (make) -> Void in
+        buttonPlay.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getTimerVerticalOffset)
             make.width.height.equalTo(buttonPlaySize)
         }
         
         buttonReset.tintColor = colorButtons
-        buttonReset.setImage(UIImage.getResetIcon(), forState: .Normal)
-        buttonReset.addTarget(self, action: #selector(CoundownViewController.clickReset), forControlEvents: .TouchDown)
+        buttonReset.setImage(UIImage.getResetIcon(), for: UIControlState())
+        buttonReset.addTarget(self, action: #selector(CoundownViewController.clickReset), for: .touchDown)
         self.view.addSubview(buttonReset)
-        buttonReset.snp_makeConstraints { (make) -> Void in
+        buttonReset.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view).offset(buttonPlayOffsetX)
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getTimerVerticalOffset)
             make.width.equalTo(buttonPlaySize)
             make.height.equalTo(buttonPlaySize)
         }
         
-        buttonMenu.tintColor = UIColor.whiteColor()
-        buttonMenu.contentMode = .ScaleAspectFit
-        buttonMenu.setImage(UIImage.getMenuIcon(), forState: .Normal)
-        buttonMenu.addTarget(self, action: #selector(CoundownViewController.clickMenu), forControlEvents: .TouchDown)
+        buttonMenu.tintColor = UIColor.white
+        buttonMenu.contentMode = .scaleAspectFit
+        buttonMenu.setImage(UIImage.getMenuIcon(), for: UIControlState())
+        buttonMenu.addTarget(self, action: #selector(CoundownViewController.clickMenu), for: .touchDown)
         self.view.addSubview(buttonMenu)
-        buttonMenu.snp_makeConstraints { (make) -> Void in
+        buttonMenu.snp.makeConstraints { (make) -> Void in
             make.left.top.equalTo(self.view).offset(20)
             make.width.height.equalTo(30)
         }
         
         buttonLogo.alpha = 0
-        buttonLogo.contentMode = .ScaleAspectFit
-        buttonLogo.setImage(UIImage(named:"SteelwodLogo"), forState: .Normal)
-        buttonLogo.addTarget(self, action: #selector(CoundownViewController.clickLogo), forControlEvents: .TouchDown)
+        buttonLogo.contentMode = .scaleAspectFit
+        buttonLogo.setImage(UIImage(named:"SteelwodLogo"), for: UIControlState())
+        buttonLogo.addTarget(self, action: #selector(CoundownViewController.clickLogo), for: .touchDown)
         self.view.addSubview(buttonLogo)
-        buttonLogo.snp_makeConstraints { (make) -> Void in
+        buttonLogo.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(self.view)
             make.bottom.equalTo(self.view).offset(-20)
             make.width.equalTo(150)
@@ -259,7 +259,7 @@ class CoundownViewController: UIViewController {
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
@@ -268,7 +268,7 @@ class CoundownViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -280,67 +280,67 @@ class CoundownViewController: UIViewController {
         clockTimer = nil
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if motion == .MotionShake {
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
             clickPlayPause()
         }
     }
     
-    func handleLongPress(gestureRecognizer: UIGestureRecognizer) {
-        if (gestureRecognizer.state != UIGestureRecognizerState.Ended) {
+    func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
+        if (gestureRecognizer.state != UIGestureRecognizerState.ended) {
             return
         }
-        if timerModel.state != .Finished {
+        if timerModel.state != .finished {
             timerModel.startStop()
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
-        progressTimer.snp_updateConstraints {
+        progressTimer.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(-getTimerVerticalOffset)
         }
         
-        progressRounds.snp_updateConstraints {
+        progressRounds.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
         }
 
-        progressCycles.snp_updateConstraints {
+        progressCycles.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
         }
         
-        labelRounds.snp_updateConstraints {
+        labelRounds.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
         }
         
-        labelCycles.snp_updateConstraints {
+        labelCycles.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(getRoundsVerticalOffset)
         }
         
-        buttonPlay.snp_updateConstraints { (make) -> Void in
+        buttonPlay.snp.updateConstraints { (make) -> Void in
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getTimerVerticalOffset)
         }
         
-        buttonReset.snp_updateConstraints { (make) -> Void in
+        buttonReset.snp.updateConstraints { (make) -> Void in
             make.centerY.equalTo(self.view).offset(verticaButtonlOffset - getTimerVerticalOffset)
         }
         
-        labelInfo.snp_updateConstraints {
+        labelInfo.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(verticalInfoOffset - getTimerVerticalOffset)
         }
         
-        labelTime.snp_updateConstraints {
+        labelTime.snp.updateConstraints {
             (make) -> Void in
             make.centerY.equalTo(self.view).offset(-getTimerVerticalOffset)
         }
@@ -360,12 +360,12 @@ class CoundownViewController: UIViewController {
     
     func clickMenu() {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func clickLogo() {
-        if let requestUrl = NSURL(string: logoLink) {
-            UIApplication.sharedApplication().openURL(requestUrl)
+        if let requestUrl = URL(string: logoLink) {
+            UIApplication.shared.openURL(requestUrl)
         }
     }
     
@@ -379,31 +379,31 @@ class CoundownViewController: UIViewController {
         labelTime.textColor = colorPause
         labelTime.text = Utilites.secondsToTimer(timerConfig.getPreviewValue())
         
-        labelRounds.hidden = true
-        labelCycles.hidden = true
+        labelRounds.isHidden = true
+        labelCycles.isHidden = true
         
         buttonPlay.tintColor = colorButtons
-        buttonPlay.hidden = false
-        buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
-        buttonPlay.snp_updateConstraints { (make) in
+        buttonPlay.isHidden = false
+        buttonPlay.setImage(UIImage.getPlayIcon(), for: UIControlState())
+        buttonPlay.snp.updateConstraints { (make) in
             make.centerX.equalTo(self.view)
         }
-        buttonPlay.enabled = true
+        buttonPlay.isEnabled = true
 
         buttonReset.tintColor = colorButtons
-        buttonReset.hidden = true
+        buttonReset.isHidden = true
         
-        progressRounds.hidden = true
-        progressCycles.hidden = true
+        progressRounds.isHidden = true
+        progressCycles.isHidden = true
         
         progressTimer.angle = 0
         progressTimer.clockwise = false
-        progressTimer.snp_updateConstraints {
+        progressTimer.snp.updateConstraints {
             (make) -> Void in
             make.width.height.equalTo(bigProgressSize * 3)
         }
         self.buttonLogo.alpha = 1
-        UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: animationLength, delay: 0.0, options: UIViewAnimationOptions(), animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
@@ -420,37 +420,37 @@ class CoundownViewController: UIViewController {
         labelTime.textColor = colorPause
 
         buttonPlay.tintColor = colorButtons
-        buttonPlay.hidden = false
+        buttonPlay.isHidden = false
 
-        buttonPlay.snp_updateConstraints { (make) in
+        buttonPlay.snp.updateConstraints { (make) in
             make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
         }
-        buttonPlay.enabled = true
+        buttonPlay.isEnabled = true
         
         buttonReset.tintColor = colorButtons
-        buttonReset.hidden = false
-        buttonReset.enabled = false
+        buttonReset.isHidden = false
+        buttonReset.isEnabled = false
         
-        if timerConfig.style == .Tabata {
-            progressRounds.hidden = false
+        if timerConfig.style == .tabata {
+            progressRounds.isHidden = false
             progressRounds.sectorsCount = timerConfig.presets[roundsIndex].value
-            progressCycles.hidden = false
+            progressCycles.isHidden = false
             progressCycles.sectorsCount = timerConfig.presets[cyclesIndex].value
             
-            labelRounds.hidden = false
-            labelCycles.hidden = false
+            labelRounds.isHidden = false
+            labelCycles.isHidden = false
 
         }
         
         progressTimer.clockwise = false
         progressTimer.setColorsArray(yellowColors)
         progressTimer.angle = degreesOnCircle
-        progressTimer.snp_updateConstraints {
+        progressTimer.snp.updateConstraints {
             (make) -> Void in
             make.width.height.equalTo(bigProgressSize)
         }
         self.buttonLogo.alpha = 0
-        UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: animationLength, delay: 0.0, options: UIViewAnimationOptions(), animations: {
             self.view.layoutIfNeeded()
             }, completion: nil)
         
@@ -468,10 +468,10 @@ class CoundownViewController: UIViewController {
         buttonPlay.tintColor = colorButtons
         buttonReset.tintColor = colorButtons
         
-        progressRounds.hidden = timerConfig.style != .Tabata
-        progressCycles.hidden = timerConfig.style != .Tabata
+        progressRounds.isHidden = timerConfig.style != .tabata
+        progressCycles.isHidden = timerConfig.style != .tabata
         
-        if timerConfig.style == .StopWatch {
+        if timerConfig.style == .stopWatch {
             progressTimer.angle = 0
             progressTimer.clockwise = true
         } else {
@@ -493,25 +493,25 @@ class CoundownViewController: UIViewController {
         labelTime.textColor = colorPause
         
         buttonPlay.tintColor = colorPause
-        buttonPlay.hidden = false
-        buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
-        buttonPlay.snp_updateConstraints { (make) in
+        buttonPlay.isHidden = false
+        buttonPlay.setImage(UIImage.getPlayIcon(), for: UIControlState())
+        buttonPlay.snp.updateConstraints { (make) in
             make.centerX.equalTo(self.view).offset(-buttonPlayOffsetX)
         }
-        buttonPlay.enabled = false
+        buttonPlay.isEnabled = false
         
         buttonReset.tintColor = colorButtons
-        buttonReset.hidden = false
-        buttonReset.enabled = true
+        buttonReset.isHidden = false
+        buttonReset.isEnabled = true
         
         progressTimer.setColorsArray(redColors)
         progressTimer.angle = degreesOnCircle
-        progressTimer.snp_updateConstraints {
+        progressTimer.snp.updateConstraints {
             (make) -> Void in
             make.width.height.equalTo(bigProgressSize)
         }
         
-        UIView.animateWithDuration(animationLength, delay: 0.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: animationLength, delay: 0.0, options: UIViewAnimationOptions(), animations: {
             self.view.layoutIfNeeded()
             }, completion: nil)
         
@@ -520,14 +520,14 @@ class CoundownViewController: UIViewController {
         progressTimer.clockwise = false
     }
     
-    private func getProgressColors() -> [UIColor] {
-        if timerModel.state == .Prepare {
+    fileprivate func getProgressColors() -> [UIColor] {
+        if timerModel.state == .prepare {
             return yellowColors
         } else {
             if timerModel.isCriticalTimer {
                 return redColors
             } else {
-                if timerConfig.style != .Tabata {
+                if timerConfig.style != .tabata {
                     return greenColors
                 } else {
                     return timerModel.isWork ? greenColors : blueColors
@@ -536,36 +536,36 @@ class CoundownViewController: UIViewController {
         }
     }
     
-    private func getProgressColor() -> UIColor {
-        if timerModel.state == .Prepare {
-            return UIColor.yellowColor()
+    fileprivate func getProgressColor() -> UIColor {
+        if timerModel.state == .prepare {
+            return UIColor.yellow
         } else {
             if timerModel.isCriticalTimer {
-                return UIColor.greenColor()
+                return UIColor.green
             } else {
                 if timerModel.isPaused {
-                    return UIColor.yellowColor()
+                    return UIColor.yellow
                 }
                 
-                if timerConfig.style != .Tabata {
-                    return UIColor.greenColor()
+                if timerConfig.style != .tabata {
+                    return UIColor.green
                 } else {
-                    return timerModel.isWork ? UIColor.greenColor() : UIColor.cyanColor()
+                    return timerModel.isWork ? UIColor.green : UIColor.cyan
                 }
             }
         }
     }
     
-    private var getTimerVerticalOffset: Double {
-        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+    fileprivate var getTimerVerticalOffset: Double {
+        if UIDevice.current.orientation.isLandscape {
             return 0.0
         } else {
-            return timerConfig.style == .Tabata ? verticalTabateOffset : 0.0
+            return timerConfig.style == .tabata ? verticalTabateOffset : 0.0
         }
     }
 
-    private var getRoundsVerticalOffset: Double {
-        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+    fileprivate var getRoundsVerticalOffset: Double {
+        if UIDevice.current.orientation.isLandscape {
             return 0.0
         } else {
             return 180.0
@@ -577,13 +577,13 @@ class CoundownViewController: UIViewController {
 extension CoundownViewController: TimerModelProtocol{
     func didStateChanged() {
         switch  timerModel.state {
-        case .Reset:
+        case .reset:
             onReset()
-        case .Prepare:
+        case .prepare:
             onPrepare()
-        case .Workout:
+        case .workout:
             onWorkout()
-        case .Finished:
+        case .finished:
             onFinished()
         }
     }
@@ -592,8 +592,8 @@ extension CoundownViewController: TimerModelProtocol{
         labelInfo.text = timerModel.informationString
 
         if timerModel.isPaused {
-            buttonPlay.setImage(UIImage.getPlayIcon(), forState: .Normal)
-            buttonReset.enabled = true
+            buttonPlay.setImage(UIImage.getPlayIcon(), for: UIControlState())
+            buttonReset.isEnabled = true
             
             labelInfo.textColor = getProgressColor()
             labelTime.textColor = getProgressColor()
@@ -601,10 +601,10 @@ extension CoundownViewController: TimerModelProtocol{
             progressTimer.setColorsArray(yellowColors)
             labelClock.textColor = getProgressColor()
         } else {
-            buttonPlay.setImage(UIImage.getPauseIcon(), forState: .Normal)
-            buttonReset.enabled = false
+            buttonPlay.setImage(UIImage.getPauseIcon(), for: UIControlState())
+            buttonReset.isEnabled = false
 
-            if timerModel.state != .Prepare {
+            if timerModel.state != .prepare {
                 labelInfo.textColor = getProgressColor()
                 labelTime.textColor = getProgressColor()
                 progressTimer.setColorsArray(getProgressColors())
@@ -624,7 +624,7 @@ extension CoundownViewController: TimerModelProtocol{
         progressTimer.setColorsArray(getProgressColors())
         labelInfo.text = timerModel.informationString
         
-        if timerConfig.style == .Tabata {
+        if timerConfig.style == .tabata {
             labelRounds.text = String(timerModel.roundsValue)
             labelCycles.text = String(timerModel.circleValue)
             progressRounds.angle = timerModel.progressRoundsToShow

@@ -12,7 +12,7 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
     var minute:Int = 0
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.setup()
     }
 //    init() {
@@ -40,11 +40,11 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         let marginX = CGFloat(42)
         let width = offsetX - marginX
         
-        let hourLabel = UILabel(frame: CGRectMake(marginX, offsetY, width, height))
+        let hourLabel = UILabel(frame: CGRect(x: marginX, y: offsetY, width: width, height: height))
         hourLabel.text = "hour"
         self.addSubview(hourLabel)
         
-        let minsLabel = UILabel(frame: CGRectMake(marginX + offsetX, offsetY, width, height))
+        let minsLabel = UILabel(frame: CGRect(x: marginX + offsetX, y: offsetY, width: width, height: height))
         minsLabel.text = "min"
         self.addSubview(minsLabel)
     }
@@ -57,18 +57,18 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
 
     }
     
-    func getDate() -> NSDate{
-        let dateFormatter = NSDateFormatter()
+    func getDate() -> Date{
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        let date = dateFormatter.dateFromString(String(format: "%02d", self.hour) + ":" + String(format: "%02d", self.minute))
+        let date = dateFormatter.date(from: String(format: "%02d", self.hour) + ":" + String(format: "%02d", self.minute))
         return date!
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
             self.hour = row
@@ -79,25 +79,25 @@ class TimePickerView: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         }
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return 24
         }
         return 60
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 30 
     }
 
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         if let view = view as? UILabel {
             view.text = String(format:"%02lu", row)
             return view
         }
-        let columnView = UILabel(frame: CGRectMake(35, 0, self.frame.size.width/3 - 35, 30))
+        let columnView = UILabel(frame: CGRect(x: 35, y: 0, width: self.frame.size.width/3 - 35, height: 30))
         columnView.text = String(format:"%02lu ", row)
-        columnView.textAlignment = NSTextAlignment.Center
+        columnView.textAlignment = NSTextAlignment.center
         
         return columnView
     }

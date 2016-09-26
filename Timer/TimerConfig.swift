@@ -9,9 +9,9 @@
 import Foundation
 
 enum TimerStyle {
-    case StopWatch
-    case AMRAP
-    case Tabata
+    case stopWatch
+    case amrap
+    case tabata
 }
 
 let prepareIndex = 0
@@ -32,13 +32,13 @@ struct TabataPreset {
 class TimerConfig {
     
     var presets = [Preset]()
-    var style = TimerStyle.StopWatch
+    var style = TimerStyle.stopWatch
     var title = ""
     
     
     var tabataPresets: [TabataPreset] {
         var result = [TabataPreset]()
-        if self.style != .Tabata {
+        if self.style != .tabata {
             return result
         }
         
@@ -67,11 +67,11 @@ class TimerConfig {
     
     func getPreviewValue() -> Int {
         switch self.style {
-        case .StopWatch:
+        case .stopWatch:
         return presets[workIndex].value
-        case .AMRAP:
+        case .amrap:
         return presets[workIndex].value
-        case .Tabata: // (W+R)*Rounds*Cycles + (Cycles-1)*RestBetween
+        case .tabata: // (W+R)*Rounds*Cycles + (Cycles-1)*RestBetween
             let totalWork = (presets[workIndex].value + presets[restIndex].value) * (presets[roundsIndex].value) * (presets[cyclesIndex].value)
             return totalWork + (presets[cyclesIndex].value - 1) * presets[restBetweenIndex].value
         }
@@ -80,7 +80,7 @@ class TimerConfig {
     class func createStopWatch() -> TimerConfig{
         let timer = TimerConfig()
         timer.title = "StopWatch"
-        timer.style = TimerStyle.StopWatch
+        timer.style = TimerStyle.stopWatch
         timer.presets = [Preset.preparePreset(), Preset.timeCapPreset()]
         return timer
     }
@@ -88,7 +88,7 @@ class TimerConfig {
     class func createAMRAP() -> TimerConfig{
         let timer = TimerConfig()
         timer.title = "AMRAP"
-        timer.style = TimerStyle.AMRAP
+        timer.style = TimerStyle.amrap
         timer.presets = [Preset.preparePreset(), Preset.startTimePreset()]
         return timer
     }
@@ -96,7 +96,7 @@ class TimerConfig {
     class func createTabata() -> TimerConfig{
         let timer = TimerConfig()
         timer.title = "Tabata"
-        timer.style = TimerStyle.Tabata
+        timer.style = TimerStyle.tabata
         timer.presets = [Preset.preparePreset(),
             Preset.workPreset(),
             Preset.restPreset(),

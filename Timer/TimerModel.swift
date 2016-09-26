@@ -15,33 +15,33 @@ protocol TimerModelProtocol: class {
 }
 
 enum TimerState {
-    case Reset
-    case Prepare
-    case Workout
-    case Finished
+    case reset
+    case prepare
+    case workout
+    case finished
 }
 
 class TimerModel: NSObject {
     let timerTickInterval: Double = 0.5
     
     var timerConfig: TimerConfig
-    var tickTimer: NSTimer? = nil
+    var tickTimer: Foundation.Timer? = nil
     weak var delegate: TimerModelProtocol?
     
     var isActive = false
     var isPaused = false
     
-    var state = TimerState.Reset
+    var state = TimerState.reset
     
     var countdownValue: Double = 0.0
     var countdownMaxValue: Double = 1.0
     
-    private var tabataPresets = [TabataPreset]()
-    private var tabataIndex = 0
+    fileprivate var tabataPresets = [TabataPreset]()
+    fileprivate var tabataIndex = 0
     
     init(timerConfig: TimerConfig) {
         self.timerConfig = timerConfig
-        if timerConfig.style == .Tabata {
+        if timerConfig.style == .tabata {
             self.tabataPresets = timerConfig.tabataPresets
         }
     }
@@ -54,16 +54,16 @@ class TimerModel: NSObject {
     }
     
     var secondsToShow: Double {
-        if state == .Prepare {
+        if state == .prepare {
             return ceil(countdownValue)
         }
         
         switch timerConfig.style {
-        case .StopWatch:
+        case .stopWatch:
             return (countdownMaxValue - countdownValue)
-        case .AMRAP:
+        case .amrap:
             return (countdownValue)
-        case .Tabata:
+        case .tabata:
             return (countdownValue)
         }
     }
@@ -73,37 +73,37 @@ class TimerModel: NSObject {
             return "paused"
         }
         switch self.state {
-        case .Prepare:
+        case .prepare:
             return "prepare"
-        case .Reset:
+        case .reset:
             return ""
-        case .Workout:
-            if timerConfig.style != .Tabata {
+        case .workout:
+            if timerConfig.style != .tabata {
                 return timerConfig.title
             }
             return tabataPresets[tabataIndex].title
-        case .Finished:
+        case .finished:
             return "finished"
         }
     }
     
     var progressToShow: Double {
-        if state == .Prepare {
+        if state == .prepare {
             return directSeconds
         }
         
         switch timerConfig.style {
-        case .StopWatch:
+        case .stopWatch:
             return unDirectSeconds
-        case .AMRAP:
+        case .amrap:
             return directSeconds
-        case .Tabata:
+        case .tabata:
             return directSeconds
         }
     }
     
     var roundsValue: Int {
-        guard timerConfig.style == .Tabata else {
+        guard timerConfig.style == .tabata else {
             return 0
         }
         let roundsValue = tabataPresets[tabataIndex].round
@@ -112,7 +112,7 @@ class TimerModel: NSObject {
     }
 
     var circleValue: Int {
-        guard timerConfig.style == .Tabata else {
+        guard timerConfig.style == .tabata else {
             return 0
         }
         let circleValue = tabataPresets[tabataIndex].cycle
@@ -121,7 +121,7 @@ class TimerModel: NSObject {
     }
     
     var progressRoundsToShow: Double {
-        guard timerConfig.style == .Tabata else {
+        guard timerConfig.style == .tabata else {
             return 0.0
         }
         let roundsValue = tabataPresets[tabataIndex].round
@@ -130,7 +130,7 @@ class TimerModel: NSObject {
     }
 
     var progressCyclesToShow: Double {
-        guard timerConfig.style == .Tabata else {
+        guard timerConfig.style == .tabata else {
             return 0.0
         }
         let circleValue = tabataPresets[tabataIndex].cycle
@@ -143,25 +143,25 @@ class TimerModel: NSObject {
     }
     
     var isWork: Bool {
-        if timerConfig.style != .Tabata {
+        if timerConfig.style != .tabata {
             return true
         } else {
             return tabataPresets[tabataIndex].isWork
         }
     }
     
-    private var directSeconds: Double {
+    fileprivate var directSeconds: Double {
         return degreesOnCircle * ( countdownValue / countdownMaxValue )
     }
     
-    private var unDirectSeconds: Double {
+    fileprivate var unDirectSeconds: Double {
         return degreesOnCircle * ( 1 - countdownValue / countdownMaxValue )
     }
     
     func startStop() {
-        if state == .Reset {
+        if state == .reset {
             tabataIndex = 0
-            state = .Prepare
+            state = .prepare
             delegate?.didStateChanged()
         }
         
@@ -184,7 +184,7 @@ class TimerModel: NSObject {
         print("Reset")
         isActive = false
         isPaused = false
-        state = .Reset
+        state = .reset
         tabataIndex = 0
         tickTimer?.invalidate()
         delegate?.didStateChanged()
@@ -199,8 +199,8 @@ class TimerModel: NSObject {
         tickTimer?.invalidate()
 
         if !isPaused {
-            if timerConfig.style == .Tabata {
-                if state == .Prepare {
+            if timerConfig.style == .tabata {
+                if state == .prepare {
                     let seconds = timerConfig.presets[prepareIndex].value
                     countdownMaxValue = Double(seconds)
                     countdownValue = Double(seconds)
@@ -211,30 +211,30 @@ class TimerModel: NSObject {
                     countdownValue = Double(tabataPreset.seconds)
                 }
             } else {
-                let seconds = state == .Prepare ? timerConfig.presets[prepareIndex].value : timerConfig.presets[workIndex].value
+                let seconds = state == .prepare ? timerConfig.presets[prepareIndex].value : timerConfig.presets[workIndex].value
                 countdownMaxValue = Double(seconds)
                 countdownValue = Double(seconds)
             }
         }
         
-        tickTimer = NSTimer.scheduledTimerWithTimeInterval(timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
+        tickTimer = Foundation.Timer.scheduledTimer(timeInterval: timerTickInterval, target: self, selector: #selector(TimerModel.updateTime), userInfo: nil, repeats: true)
     }
     
     func updateTime() {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             if self.countdownValue <= 0 {
                 self.tickTimer?.invalidate()
                 self.tickTimer = nil
             
                 switch self.state {
-                case .Prepare, .Reset:
+                case .prepare, .reset:
                     print("Workout")
-                    self.state = .Workout
+                    self.state = .workout
                     self.restartTimer()
                     self.delegate?.didStateChanged()
-                case .Workout:
-                    if self.timerConfig.style != .Tabata {
-                        self.state = .Finished
+                case .workout:
+                    if self.timerConfig.style != .tabata {
+                        self.state = .finished
                         self.delegate?.didStateChanged()
                     } else {
                         self.tabataIndex += 1
@@ -244,7 +244,7 @@ class TimerModel: NSObject {
                             self.restartTimer()
                             self.delegate?.didStateChanged()
                         } else {
-                            self.state = .Finished
+                            self.state = .finished
                             self.delegate?.didStateChanged()
                         }
                     }
