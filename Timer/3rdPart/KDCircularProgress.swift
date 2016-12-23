@@ -19,6 +19,10 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         static func degreesToRadians (value:CGFloat) -> CGFloat {
             return value * CGFloat.pi / 180.0
         }
+        
+        static func RadiansToDegrees (value:CGFloat) -> CGFloat {
+            return value * 180.0 / CGFloat(M_PI)
+        }
     }
     
     private enum Utility {
@@ -176,6 +180,13 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         
         set {
             set(colors: newValue)
+        }
+    }
+    
+    @IBInspectable public var sectorsCount: Int = 0 {
+        didSet {
+            progressLayer.sectorsCount = sectorsCount
+            progressLayer.setNeedsDisplay()
         }
     }
     
@@ -360,6 +371,7 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         var progressThickness: CGFloat = 0.5
         var trackThickness: CGFloat = 0.5
         var trackColor: UIColor = .black
+        var sectorsCount = 0
         var progressInsideFillColor: UIColor = .clear
         var colorsArray: [UIColor] = [] {
             didSet {
@@ -502,6 +514,31 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
                 
                 if let color = color {
                     fillRectWith(context: ctx, color: color)
+                }
+            }
+            
+            
+            if sectorsCount != 0 {
+                let colorLine = trackColor
+                colorLine.set()
+                ctx.setStrokeColor(colorLine.cgColor)
+                ctx.setFillColor(progressInsideFillColor.cgColor)
+                ctx.setLineWidth(3.0)
+                ctx.setLineCap(CGLineCap.butt)
+                
+                for index in 0...sectorsCount {
+                    let center = size.width / 2.0
+                    let radius: CGFloat = size.width / 2.0
+                    let angle: CGFloat = CGFloat(360 * index / sectorsCount + Int(startAngle) )
+                    let radians = Conversion.degreesToRadians(value: CGFloat(angle))
+                    let pointX: CGFloat = center + radius * cos(radians)
+                    let pointY: CGFloat = center + radius * sin(radians)
+                    ctx.beginPath()
+                    
+                    ctx.move(to: CGPoint(x: center, y: center))
+                    ctx.addLine(to: CGPoint(x: pointX, y: pointY))
+                    ctx.closePath()
+                    ctx.drawPath(using: .fillStroke)
                 }
             }
             ctx.restoreGState()
