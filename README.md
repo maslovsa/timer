@@ -1,3 +1,12 @@
+# Timer fo Crossfit WODS
+
+There 3 style timers.
+
+# Using
+
+SnapKit and KDCircularProgress (I rewrote it)
+
+# Timer preferences
 
 Stopwatch
 -Prepare  [0..59 sec] default = .10
@@ -28,8 +37,6 @@ Recovery Interval
 
 
 
+# Fonts
 
 SF UI Text Bold
-
-
-harkovaa@gmail.com
