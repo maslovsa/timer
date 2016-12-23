@@ -164,7 +164,7 @@ class CoundownViewController: UIViewController {
         progressTimer.glowMode = .constant
         progressTimer.glowAmount = 0.9
         progressTimer.trackColor = UIColor.darkGray
-        progressTimer.setColorsArray(greenColors)
+        progressTimer.set(colors: UIColor.green, UIColor.cyan)
         self.view.addSubview(progressTimer)
         progressTimer.snp.makeConstraints {
             (make) -> Void in
@@ -183,7 +183,7 @@ class CoundownViewController: UIViewController {
         progressRounds.glowMode = .noGlow
         progressRounds.glowAmount = 1.0
         progressRounds.trackColor = UIColor.darkGray
-        progressRounds.setColorsArray([colorRounds])
+        progressRounds.set(colors: colorRounds)
         self.view.addSubview(progressRounds)
         progressRounds.snp.makeConstraints {
             (make) -> Void in
@@ -204,7 +204,7 @@ class CoundownViewController: UIViewController {
         progressCycles.glowMode = .noGlow
         progressCycles.glowAmount = 1.0
         progressCycles.trackColor = UIColor.darkGray
-        progressCycles.setColorsArray([colorCycles])
+        progressCycles.set(colors: colorCycles)
         self.view.addSubview(progressCycles)
         progressCycles.snp.makeConstraints {
             (make) -> Void in
@@ -439,11 +439,10 @@ class CoundownViewController: UIViewController {
             
             labelRounds.isHidden = false
             labelCycles.isHidden = false
-
         }
         
         progressTimer.clockwise = false
-        progressTimer.setColorsArray(yellowColors)
+        progressTimer.set(colors: UIColor.yellow, UIColor.orange)
         progressTimer.angle = degreesOnCircle
         progressTimer.snp.updateConstraints {
             (make) -> Void in
@@ -476,10 +475,10 @@ class CoundownViewController: UIViewController {
             progressTimer.clockwise = true
         } else {
             progressTimer.angle = degreesOnCircle
-            progressTimer.animateToAngle(degreesOnCircle, duration: 0.1, completion: nil)
+            progressTimer.animate(toAngle: degreesOnCircle, duration: 0.1, completion: nil)
             progressTimer.clockwise = false
         }
-        progressTimer.setColorsArray(getProgressColors())
+        progressTimer.set(colors: getProgressColors())
         
         
         buttonMenu.tintColor = getProgressColor()
@@ -504,7 +503,7 @@ class CoundownViewController: UIViewController {
         buttonReset.isHidden = false
         buttonReset.isEnabled = true
         
-        progressTimer.setColorsArray(redColors)
+        progressTimer.set(colors:UIColor.red, UIColor.orange)
         progressTimer.angle = degreesOnCircle
         progressTimer.snp.updateConstraints {
             (make) -> Void in
@@ -598,7 +597,7 @@ extension CoundownViewController: TimerModelProtocol{
             labelInfo.textColor = getProgressColor()
             labelTime.textColor = getProgressColor()
             buttonMenu.tintColor = getProgressColor()
-            progressTimer.setColorsArray(yellowColors)
+            progressTimer.set(colors: UIColor.yellow, UIColor.orange)
             labelClock.textColor = getProgressColor()
         } else {
             buttonPlay.setImage(UIImage.getPauseIcon(), for: UIControlState())
@@ -607,7 +606,7 @@ extension CoundownViewController: TimerModelProtocol{
             if timerModel.state != .prepare {
                 labelInfo.textColor = getProgressColor()
                 labelTime.textColor = getProgressColor()
-                progressTimer.setColorsArray(getProgressColors())
+                progressTimer.set(colors: getProgressColors())
                 buttonMenu.tintColor = getProgressColor()
                 labelClock.textColor = getProgressColor()
             }
@@ -619,9 +618,9 @@ extension CoundownViewController: TimerModelProtocol{
 
 //      progressTimer.angle = timerModel.progressToShow
         print(timerModel.progressToShow)
-        progressTimer.animateToAngle(timerModel.progressToShow, duration: timerModel.timerTickInterval, completion: nil)
+        progressTimer.animate(toAngle: timerModel.progressToShow, duration: timerModel.timerTickInterval, completion: nil)
         
-        progressTimer.setColorsArray(getProgressColors())
+        progressTimer.set(colors: getProgressColors())
         labelInfo.text = timerModel.informationString
         
         if timerConfig.style == .tabata {

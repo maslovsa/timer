@@ -252,7 +252,8 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         set(colors: colors)
     }
     
-    private func set(colors: [UIColor]) {
+    
+    public func set(colors: [UIColor]) {
         progressLayer.colorsArray = colors
         progressLayer.setNeedsDisplay()
     }

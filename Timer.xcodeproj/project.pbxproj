@@ -22,7 +22,6 @@
 		8FB953B81C861EC400EF95C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FB953B61C861EC400EF95C1 /* Main.storyboard */; };
 		8FB953BA1C861EC400EF95C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FB953B91C861EC400EF95C1 /* Assets.xcassets */; };
 		8FB953BD1C861EC400EF95C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FB953BB1C861EC400EF95C1 /* LaunchScreen.storyboard */; };
-		8FB953C81C861EC400EF95C1 /* TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953C71C861EC400EF95C1 /* TimerTests.swift */; };
 		8FB953D31C8620D600EF95C1 /* TabataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D21C8620D600EF95C1 /* TabataViewController.swift */; };
 		8FB953D51C8620F500EF95C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */; };
 		8FB953DD1C8628EE00EF95C1 /* TimerConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */; };
@@ -67,8 +66,6 @@
 		8FB953BC1C861EC400EF95C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FB953BE1C861EC400EF95C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB953C31C861EC400EF95C1 /* TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FB953C71C861EC400EF95C1 /* TimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTests.swift; sourceTree = "<group>"; };
-		8FB953C91C861EC400EF95C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FB953D21C8620D600EF95C1 /* TabataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabataViewController.swift; sourceTree = "<group>"; };
 		8FB953D41C8620F500EF95C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8FB953DC1C8628EE00EF95C1 /* TimerConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerConfigViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				8FB953AF1C861EC400EF95C1 /* Timer */,
-				8FB953C61C861EC400EF95C1 /* TimerTests */,
 				8FB953AE1C861EC400EF95C1 /* Products */,
 				4F7621A3421C2F1B9464D4FB /* Pods */,
 				31CEBAF7EDA9D9CB984AA903 /* Frameworks */,
@@ -179,15 +175,6 @@
 				8F36EDE31CC41A9B00F0FD7A /* Timer-Bridging-Header.h */,
 			);
 			path = Timer;
-			sourceTree = "<group>";
-		};
-		8FB953C61C861EC400EF95C1 /* TimerTests */ = {
-			isa = PBXGroup;
-			children = (
-				8FB953C71C861EC400EF95C1 /* TimerTests.swift */,
-				8FB953C91C861EC400EF95C1 /* Info.plist */,
-			);
-			path = TimerTests;
 			sourceTree = "<group>";
 		};
 		8FB953DE1C862AB100EF95C1 /* Controllers */ = {
@@ -392,7 +379,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -428,7 +415,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FB953C81C861EC400EF95C1 /* TimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
